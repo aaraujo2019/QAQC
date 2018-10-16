@@ -1,0 +1,17 @@
+C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\bin\Debug\Intercept_Intervals.exe.config
+C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\bin\Debug\Intercept_Intervals.exe
+C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\bin\Debug\Intercept_Intervals.pdb
+C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\bin\Debug\IrisSkin2.dll
+C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\bin\Debug\RN.dll
+C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\bin\Debug\Entities.dll
+C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\bin\Debug\RN.pdb
+C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\bin\Debug\Entities.pdb
+C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Intervals.csprojAssemblyReference.cache
+C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Intervals.Properties.Resources.resources
+C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\EnviosColombiaGold.frmSplash.resources
+C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Intervals.UI.frm_Intercept_Intervals.resources
+C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Intervals.csproj.GenerateResource.cache
+C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Intervals.csproj.CoreCompileInputs.cache
+C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Intervals.csproj.CopyComplete
+C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Intervals.exe
+C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Intervals.pdb

@@ -1,0 +1,11 @@
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\bin\Release\RN.dll
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\bin\Release\RN.pdb
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\bin\Release\Entities.dll
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\bin\Release\Microsoft.SqlServer.Types.dll
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\bin\Release\Entities.pdb
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\bin\Release\es\Microsoft.SqlServer.Types.resources.dll
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\obj\Release\RN.csprojAssemblyReference.cache
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\obj\Release\RN.csproj.CoreCompileInputs.cache
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\obj\Release\RN.csproj.CopyComplete
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\obj\Release\RN.dll
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\obj\Release\RN.pdb

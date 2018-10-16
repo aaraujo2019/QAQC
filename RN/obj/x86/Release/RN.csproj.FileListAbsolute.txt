@@ -1,0 +1,9 @@
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\bin\x86\Release\RN.dll
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\bin\x86\Release\RN.pdb
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\bin\x86\Release\Entities.dll
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\bin\x86\Release\Microsoft.SqlServer.Types.dll
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\bin\x86\Release\Entities.pdb
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\bin\x86\Release\es\Microsoft.SqlServer.Types.resources.dll
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\obj\x86\Release\RN.csprojResolveAssemblyReference.cache
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\obj\x86\Release\RN.dll
+C:\Proyectos\QAQC\EnviosColombiaGold\RN\obj\x86\Release\RN.pdb

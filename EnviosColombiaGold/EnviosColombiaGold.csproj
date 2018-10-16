@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{601E29D5-8429-42CF-8424-33C01BBC4D2A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EnviosColombiaGold</RootNamespace>
+    <AssemblyName>QAQC</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EPPlus, Version=4.5.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.1\lib\net40\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IrisSkin2">
+      <HintPath>..\..\..\Apoyo Proyectos\Apoyo Visual\Componentes Graficos Vb2\Componentes Graficos Vb2\SKIN NET 2010 WIN 7\SkinVS.NET\IrisSkin2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Users\david.ciro\Desktop\Dlls\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Users\david.ciro\Desktop\Dlls\Microsoft.Office.Interop.Word.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="Spire.Common, Version=1.2.787.14040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\Spire.XLS.8.3.5\lib\net40\Spire.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spire.License, Version=1.3.6.40, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Spire.XLS.8.3.5\lib\net40\Spire.License.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=4.3.2.2040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\Spire.XLS.8.3.5\lib\net40\Spire.Pdf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spire.XLS, Version=8.3.5.6040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\Spire.XLS.8.3.5\lib\net40\Spire.XLS.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.DataVisualization">
+      <HintPath>..\packages\Microsoft.Chart.Controls.4.7.2046\lib\net35\System.Web.DataVisualization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DataVisualization.Design">
+      <HintPath>..\packages\Microsoft.Chart.Controls.4.7.2046\lib\net35\System.Web.DataVisualization.Design.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization">
+      <HintPath>..\packages\Microsoft.Chart.Controls.4.7.2046\lib\net35\System.Windows.Forms.DataVisualization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization.Design">
+      <HintPath>..\packages\Microsoft.Chart.Controls.4.7.2046\lib\net35\System.Windows.Forms.DataVisualization.Design.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommonUI\GlobalValue.cs" />
+    <Compile Include="frmCargarLaboratorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCargarLaboratorio.Designer.cs">
+      <DependentUpon>frmCargarLaboratorio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCargarResEnvio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCargarResEnvio.Designer.cs">
+      <DependentUpon>frmCargarResEnvio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmControlSampling.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmControlSampling.Designer.cs">
+      <DependentUpon>frmControlSampling.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDB.Designer.cs">
+      <DependentUpon>frmDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEnvios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEnvios.Designer.cs">
+      <DependentUpon>frmEnvios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmGrapits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGrapits.Designer.cs">
+      <DependentUpon>frmGrapits.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSearchId.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSearchId.Designer.cs">
+      <DependentUpon>frmSearchId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPpal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPpal.Designer.cs">
+      <DependentUpon>frmPpal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSplash.designer.cs">
+      <DependentUpon>frmSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Intercept_Intervals\frm_Intercept_Intervals.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Intercept_Intervals\frm_Intercept_Intervals.Designer.cs">
+      <DependentUpon>frm_Intercept_Intervals.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rol\DataSet\ControlSecurityDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ControlSecurityDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Rol\ManagePermissions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rol\ManagePermissions.Designer.cs">
+      <DependentUpon>ManagePermissions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rol\ManageRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Rol\ManageRoles.Designer.cs">
+      <DependentUpon>ManageRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Topography\frmAdminTopography.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Topography\frmAdminTopography.Designer.cs">
+      <DependentUpon>frmAdminTopography.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Topography\frmLoadArchive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Topography\frmLoadArchive.Designer.cs">
+      <DependentUpon>frmLoadArchive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Topography\frmMoventLabor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Topography\frmMoventLabor.Designer.cs">
+      <DependentUpon>frmMoventLabor.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="frmCargarLaboratorio.resx">
+      <DependentUpon>frmCargarLaboratorio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCargarResEnvio.resx">
+      <DependentUpon>frmCargarResEnvio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmControlSampling.resx">
+      <DependentUpon>frmControlSampling.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDB.resx">
+      <DependentUpon>frmDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEnvios.resx">
+      <DependentUpon>frmEnvios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSearchId.resx">
+      <DependentUpon>frmSearchId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPpal.resx">
+      <DependentUpon>frmPpal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSplash.resx">
+      <DependentUpon>frmSplash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Intercept_Intervals\frm_Intercept_Intervals.resx">
+      <DependentUpon>frm_Intercept_Intervals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Rol\ManagePermissions.resx">
+      <DependentUpon>ManagePermissions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Rol\ManageRoles.resx">
+      <DependentUpon>ManageRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Topography\frmAdminTopography.resx">
+      <DependentUpon>frmAdminTopography.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Topography\frmLoadArchive.resx">
+      <DependentUpon>frmLoadArchive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Topography\frmMoventLabor.resx">
+      <DependentUpon>frmMoventLabor.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CommonUI\GC_110908_Template_QCReport_DRG.xls" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Rol\DataSet\ControlSecurityDataSet.xsc">
+      <DependentUpon>ControlSecurityDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Rol\DataSet\ControlSecurityDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ControlSecurityDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Rol\DataSet\ControlSecurityDataSet.xss">
+      <DependentUpon>ControlSecurityDataSet.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{3228e077-bc25-46bb-b77d-125481a553fd}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RN\RN.csproj">
+      <Project>{12ffc622-7e92-40c8-8f8d-c334f25ca714}</Project>
+      <Name>RN</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CommonUI\Datos.xml" />
+    <Content Include="favicon.ico" />
+    <None Include="Resources\GranColombiaGold.jpg" />
+    <Content Include="Resources\BarrasL.png" />
+    <None Include="Resources\excel.ico" />
+    <None Include="Resources\exit3.ico" />
+    <Content Include="Resources\mail.ico" />
+    <None Include="Resources\Recckeck2.png" />
+    <None Include="Resources\nut-1420234_640 %282%29 %282%29.png" />
+    <None Include="Resources\Refresh-icon_Value.png" />
+    <None Include="Resources\save_162.ico" />
+    <None Include="Resources\mail1.ico" />
+    <None Include="Resources\new_162.ico" />
+    <Content Include="Resources\srch_16.ico" />
+    <Content Include="Resources\trash_16.ico" />
+    <None Include="Resources\trash_163.ico" />
+    <Content Include="send.ico" />
+    <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

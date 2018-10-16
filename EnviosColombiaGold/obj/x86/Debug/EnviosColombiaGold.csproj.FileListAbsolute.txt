@@ -1,0 +1,2 @@
+C:\Proyectos\QAQC\EnviosColombiaGold\EnviosColombiaGold\bin\x86\Debug\QAQC.exe.config
+C:\Proyectos\QAQC\EnviosColombiaGold\EnviosColombiaGold\obj\x86\Debug\EnviosColombiaGold.csproj.ResolveComReference.cache

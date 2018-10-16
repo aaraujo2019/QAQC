@@ -1,0 +1,6 @@
+C:\Proyectos\QAQC\EnviosColombiaGold\Entities\bin\Release\Entities.dll
+C:\Proyectos\QAQC\EnviosColombiaGold\Entities\bin\Release\Entities.pdb
+C:\Proyectos\QAQC\EnviosColombiaGold\Entities\obj\Release\Entities.csproj.CoreCompileInputs.cache
+C:\Proyectos\QAQC\EnviosColombiaGold\Entities\obj\Release\Entities.dll
+C:\Proyectos\QAQC\EnviosColombiaGold\Entities\obj\Release\Entities.pdb
+C:\Proyectos\QAQC\EnviosColombiaGold\Entities\obj\Release\Entities.csprojAssemblyReference.cache
