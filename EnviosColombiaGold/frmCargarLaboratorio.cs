@@ -432,7 +432,7 @@ namespace EnviosColombiaGold
         {
             try
             {
-                SqlConnection cnn = new SqlConnection(@"Server=10.10.203.4\gcg;uid=sa;pwd=BdZandor123*;database=GZC");
+                SqlConnection cnn = new SqlConnection(@"Server=SEGSVRSQL01;uid=sa;pwd=*Bd6r4nC0l0mb1a*;database=DB_SEG");
                 string sqlbuscar = String.Format("SELECT COUNT(*) FROM LabsumitIn  WHERE Submit= @submit");
                 SqlCommand cmd = new SqlCommand(sqlbuscar, cnn);
                 cmd.Parameters.AddWithValue("@submit ", submit);

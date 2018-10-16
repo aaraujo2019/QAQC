@@ -4,3 +4,9 @@ C:\Proyectos\QAQC\EnviosColombiaGold\Entities\obj\Release\Entities.csproj.CoreCo
 C:\Proyectos\QAQC\EnviosColombiaGold\Entities\obj\Release\Entities.dll
 C:\Proyectos\QAQC\EnviosColombiaGold\Entities\obj\Release\Entities.pdb
 C:\Proyectos\QAQC\EnviosColombiaGold\Entities\obj\Release\Entities.csprojAssemblyReference.cache
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Entities\bin\Release\Entities.dll
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Entities\bin\Release\Entities.pdb
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Entities\obj\Release\Entities.csproj.CoreCompileInputs.cache
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Entities\obj\Release\Entities.dll
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Entities\obj\Release\Entities.pdb
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Entities\obj\Release\Entities.csprojAssemblyReference.cache

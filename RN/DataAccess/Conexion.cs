@@ -104,10 +104,11 @@ namespace RN
                     {
                         string[] val = ((System.Configuration.ConnectionStringSettings)item).ConnectionString.Split(';');
 
-                        servidor = val[0].Substring(12, 15).Trim();
-                        dbase = val[1].Substring(16, 3).Trim();
-                        usuario = val[2].Substring(8, 13).Trim();
-                        pws = Clave.DesEncriptar(Convert.FromBase64String(val[3].Substring(9, 32).Trim()));
+                        servidor = val[0].Substring(12).Trim();
+                        dbase = val[1].Substring(16).Trim();
+                        usuario = val[2].Substring(8).Trim();
+                        //pws = Clave.DesEncriptar(Convert.FromBase64String(val[3].Substring(9).Trim()));
+                        pws = val[3].Substring(9).Trim();
 
                         break;
                     }

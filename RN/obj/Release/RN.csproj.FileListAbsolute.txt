@@ -9,3 +9,12 @@ C:\Proyectos\QAQC\EnviosColombiaGold\RN\obj\Release\RN.csproj.CoreCompileInputs.
 C:\Proyectos\QAQC\EnviosColombiaGold\RN\obj\Release\RN.csproj.CopyComplete
 C:\Proyectos\QAQC\EnviosColombiaGold\RN\obj\Release\RN.dll
 C:\Proyectos\QAQC\EnviosColombiaGold\RN\obj\Release\RN.pdb
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\RN\bin\Release\RN.dll
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\RN\bin\Release\RN.pdb
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\RN\bin\Release\Entities.dll
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\RN\bin\Release\Microsoft.SqlServer.Types.dll
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\RN\bin\Release\Entities.pdb
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\RN\bin\Release\es\Microsoft.SqlServer.Types.resources.dll
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\RN\obj\Release\RN.dll
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\RN\obj\Release\RN.pdb
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\RN\obj\Release\RN.csprojResolveAssemblyReference.cache

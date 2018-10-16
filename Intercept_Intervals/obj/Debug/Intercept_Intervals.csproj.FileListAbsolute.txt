@@ -15,3 +15,17 @@ C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Int
 C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Intervals.csproj.CopyComplete
 C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Intervals.exe
 C:\Proyectos\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Intervals.pdb
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Intercept_Intervals\bin\Debug\Intercept_Intervals.exe.config
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Intercept_Intervals\bin\Debug\Intercept_Intervals.exe
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Intercept_Intervals\bin\Debug\Intercept_Intervals.pdb
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Intercept_Intervals\bin\Debug\RN.dll
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Intercept_Intervals\bin\Debug\Entities.dll
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Intercept_Intervals\bin\Debug\RN.pdb
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Intercept_Intervals\bin\Debug\Entities.pdb
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Intervals.Properties.Resources.resources
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\EnviosColombiaGold.frmSplash.resources
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Intervals.UI.frm_Intercept_Intervals.resources
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Intervals.csproj.GenerateResource.cache
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Intervals.exe
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Intervals.pdb
+C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Intercept_Intervals\obj\Debug\Intercept_Intervals.csprojResolveAssemblyReference.cache

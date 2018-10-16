@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEnvios));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
             this.btnClean = new System.Windows.Forms.Button();
@@ -205,8 +205,8 @@
             // 
             // dgDetalleInterval
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgDetalleInterval.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgDetalleInterval.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgDetalleInterval.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgDetalleInterval.Location = new System.Drawing.Point(8, 20);
             this.dgDetalleInterval.Margin = new System.Windows.Forms.Padding(2);
@@ -286,13 +286,14 @@
             // 
             // txtDate
             // 
-            this.txtDate.CustomFormat = "dd/MM/yyyy";
+            this.txtDate.CustomFormat = "yyyy/MM/dd";
             this.txtDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.txtDate.Location = new System.Drawing.Point(576, 141);
             this.txtDate.Margin = new System.Windows.Forms.Padding(2);
             this.txtDate.Name = "txtDate";
             this.txtDate.Size = new System.Drawing.Size(197, 23);
             this.txtDate.TabIndex = 11;
+            this.txtDate.ValueChanged += new System.EventHandler(this.txtDate_ValueChanged);
             // 
             // TxtOtAnCod
             // 
@@ -801,8 +802,8 @@
             // 
             // dgInterval
             // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgInterval.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgInterval.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgInterval.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgInterval.Location = new System.Drawing.Point(15, 83);
             this.dgInterval.Margin = new System.Windows.Forms.Padding(2);

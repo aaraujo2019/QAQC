@@ -3082,5 +3082,10 @@ namespace EnviosColombiaGold
         {
 
         }
+
+        private void txtDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
