@@ -97,7 +97,6 @@ namespace EnviosColombiaGold
         {
             try
             {
-
                 Application.Restart();
             }
             catch (Exception ex)
