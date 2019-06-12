@@ -923,6 +923,7 @@ namespace EnviosColombiaGold
             }
         }
 
+        /* Alvaro Araujo Arrieta */ 
         private void Load_FormData()
         {
             try
