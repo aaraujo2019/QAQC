@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using OfficeOpenXml;
+using System;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using System.Data.OleDb;
-using System.IO;
-using System.Xml.Serialization;
 using System.Configuration;
-
-using Excel = Microsoft.Office.Interop.Excel;
-using System.Reflection;
+using System.Data;
+using System.Data.OleDb;
 using System.Data.SqlClient;
-using OfficeOpenXml;
-using System.Linq;
 using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace EnviosColombiaGold
 {
@@ -189,22 +183,12 @@ namespace EnviosColombiaGold
                 }
 
                 for (int iRowElem = 5; iRowElem < iPosicionFin; iRowElem++)
-                //for (int iRowElem = 5; iRowElem < 8; iRowElem++)
-
-
                 {
-
                     for (int iElem = 0; iElem < dtElementos.Columns.Count; iElem++)
                     {
-
-
-
                         for (int iXml = 0; iXml < ds.Tables[0].Rows.Count; iXml++)
                         {
-
-                            //string sCampoElem;
                             string[] words = dtElementos.Columns[iElem].Caption.ToString().Split('*');
-
 
                             if (words[0].ToUpper() == ds.Tables[0].Rows[iXml][1].ToString().ToUpper())
                             {

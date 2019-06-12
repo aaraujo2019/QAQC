@@ -8,3 +8,9 @@ C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Entities\bin\Debug\En
 C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Entities\obj\Debug\Entities.csproj.CoreCompileInputs.cache
 C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Entities\obj\Debug\Entities.dll
 C:\Users\giovanny.alzate\Downloads\QAQC\EnviosColombiaGold\Entities\obj\Debug\Entities.pdb
+Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\Entities\bin\Debug\Entities.dll
+Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\Entities\bin\Debug\Entities.pdb
+Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\Entities\obj\Debug\Entities.csprojAssemblyReference.cache
+Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\Entities\obj\Debug\Entities.csproj.CoreCompileInputs.cache
+Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\Entities\obj\Debug\Entities.dll
+Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\Entities\obj\Debug\Entities.pdb

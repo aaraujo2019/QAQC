@@ -1,4 +1,9 @@
-﻿namespace EnviosColombiaGold
+﻿using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace EnviosColombiaGold
 {
     partial class frmEnvios
     {
@@ -28,9 +33,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEnvios));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
             this.btnClean = new System.Windows.Forms.Button();
@@ -205,8 +210,8 @@
             // 
             // dgDetalleInterval
             // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgDetalleInterval.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgDetalleInterval.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgDetalleInterval.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgDetalleInterval.Location = new System.Drawing.Point(8, 20);
             this.dgDetalleInterval.Margin = new System.Windows.Forms.Padding(2);
@@ -346,7 +351,6 @@
             this.CmbTypSub.Name = "CmbTypSub";
             this.CmbTypSub.Size = new System.Drawing.Size(176, 24);
             this.CmbTypSub.TabIndex = 2;
-            this.CmbTypSub.SelectedIndexChanged += new System.EventHandler(this.CmbTypSub_SelectedIndexChanged);
             // 
             // label18
             // 
@@ -633,9 +637,9 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Image = global::EnviosColombiaGold.Properties.Resources.GranColombiaGold;
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(101, 26);
+            this.pictureBox1.Location = new System.Drawing.Point(19, 26);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(201, 45);
@@ -658,7 +662,7 @@
             // 
             this.lblUser.AutoSize = true;
             this.lblUser.Font = new System.Drawing.Font("Verdana", 10F);
-            this.lblUser.Location = new System.Drawing.Point(1076, 11);
+            this.lblUser.Location = new System.Drawing.Point(1051, 14);
             this.lblUser.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUser.Name = "lblUser";
             this.lblUser.Size = new System.Drawing.Size(90, 17);
@@ -802,8 +806,8 @@
             // 
             // dgInterval
             // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgInterval.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgInterval.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgInterval.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgInterval.Location = new System.Drawing.Point(15, 83);
             this.dgInterval.Margin = new System.Windows.Forms.Padding(2);

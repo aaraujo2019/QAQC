@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Spire.Xls;
+using System;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using System.Data.OleDb;
-using System.IO;
-using System.Xml.Serialization;
 using System.Configuration;
-
-using Excel = Microsoft.Office.Interop.Excel;
-using System.Reflection;
-using Spire.Xls;
+using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.IO;
+using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace EnviosColombiaGold
 {
@@ -41,9 +34,7 @@ namespace EnviosColombiaGold
             InitializeComponent();
             LoadXML();
             dtQCConversion = oRf.getRfQCConversion();
-
             LoadCmb();
-
         }
 
         private void LoadCmb()
@@ -74,14 +65,10 @@ namespace EnviosColombiaGold
         {
             string myXMLfile = Application.StartupPath.ToString() + @"\Datos.xml";
             ds = new DataSet();
-            // Create new FileStream with which to read the schema.
-            System.IO.FileStream fsReadXml = new System.IO.FileStream
-                (myXMLfile, System.IO.FileMode.Open);
+            FileStream fsReadXml = new System.IO.FileStream (myXMLfile, FileMode.Open);
             try
             {
                 ds.ReadXml(fsReadXml);
-                //dgXML.DataSource = ds.Tables[0];
-                //dgDatos.DataMember = "Cust";
             }
             catch (Exception ex)
             {
@@ -105,7 +92,6 @@ namespace EnviosColombiaGold
                 oDialog.Title = "Seleccionar Archivos";
                 oDialog.Filter = "Todos los archivos (*.xls*)|*.xls*";
                 oDialog.Multiselect = false;
-
             }
             catch (Exception ex)
             {
@@ -144,7 +130,6 @@ namespace EnviosColombiaGold
                 }
                 var ws = pck.Workbook.Worksheets.Count;
                 DataTable tbl = new DataTable();
-                bool hasHeader = true;
                 return tbl;
             }
         }
@@ -162,26 +147,21 @@ namespace EnviosColombiaGold
                 string sCampos = "";
                 string sCamposVal = "";
                 string sSQL = "";
-
                 var culturaCol = CultureInfo.GetCultureInfo("es-CO");
-
                 sLab = dtXls.Columns[0].Caption.ToString();
 
                 DateTime dateReport = Convert.ToDateTime(dtXls.Rows[7][1].ToString(), culturaCol);
 
                 string valueDate = string.Concat(dateReport.Day, "/0", dateReport.Month, "/", dateReport.Year, " ", "00:00:00");
-
                 sLab = dtXls.Columns[0].Caption.ToString();
                 sEnvio = dtXls.Rows[8][1].ToString();
                 sSample = dtXls.Rows[5][1].ToString().Trim();
                 sQaqc = ConfigurationSettings.AppSettings["Qaqc"].ToString();
 
-
                 string sInsertLabRes = "";
                 sInsertLabRes += "Insert into LabResult (Submit, Jobno, CantSample, Lab, DateReport) Values ('" +
                     sEnvio + "','" + sNomArchivo + "'," + sSample.Trim() + ",'" + sLab + "','" + valueDate + "')";
                 string sResp = oRf.ExecSQL(sInsertLabRes);
-
 
                 oLabSub.sOpcion = "1";
                 oLabSub.sSubmit = sEnvio.ToString();
@@ -238,7 +218,6 @@ namespace EnviosColombiaGold
 
                                     sCampos += ",[" + sAu + "]";
                                     sCamposVal += ",'" + dtElementos.Rows[iRowElem][iElem].ToString() + "'";
-                                    //MessageBox.Show(dtElementos.Rows[1][iElem].ToString());
                                 }
                                 else if (words[0].ToUpper() == "AG")
                                 {
@@ -290,7 +269,6 @@ namespace EnviosColombiaGold
                         sSQL = "Insert into Assay (JobNo, [Sample], Qaqc, [Type] " +
                             sCampos + ") Values ('" + sNomArchivo + "','" + dtElementos.Rows[iRowElem][0].ToString().Trim() +
                             "','" + sQaqc + "','" + sType + "'" + sCamposVal + ")";
-                        //MessageBox.Show(sSQL);
 
                         string sRespAss = oRf.ExecSQL(sSQL);
                         MessageBox.Show(sRespAss);

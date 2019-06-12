@@ -1,18 +1,14 @@
-﻿using System;
+﻿using Entities.Config;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Configuration;
+using System.Data;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using Word = Microsoft.Office.Interop.Word;
-using System.Reflection;
-using System.Threading;
-using System.Globalization;
-using Entities.Config;
 
 namespace EnviosColombiaGold
 {
@@ -21,28 +17,29 @@ namespace EnviosColombiaGold
 
         #region variables
 
-        int iSackos;
-        int iCont;
-        int iInterval;
-        clsDHSamples oDHSamp = new clsDHSamples();
-        clsLabSubmit oLabS = new clsLabSubmit();
-        clsLabsumitIn oLabSIn = new clsLabsumitIn();
-        clsLabSumitInterval oLabSInterval = new clsLabSumitInterval();
-        clsSampleofNature oSampNature = new clsSampleofNature();
-        clsSampShipment oSampShipment = new clsSampShipment();
-        clsShipment oShipment = new clsShipment();
-        clsAssay oAssay = new clsAssay();
-        clsRf oRf = new clsRf();
+        private int iSackos;
+        private int iCont;
+        private int iInterval;
+        private clsDHSamples oDHSamp = new clsDHSamples();
+        private clsLabSubmit oLabS = new clsLabSubmit();
+        private clsLabsumitIn oLabSIn = new clsLabsumitIn();
+        private clsLabSumitInterval oLabSInterval = new clsLabSumitInterval();
+        private clsSampleofNature oSampNature = new clsSampleofNature();
+        private clsSampShipment oSampShipment = new clsSampShipment();
+        private clsShipment oShipment = new clsShipment();
+        private clsAssay oAssay = new clsAssay();
+        private clsRf oRf = new clsRf();
         public string SampleType = string.Empty;
+
         //int iModify = 0;
-        string sSelected = "";
+        private string sSelected = "";
 
         //Estados de los botones
-        bool bcmbFind = false;
-        bool bcmbModify = false;
-        bool bcmbReanalisis = false;
-        bool isRean = false;
-        bool isSelected = false;
+        private bool bcmbFind = false;
+        private bool bcmbModify = false;
+        private bool bcmbReanalisis = false;
+        private bool isRean = false;
+        private bool isSelected = false;
         public int indexSelectCmbSam = -1;
         public bool modificate = false;
         #endregion
@@ -94,19 +91,11 @@ namespace EnviosColombiaGold
         }
         public frmEnvios()
         {
-
             InitializeComponent();
-            //Load David Nueva Implementación
-            //Este se llena luego de cargar el de grupos LoadCmb1
-            //LoadCmb1();
-            //LoadCmb();
-
             GetItemsPrimary();
-
             Load_Combos();
             initVbles();
             isSelected = true;
-
         }
         private void GetItemsPrimary()
         {
@@ -117,16 +106,13 @@ namespace EnviosColombiaGold
             lista.Add(new Item("Exploration Geology Shipment", string.Concat("SEP18-0001", DateTime.Now.ToString("yy"), "-")));
             lista.Add(new Item("Others Shipment", string.Concat("SOT18-0001", DateTime.Now.ToString("yy"), "-")));
             lista.Add(new Item("Ore Stockyard Shipment", string.Concat("SOS18-0001", DateTime.Now.ToString("yy"), "-")));
-
             lista.Add(new Item("Select an option..", ""));
-
-
             comboBox1.DisplayMember = "Name";
             comboBox1.ValueMember = "Value";
-
             comboBox1.DataSource = lista;
             comboBox1.SelectedIndex = lista.Count() - 1;
         }
+
         private void initVbles()
         {
             try
@@ -135,10 +121,13 @@ namespace EnviosColombiaGold
                 iSackos = 1;
                 iCont = 1;
                 if (dgInterval.Rows.Count == 0)
+                {
                     iInterval = 1;
+                }
                 else if (dgInterval.Rows.Count >= 1)
+                {
                     iInterval = dgInterval.Rows.Count;
-
+                }
             }
             catch (Exception ex)
             {
@@ -162,41 +151,36 @@ namespace EnviosColombiaGold
 
                 cmbShipment.DisplayMember = "Ssumit";
                 cmbShipment.ValueMember = "Ssumit";
-                //cmbShipment.Items.AddRange(dtCmbShipm.AsEnumerable());
                 cmbShipment.DataSource = dtCmbShipm;
 
-
                 int iCon = 1;
-                if (dtCmbShipm.Rows.Count > 0)
-                //if (cmbShipment.Text.ToString().Length > 0)
+                if (dtCmbShipm.Rows.Count > 0 && cmbShipment.SelectedValue.ToString().Contains(sPrefix))
                 {
-                    if (cmbShipment.SelectedValue.ToString().Contains(sPrefix))
+                    //código Anterior
+                    //iCon = int.Parse(cmbShipment.Text.ToString().Substring(6, 4)) + 1;
+                    string sYear = DateTime.Now.ToString("yy");
+
+                    int yearValue = dtCmbShipm.Rows[0]["Ssumit"].ToString().IndexOf('-');
+                    if (yearValue > 0)
                     {
-                        //código Anterior
-                        //iCon = int.Parse(cmbShipment.Text.ToString().Substring(6, 4)) + 1;
-                        string sYear = DateTime.Now.ToString("yy");
+                        iCon = int.Parse(dtCmbShipm.Rows[0]["Ssumit"].ToString().Substring(yearValue - 2, 2));
+                    }
 
-                        int yearValue = dtCmbShipm.Rows[0]["Ssumit"].ToString().IndexOf('-');
+                    if (int.Parse(sYear) <= iCon)
+                    {
+                        yearValue = cmbShipment.Text.ToString().IndexOf('-');
                         if (yearValue > 0)
-                            iCon = int.Parse(dtCmbShipm.Rows[0]["Ssumit"].ToString().Substring(yearValue - 2, 2));
-
-                        if (int.Parse(sYear) <= iCon)
                         {
-                            yearValue = cmbShipment.Text.ToString().IndexOf('-');
-                            if (yearValue > 0)
-                                iCon = int.Parse(cmbShipment.Text.Substring(yearValue - 2, 2));
+                            iCon = int.Parse(cmbShipment.Text.Substring(yearValue - 2, 2));
                         }
                     }
                 }
 
                 DataRow dr = dtCmbShipm.NewRow();
                 dr[0] = sPrefix.ToString() + DateTime.Now.ToString("yy") + "-" + iCon.ToString().PadLeft(4, '0');
-                //dr[0] = "";
                 dtCmbShipm.Rows.Add(dr);
-                //cmbShipment.SelectedText = "";
                 sSelected = sPrefix.ToString() + DateTime.Now.ToString("yy") + "-" + iCon.ToString().PadLeft(4, '0');
                 cmbShipment.SelectedValue = sSelected.ToString();
-                //cmbShipment.Update();
 
             }
             catch (Exception ex)
@@ -229,14 +213,18 @@ namespace EnviosColombiaGold
 
                             yearValue = ent_dtCmbShipm.Select(c => c.Ssumit).FirstOrDefault().ToString().IndexOf('-');
                             if (yearValue > 0)
+                            {
                                 //iCon = int.Parse(ent_dtCmbShipm.Select(c => c.Ssumit).FirstOrDefault().ToString().Substring(yearValue - 2, 2));
                                 iCon = int.Parse(ent_dtCmbShipm.Select(c => c.Ssumit).FirstOrDefault().ToString().Substring(yearValue + 1, 4));
+                            }
 
                             if (int.Parse(sYear) <= iCon)
                             {
                                 yearValue = cmbShipment.Text.ToString().IndexOf('-');
                                 if (yearValue > 0)
+                                {
                                     iCon = int.Parse(cmbShipment.Text.Substring(yearValue + 1, 4));
+                                }
                             }
                         }
                     }
@@ -249,11 +237,8 @@ namespace EnviosColombiaGold
 
                         iCon = int.Parse(valueDefaul.ToString().Substring(valueIndexSeparator + 1, 4)) + 1;
 
-                        // ent_dtCmbShipm.Insert()
-                        // DataRow dr = dtCmbShipm.NewRow();
                         pre.Ssumit = sPrefix.ToString() + DateTime.Now.ToString("yy") + "-" + iCon.ToString().PadLeft(4, '0');
                         ent_dtCmbShipm.Insert(ent_dtCmbShipm.ToList().Count, pre);
-                        // dtCmbShipm.Rows.Add(dr);
                         sSelected = sPrefix.ToString() + DateTime.Now.ToString("yy") + "-" + iCon.ToString().PadLeft(4, '0');
                         query = ent_dtCmbShipm.Select(c => c.Ssumit).ToList();
                         cmbShipment.Items.Clear();
@@ -264,7 +249,6 @@ namespace EnviosColombiaGold
                     {
                         pre.Ssumit = sPrefix.ToString() + DateTime.Now.ToString("yy") + "-" + iCon.ToString().PadLeft(4, '0');
                         ent_dtCmbShipm.Insert(ent_dtCmbShipm.ToList().Count, pre);
-                        // dtCmbShipm.Rows.Add(dr);
                         sSelected = sPrefix.ToString() + DateTime.Now.ToString("yy") + "-" + iCon.ToString().PadLeft(4, '0');
                         query = ent_dtCmbShipm.Select(c => c.Ssumit).ToList();
                         cmbShipment.Items.Clear();
@@ -307,21 +291,16 @@ namespace EnviosColombiaGold
 
                 CmbTypSub.DisplayMember = "Description";
                 CmbTypSub.ValueMember = "Code";
-                //CmbTypSub.DataSource = LoadShipmentAll();
-                //Implementación David Ciro
                 var query1 = LoadShipmentAllTypSubEntity();
                 CmbTypSub.DataSource = query1.Select(c => c.Description).ToList(); ;
                 CmbTypSub.SelectedIndex = query1.ToList().Count - 1;
 
                 cmbDisp.DisplayMember = "Name";
                 cmbDisp.ValueMember = "Identification";
-                //cmbDisp.DataSource = LoadDispatchedby();
-                //Implementación David Ciro
                 var query2 = LoadDispatchedbySubEntity();
                 cmbDisp.DataSource = query2;
                 cmbDisp.SelectedIndex = query2.ToList().Count - 1;
 
-                //Implementación David Ciro
                 cmbLab.DisplayMember = "Code";
                 cmbLab.ValueMember = "Code";
                 var query3 = GetRfCodeLabEntity();
@@ -337,17 +316,15 @@ namespace EnviosColombiaGold
                 cmbPrepLab.ValueMember = "Code";
                 cmbPrepLab.DataSource = query3.Select(c => c.Code).ToList();
                 cmbPrepLab.SelectedIndex = query3.ToList().Count - 1;
-                
+
                 cmbPrepCode.DisplayMember = "Code";
                 cmbPrepCode.ValueMember = "Code";
-                //cmbPrepCode.DataSource = LoadPrepCode();
                 var query5 = GetuRfPreparationCodeEntity();
                 cmbPrepCode.DataSource = query5.Select(c => c.Code).ToList();
                 cmbPrepCode.SelectedIndex = query5.ToList().Count - 1;
 
                 CmbAnCod.DisplayMember = "Code";
                 CmbAnCod.ValueMember = "Code";
-                //CmbAnCod.DataSource = LoadAuAnCode();
                 var query6 = GetuRfAnalysisCodeLabEntity();
                 CmbAnCod.DataSource = query6.Select(c => c.Code).ToList();
                 CmbAnCod.SelectedIndex = query6.ToList().Count - 1;
@@ -365,10 +342,8 @@ namespace EnviosColombiaGold
                 dtAuAnC = oRf.getRfAnalysisCodeLab();
 
                 DataRow dr = dtAuAnC.NewRow();
-                //dr[0] = "-1";
                 dr[0] = "Select an option..";
                 dtAuAnC.Rows.Add(dr);
-
                 return dtAuAnC;
             }
             catch (Exception ex)
@@ -385,7 +360,6 @@ namespace EnviosColombiaGold
                 dtPrpCode = oRf.getRfPreparationCode();
 
                 DataRow dr = dtPrpCode.NewRow();
-                //dr[0] = "-1";
                 dr[0] = "Select an option..";
                 dtPrpCode.Rows.Add(dr);
 
@@ -415,14 +389,12 @@ namespace EnviosColombiaGold
         {
             try
             {
-                //clsShipment oShipment = new clsShipment();
                 var dtShipment = oShipment.getLoadDispatchedbyEntity();
 
                 Ent_Prefix pre = new Ent_Prefix();
                 pre.Identification = -1;
                 pre.Name = "Select an option..";
                 dtShipment.Insert(dtShipment.ToList().Count, pre);
-
 
                 return dtShipment;
             }
@@ -477,7 +449,6 @@ namespace EnviosColombiaGold
         {
             try
             {
-                //clsShipment oShipment = new clsShipment();
                 var dtShipment = oShipment.getuRfCodeLabEntity();
 
                 Ent_Prefix pre = new Ent_Prefix();
@@ -688,15 +659,19 @@ namespace EnviosColombiaGold
                 clsCHSamples oCh = new clsCHSamples();
                 oCh.sOpcion = "2";
                 if (cmbHoleId.SelectedValue == null)
+                {
                     oCh.sCHId = "";
+                }
                 else
+                {
                     oCh.sCHId = cmbHoleId.SelectedValue.ToString();
+                }
 
                 IList<Ent_Prefix> value = getCHSamplesEntity(oCh.sOpcion, oCh.sCHId);
 
                 Ent_Prefix[] value1 = value.ToArray();
                 var value2 = value1;
-              
+
                 a.DisplayMember = "Sample";
                 ///// Documentado David Ciro  
                 a.ValueMember = "Sample";
@@ -781,7 +756,7 @@ namespace EnviosColombiaGold
 
                     }
                     else if (code == ConfigurationSettings.AppSettings["Channels"].ToString())
-                    {                        
+                    {
                         dtHoleId = new DataTable();
                         cmbHoleId.DataSource = dtHoleId;
                         cmbHoleId.Enabled = false;
@@ -1244,7 +1219,8 @@ namespace EnviosColombiaGold
         private void cmbShipment_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
-            {       if (cmbShipment.Text.ToString() == sSelected)
+            {
+                if (cmbShipment.Text.ToString() == sSelected)
                 {
                     bcmbFind = false;
                 }
@@ -1325,28 +1301,43 @@ namespace EnviosColombiaGold
                 DataRow[] dato;
                 dato = clsRf.dsPermisos.Tables[1].Select("nombre_Real_Form = 'frmEnvios' and Accion = 'Insertar'");
                 if (dato.Length > 0)
+                {
                     btnSave.Enabled = true;
+                }
                 else
+                {
                     btnSave.Enabled = false;
+                }
 
                 dato = clsRf.dsPermisos.Tables[1].Select("nombre_Real_Form = 'frmEnvios' and Accion = 'Generar Reportes'");
                 if (dato.Length > 0)
+                {
                     btnReport.Enabled = true;
+                }
                 else
+                {
                     btnReport.Enabled = false;
+                }
 
                 dato = clsRf.dsPermisos.Tables[1].Select("nombre_Real_Form = 'frmEnvios' and Accion = 'Modificar'");
                 if (dato.Length > 0)
+                {
                     btnModify.Enabled = true;
+                }
                 else
+                {
                     btnModify.Enabled = false;
+                }
 
                 dato = clsRf.dsPermisos.Tables[1].Select("nombre_Real_Form = 'frmEnvios' and Accion = 'Consultar'");
                 if (dato.Length > 0)
+                {
                     btnFind.Enabled = true;
+                }
                 else
+                {
                     btnFind.Enabled = false;
-
+                }
             }
             catch (Exception ex)
             {
@@ -1396,6 +1387,7 @@ namespace EnviosColombiaGold
                 clsCHSamples oCh = new clsCHSamples();
 
                 string sMens = "";
+
                 for (int i = 0; i < dgInterval.Rows.Count - 1; i++)
                 {
                     string code = LoadSampShipmentAllEnt()[CmbSamTyp.SelectedIndex].Code.ToString().Trim();
@@ -1432,9 +1424,6 @@ namespace EnviosColombiaGold
                             sMens = "NOK";
                             break;
                         }
-
-
-                        break;
                     }
                     else if (code == ConfigurationSettings.AppSettings["Channels"].ToString())
                     {
@@ -1453,22 +1442,20 @@ namespace EnviosColombiaGold
                             sMens = "NOK";
                             break;
                         }
-
                     }
                     else
                     {
                         break;
                     }
-
-
                 }
+
                 if (sMens == "")
                 {
                     string sSampTo = "";
                     string sSampFrom = "";
 
                     string code = LoadSampShipmentAllEnt()[CmbSamTyp.SelectedIndex].Code.ToString().Trim();
-                    
+
                     if (code == ConfigurationSettings.AppSettings["Drill"].ToString())
                     {
                         sSampTo = lblsampTo.Text.ToString();
@@ -1486,36 +1473,10 @@ namespace EnviosColombiaGold
                     }
                     else
                     {
-
+                        sSampTo = lblsampTo.Text.ToString();
+                        sSampFrom = lblsampfrom.Text.ToString();
                     }
 
-                    if (code == ConfigurationSettings.AppSettings["Channels"].ToString())
-                    {
-                        goto Process;
-                    }
-                    
-                    if (sSampTo.ToString().Substring(0, 3) == "-99" || sSampFrom.ToString().Substring(0, 3) == "-99")
-                    {
-
-                    }
-                    else
-                    {
-                        if (double.Parse(sSampTo.ToString()) > double.Parse(sSampFrom.ToString()))
-                        //if (double.Parse(CmbTS.Text.ToString()) >= double.Parse(CmbFS.Text.ToString()))
-                        {
-                            goto Process;
-                        }
-                        else
-                        {
-                            MessageBox.Show("From Sample value greater than To Sample value", "Shipment", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                    }
-
-                  
-                    Process:
-
-                    //dtIntervals
                     if (clsLabSumitInterval.dtIntervals.Columns.Count == 0)
                     {
                         clsLabSumitInterval.dtIntervals.Columns.Add("ID", typeof(String));
@@ -1525,58 +1486,63 @@ namespace EnviosColombiaGold
                         clsLabSumitInterval.dtIntervals.Columns.Add("IdFrom", typeof(String));
                         clsLabSumitInterval.dtIntervals.Columns.Add("IdTo", typeof(String));
                     }
-                  
+
                     DataRow dr = clsLabSumitInterval.dtIntervals.NewRow();
                     dr["ID"] = iInterval.ToString(); //Variable para identificar el registro en ambos grid
                     
-
                     if (code == ConfigurationSettings.AppSettings["Drill"].ToString())
                     {
-                        
+
                         dr["SampleFrom"] = a.Text.ToString();
                         dr["SampleTo"] = CmbTS.Text.ToString();
-                        //dr["TotalSample"] = oDHSamp.getDHSamplesById(CmbFS.SelectedValue.ToString(), CmbTS.SelectedValue.ToString()).Rows.Count;
                         dr["TotalSample"] = oDHSamp.getDHSamplesBySamp(a.Text.ToString(), CmbTS.Text.ToString()).Rows.Count;
-                        
+
                     }
                     else if (code == ConfigurationSettings.AppSettings["Rocks"].ToString())
                     {
                         dr["SampleFrom"] = a.SelectedValue.ToString();
                         dr["SampleTo"] = CmbTS.SelectedValue.ToString();
                         dr["TotalSample"] = oRock.getGC_SamplesRockById(a.SelectedValue.ToString(), CmbTS.SelectedValue.ToString()).Rows.Count;
-                        
+
                     }
                     else if (code == ConfigurationSettings.AppSettings["Channels"].ToString())
                     {
                         dr["SampleFrom"] = a.Text.ToString();
-                     
                         dr["SampleTo"] = CmbTS.Text.ToString();
-                        
+
                         if (cmbHoleId.SelectedValue == null)
                         {
                             oCh.sCHId = "";
                         }
                         else
-                        { 
+                        {
                             oCh.sCHId = cmbHoleId.SelectedValue.ToString();
                         }
                         dr["TotalSample"] = oCh.getCHSamplesBySample(a.Text.ToString(), CmbTS.Text.ToString()).Rows.Count;
-                        
+
                     }
                     else
                     {
+                        if (this.cmbHoleId.SelectedValue == null)
+                        {
+                            oCh.sCHId = "";
+                        }
+                        else
+                        {
+                            oCh.sCHId = this.cmbHoleId.SelectedValue.ToString();
+                        }
+                        int num = 0;
+                        if (this.oDHSamp.sHoleID != null && this.oDHSamp.sHoleID != string.Empty)
+                        {
+                            num = this.oDHSamp.getDHSamplesBySamp(this.a.Text.ToString(), this.CmbTS.Text.ToString()).Rows.Count;
+                        }
+                        dr["SampleFrom"] = this.a.SelectedValue.ToString();
+                        dr["SampleTo"] = this.CmbTS.SelectedValue.ToString();
+                        dr["TotalSample"] = oCh.getCHSamplesBySample(this.a.Text.ToString(), this.CmbTS.Text.ToString()).Rows.Count + oRock.getGC_SamplesRockById(this.a.SelectedValue.ToString(), this.CmbTS.SelectedValue.ToString()).Rows.Count + num;
 
                     }
-                 
 
-                    //Cargar el grid con la informacion de Sample para el from to
-
-                    //Envio los parametros from y to para calcular la cantidad de registros seleccionados
-                    //oDHSamp.lFrom = CmbFS.SelectedValue.ToString();
-                    //oDHSamp.lTo = CmbTS.SelectedValue.ToString();
                     oDHSamp.sHoleID = cmbHoleId.Text.ToString();
-
-
                     dr["IdFrom"] = a.SelectedValue.ToString();
                     dr["IdTo"] = CmbTS.SelectedValue.ToString();
 
@@ -1586,7 +1552,7 @@ namespace EnviosColombiaGold
                     {
                         dgInterval.Columns[0].Visible = false;
                     }
-      //Intervals Detail 
+                    //Intervals Detail 
                     if (clsLabsumitIn.dtIn.Columns.Count == 0)
                     {
                         DataColumn DCAutoInc = clsLabsumitIn.dtIn.Columns.Add("Con", typeof(Int32));
@@ -1607,16 +1573,15 @@ namespace EnviosColombiaGold
                     {
 
                         dtDetail = oDHSamp.getDHSamplesBySamp(a.Text.ToString(), CmbTS.Text.ToString());
-                        //dtDetail = oDHSamp.getDHSamplesById(CmbFS.SelectedValue.ToString(), CmbTS.SelectedValue.ToString());
-                        
                         if (!SampleType.Contains("Drill"))
+                        {
                             SampleType = string.Concat(SampleType, "Drill,");
+                        }
 
                         for (int i = 0; i < dtDetail.Rows.Count; i++)
                         {
 
                             DataRow drDetail = clsLabsumitIn.dtIn.NewRow();
-                            //drDetail["Con"] = ;
                             drDetail["IDInterval"] = iInterval.ToString();
                             drDetail["Sample"] = dtDetail.Rows[i]["Sample"].ToString();
                             drDetail["Sack"] = iSackos.ToString();
@@ -1639,14 +1604,14 @@ namespace EnviosColombiaGold
                         dtDetail = oRock.getGC_SamplesRockById(a.SelectedValue.ToString(), CmbTS.SelectedValue.ToString());
 
                         if (!SampleType.Contains("Rocks"))
+                        {
                             SampleType = string.Concat(SampleType, "Rocks,");
-                        
+                        }
 
                         for (int i = 0; i < dtDetail.Rows.Count; i++)
                         {
 
                             DataRow drDetail = clsLabsumitIn.dtIn.NewRow();
-                            //drDetail["Con"] = ;
                             drDetail["IDInterval"] = iInterval.ToString();
                             drDetail["Sample"] = dtDetail.Rows[i]["Sample"].ToString();
                             drDetail["Sack"] = iSackos.ToString();
@@ -1666,21 +1631,25 @@ namespace EnviosColombiaGold
                     else if (code == ConfigurationSettings.AppSettings["Channels"].ToString())
                     {
                         if (cmbHoleId.SelectedValue == null)
+                        {
                             oCh.sCHId = "";
+                        }
                         else
+                        {
                             oCh.sCHId = cmbHoleId.SelectedValue.ToString();
+                        }
 
                         dtDetail = oCh.getCHSamplesBySample(a.Text.ToString(), CmbTS.Text.ToString());
 
                         if (!SampleType.Contains("Channels"))
+                        {
                             SampleType = string.Concat(SampleType, "Channels,");
-
+                        }
 
                         for (int i = 0; i < dtDetail.Rows.Count; i++)
                         {
 
                             DataRow drDetail = clsLabsumitIn.dtIn.NewRow();
-                            //drDetail["Con"] = ;
                             drDetail["IDInterval"] = iInterval.ToString();
                             drDetail["Sample"] = dtDetail.Rows[i]["Sample"].ToString();
                             drDetail["Sack"] = iSackos.ToString();
@@ -1698,11 +1667,8 @@ namespace EnviosColombiaGold
                         }
 
                     }
-                    else
-                    {
 
-                    }
-                     txtBags.Text = sCantSack.ToString();
+                    txtBags.Text = sCantSack.ToString();
 
                     dgDetalleInterval.DataSource = clsLabsumitIn.dtIn;
                     if (clsLabsumitIn.dtIn.Rows.Count > 0)
@@ -1712,13 +1678,12 @@ namespace EnviosColombiaGold
                     }
                     //Variable para identificar el registro en ambos grid
                     iInterval += 1;
-
                 }
                 else if (sMens == "NOK")
                 {
                     MessageBox.Show("Range Invalid.", "Shipment", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
+                return;
             }
             catch (Exception ex)
             {
@@ -1742,36 +1707,24 @@ namespace EnviosColombiaGold
                     {
 
                         if (clsLabsumitIn.dtIn.Rows[i][1].ToString() == dgInterval.Rows[e.RowIndex].Cells[0].Value.ToString())
-                        //dgDetalleInterval.Rows[i].Cells[1].ToString() == dgInterval.Rows[dgInterval.Rows[e.RowIndex]].Cells[0].ToString())
                         {
                             clsLabsumitIn.dtIn.Rows[i].Delete();
                         }
                     }
                     dgDetalleInterval.DataSource = clsLabsumitIn.dtIn;
-
                     clsLabSumitInterval.dtIntervals.Rows[e.RowIndex].Delete();
                     dgInterval.DataSource = clsLabSumitInterval.dtIntervals;
-                    //dgInterval.Rows.Remove(dgInterval.Rows[e.RowIndex]);
-
-                    //clsLabsumitIn.dtIn = (DataTable)(dgDetalleInterval.DataSource);
                     clsLabsumitIn.dtIn = new DataTable();
-
                     Init_DtIn();
                     initVbles();
 
-
-
                     for (int i = 0; i < dgDetalleInterval.Rows.Count - 1; i++)
                     {
-
-
                         DataRow drDetail = clsLabsumitIn.dtIn.NewRow();
-                        //drDetail["Con"] = ;
                         drDetail["IDInterval"] = dgDetalleInterval.Rows[i].Cells[1].Value.ToString();
                         drDetail["Sample"] = dgDetalleInterval.Rows[i].Cells[2].Value.ToString();
                         drDetail["Sack"] = iSackos.ToString();
                         clsLabsumitIn.dtIn.Rows.Add(drDetail);
-
 
                         if ((iCont % int.Parse(ConfigurationSettings.AppSettings["CantSackos"].ToString())) == 0)
                         {
@@ -1779,20 +1732,14 @@ namespace EnviosColombiaGold
                         }
 
                         iCont += 1;
-
                     }
 
                     dgDetalleInterval.DataSource = clsLabsumitIn.dtIn;
-
-
-                    //MessageBox.Show(dgInterval.SelectedCells[0].Value.ToString());
                 }
                 else
                 {
                     MessageBox.Show("Select a record", "Shipment", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -1836,14 +1783,14 @@ namespace EnviosColombiaGold
 
                 var culturaCol = CultureInfo.GetCultureInfo("es-CO");
                 dDate = Convert.ToDateTime(txtDate.Text.ToString(), culturaCol);
-  //Para capturar la fecha en el formato correcto
+                //Para capturar la fecha en el formato correcto
                 //Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
                 //dDate = DateTime.Parse(txtDate.Text.ToString());
                 string sDate = dDate.Year.ToString().PadLeft(4, '0') + dDate.Month.ToString().PadLeft(2, '0') +
                     dDate.Day.ToString().PadLeft(2, '0');
 
 
-                  if (cmbDisp.Text.Contains("Select"))
+                if (cmbDisp.Text.Contains("Select"))
                 {
                     MessageBox.Show("El valor del campo " + "Dispatched by es requerido");
                     return "";
@@ -1911,9 +1858,13 @@ namespace EnviosColombiaGold
                 string[] countType = SampleType.Split(',');
 
                 if (countType.Count() > 1)
+                {
                     oLabS.sSampleType = "CRD";//CmbSamTyp.SelectedValue.ToString()
+                }
                 else
+                {
                     oLabS.sSampleType = sSampleType;
+                }
 
                 string code = LoadSampShipmentAllEnt()[CmbSamTyp.SelectedIndex].Code.ToString().Trim();
 
@@ -1931,14 +1882,21 @@ namespace EnviosColombiaGold
                 string sRes = oLabS.LabSubmit_Add();
 
                 if (sRes.Contains("OK"))
+                {
                     SampleType = string.Empty;
+                }
 
                 //Insertar el registro para el historial de transacciones por usuario
                 string sTrans = "";
                 if (bcmbModify == true)
+                {
                     sTrans = "Update";
+                }
                 else
+                {
                     sTrans = "Insert";
+                }
+
                 oRf.InsertTrans("LabSubmit", sTrans.ToString(), clsRf.sUser.ToString(),
                                 " DateShipment = " + sDate.ToString() +
                                 ". Type = " + sSampleType.ToString() +
@@ -1980,9 +1938,13 @@ namespace EnviosColombiaGold
 
                     string sTrans = "";
                     if (bcmbModify == true)
+                    {
                         sTrans = "Update";
+                    }
                     else
+                    {
                         sTrans = "Insert";
+                    }
                     //Insertar el registro para el historial de transacciones por usuario
                     oRf.InsertTrans("LabSumitInterval", sTrans, clsRf.sUser.ToString(),
                                     " Submit = " + cmbShipment.Text.ToString() +
@@ -2213,12 +2175,9 @@ namespace EnviosColombiaGold
             {
                 if (dgInterval.Rows.Count > 1)
                 {
-                    //MessageBox.Show(dgInterval.SelectedRows[0].Index.ToString());
                     for (int i = dgDetalleInterval.Rows.Count - 2; i >= 0; i += -1)
                     {
-
                         if (clsLabsumitIn.dtIn.Rows[i][1].ToString() == dgInterval.Rows[dgInterval.SelectedRows[0].Index].Cells[0].Value.ToString())
-                        //dgDetalleInterval.Rows[i].Cells[1].ToString() == dgInterval.Rows[dgInterval.Rows[e.RowIndex]].Cells[0].ToString())
                         {
                             clsLabsumitIn.dtIn.Rows[i].Delete();
                         }
@@ -2228,37 +2187,26 @@ namespace EnviosColombiaGold
                     clsLabSumitInterval.dtIntervals.Rows[dgInterval.SelectedRows[0].Index].Delete();
 
                     dgInterval.DataSource = clsLabSumitInterval.dtIntervals;
-                    //dgInterval.Rows.Remove(dgInterval.Rows[dgInterval.SelectedRows[0].Index]);
-
-
-                    //clsLabsumitIn.dtIn = (DataTable)(dgDetalleInterval.DataSource);
                     clsLabsumitIn.dtIn = new DataTable();
 
                     Init_DtIn();
                     initVbles();
-
-
+                    
                     for (int i = 0; i < dgDetalleInterval.Rows.Count - 1; i++)
                     {
-
-
                         DataRow drDetail = clsLabsumitIn.dtIn.NewRow();
-                        //drDetail["Con"] = ;
                         drDetail["IDInterval"] = dgDetalleInterval.Rows[i].Cells[1].Value.ToString();
                         drDetail["Sample"] = dgDetalleInterval.Rows[i].Cells[2].Value.ToString();
                         drDetail["Sack"] = iSackos.ToString();
                         drDetail["IdAut"] = dgDetalleInterval.Rows[i].Cells[4].Value.ToString();
                         clsLabsumitIn.dtIn.Rows.Add(drDetail);
-
-
+                        
                         if ((iCont % int.Parse(ConfigurationSettings.AppSettings["CantSackos"].ToString())) == 0)
                         {
                             iSackos += 1;
                         }
 
                         iCont += 1;
-
-
                     }
 
                     dgDetalleInterval.DataSource = clsLabsumitIn.dtIn;
@@ -2267,9 +2215,6 @@ namespace EnviosColombiaGold
                 {
                     MessageBox.Show("Select a record", "Shipment", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-
-
             }
             catch (Exception ex)
             {
@@ -2681,17 +2626,15 @@ namespace EnviosColombiaGold
         {
             try
             {
-                //Cambios David Ciro
-                //cmbPrepLab.SelectedValue = cmbLab.SelectedValue;
-                //cmbAnLab.SelectedValue = cmbLab.SelectedValue;
-
                 if (cmbPrepLab.Items.Count > 0)
+                {
                     cmbPrepLab.SelectedIndex = cmbLab.SelectedIndex;
+                }
 
                 if (cmbPrepLab.Items.Count > 0)
+                {
                     cmbAnLab.SelectedIndex = cmbLab.SelectedIndex;
-
-
+                }
             }
             catch (Exception ex)
             {
@@ -2837,9 +2780,8 @@ namespace EnviosColombiaGold
                     lblsampfrom.Text = dtIdF.Rows[0]["From"].ToString(); //CmbFS.SelectedValue.ToString();
 
                 }
-                else if (code == ConfigurationSettings.AppSettings["Rocks"].ToString())
+                else 
                 {
-
                     string sCadena = a.SelectedValue.ToString();
                     string sNumero = "";
                     string sLetras = "";
@@ -2856,46 +2798,10 @@ namespace EnviosColombiaGold
                     }
 
                     lblsampfrom.Text = sNumero;//CmbFS.SelectedValue.ToString(); 
-
                 }
-                else if (code == ConfigurationSettings.AppSettings["Channels"].ToString())
-                {
-                    //clsCHSamples oCh = new clsCHSamples();
-                    //oCh.sCHId = cmbHoleId.SelectedValue.ToString();
-                    //dtIdF = oCh.getCHSamplesById(CmbFS.SelectedValue.ToString(), CmbFS.SelectedValue.ToString());
-                    //if (dtIdF.Rows.Count == 0)
-                    //{
-                    //    return;
-                    //}
-                    //lblsampfrom.Text = dtIdF.Rows[0]["From"].ToString(); //CmbFS.SelectedValue.ToString();
-
-                    string sCadena = a.SelectedValue.ToString();
-                    string sNumero = "";
-                    string sLetras = "";
-                    foreach (char val in sCadena.ToCharArray())
-                    {
-                        if (char.IsNumber(val))
-                        {
-                            sNumero = sNumero + val;
-                        }
-                        else
-                        {
-                            sLetras = sLetras + val;
-                        }
-                    }
-
-                    lblsampfrom.Text = sNumero;//CmbFS.SelectedValue.ToString(); 
-
-                }
-                else
-                {
-
-                }
-
+                
                 dtIdF.Clear();
                 dtIdF.Dispose();
-
-
             }
             catch (Exception ex)
             {
@@ -2925,58 +2831,26 @@ namespace EnviosColombiaGold
                     lblsampTo.Text = dtIdT.Rows[0]["To"].ToString();//CmbTS.SelectedValue.ToString();
 
                 }
-                else if (code == ConfigurationSettings.AppSettings["Rocks"].ToString())
-                {
-                    string sCadena = CmbTS.SelectedValue.ToString();
-                    string sNumero = "";
-                    string sLetras = "";
-                    foreach (char val in sCadena.ToCharArray())
-                    {
-                        if (char.IsNumber(val))
-                        {
-                            sNumero = sNumero + val;
-                        }
-                        else
-                        {
-                            sLetras = sLetras + val;
-                        }
-                    }
-
-                    lblsampTo.Text = sNumero;//CmbTS.SelectedValue.ToString();
-                }
-                else if (code == ConfigurationSettings.AppSettings["Channels"].ToString())
-                {
-                    //clsCHSamples oCh = new clsCHSamples();
-                    //oCh.sCHId = cmbHoleId.SelectedValue.ToString();
-                    //dtIdT = oCh.getCHSamplesById(CmbTS.SelectedValue.ToString(), CmbTS.SelectedValue.ToString());
-                    //if (dtIdT.Rows.Count == 0)
-                    //{
-                    //    return;
-                    //}
-                    //lblsampTo.Text = dtIdT.Rows[0]["To"].ToString(); //CmbFS.SelectedValue.ToString();
-
-                    string sCadena = CmbTS.SelectedValue.ToString();
-                    string sNumero = "";
-                    string sLetras = "";
-                    foreach (char val in sCadena.ToCharArray())
-                    {
-                        if (char.IsNumber(val))
-                        {
-                            sNumero = sNumero + val;
-                        }
-                        else
-                        {
-                            sLetras = sLetras + val;
-                        }
-                    }
-
-                    lblsampTo.Text = sNumero;//CmbTS.SelectedValue.ToString();
-                }
                 else
                 {
+                    string sCadena = CmbTS.SelectedValue.ToString();
+                    string sNumero = "";
+                    string sLetras = "";
+                    foreach (char val in sCadena.ToCharArray())
+                    {
+                        if (char.IsNumber(val))
+                        {
+                            sNumero = sNumero + val;
+                        }
+                        else
+                        {
+                            sLetras = sLetras + val;
+                        }
+                    }
 
+                    lblsampTo.Text = sNumero;//CmbTS.SelectedValue.ToString();
                 }
-
+               
                 dtIdT.Clear();
                 dtIdT.Dispose();
             }
@@ -2990,46 +2864,9 @@ namespace EnviosColombiaGold
         {
             try
             {
-                //Seteo los combos para evitar errores al asignar la propiedad valuemember y displaymember al cambiar la fuente de datos
-
-                //Documentado por David Ciro, a Solicitud de Juan Ortiz
-
                 a.DataSource = null;
                 CmbTS.DataSource = null;
                 LoadCmbHoleId();
-
-                //if (indexSelectCmbSam >= 0)
-                //{
-                //    if (CmbSamTyp.SelectedIndex == 3)
-                //    {
-
-                //        a.DataSource = null;
-                //        CmbTS.DataSource = null; LoadCmbHoleId();
-                //    }
-                //    else
-                //    {
-                //        if (!modificate)
-                //            if (CmbSamTyp.SelectedIndex != 4)
-                //                CmbSamTyp.SelectedIndex = indexSelectCmbSam;
-
-                //    }
-                //}
-                //else
-                //{
-                //    if (CmbSamTyp.SelectedIndex != 4)
-                //    {
-                //        indexSelectCmbSam = CmbSamTyp.SelectedIndex;
-
-
-                //        a.DataSource = null;
-                //        CmbTS.DataSource = null; LoadCmbHoleId();
-
-                //    }
-                //}
-
-
-                //LoadCmbHoleId();
-
             }
             catch (Exception ex)
             {
@@ -3047,14 +2884,9 @@ namespace EnviosColombiaGold
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (isSelected)
+            {
                 LoadCmb1();
-
-            //clear();
-            //GetItemsPrimary();
-
-            //Load_Combos();
-            //initVbles();
-            //isSelected = true;
+            }
         }
 
         private void cmbShipment_Leave(object sender, EventArgs e)
