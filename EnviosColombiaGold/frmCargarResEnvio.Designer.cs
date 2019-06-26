@@ -29,17 +29,22 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCargarResEnvio));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LblTitulos = new System.Windows.Forms.Label();
+            this.pbtnSearch = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtRuta = new System.Windows.Forms.TextBox();
             this.dgXls = new System.Windows.Forms.DataGridView();
             this.oDialog = new System.Windows.Forms.OpenFileDialog();
             this.tMessage = new System.Windows.Forms.ToolTip(this.components);
+            this.pbtnUpdate = new System.Windows.Forms.PictureBox();
+            this.pbtnPrint = new System.Windows.Forms.PictureBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabJobAssay = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabReimp = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,21 +57,16 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cmbJobNo = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pbtnSearch = new System.Windows.Forms.PictureBox();
-            this.pbtnUpdate = new System.Windows.Forms.PictureBox();
-            this.pbtnPrint = new System.Windows.Forms.PictureBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbtnSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgXls)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbtnUpdate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbtnPrint)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabJobAssay.SuspendLayout();
             this.tabReimp.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbtnSearch)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbtnUpdate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbtnPrint)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -78,9 +78,21 @@
             this.groupBox1.Controls.Add(this.txtRuta);
             this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1129, 85);
+            this.groupBox1.Size = new System.Drawing.Size(1133, 85);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(1084, 51);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(26, 22);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 92;
+            this.pictureBox1.TabStop = false;
+            this.tMessage.SetToolTip(this.pictureBox1, "Search");
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // LblTitulos
             // 
@@ -95,6 +107,18 @@
             this.LblTitulos.TabIndex = 91;
             this.LblTitulos.Text = "Load assay SGS";
             this.LblTitulos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pbtnSearch
+            // 
+            this.pbtnSearch.Image = ((System.Drawing.Image)(resources.GetObject("pbtnSearch.Image")));
+            this.pbtnSearch.Location = new System.Drawing.Point(1039, 51);
+            this.pbtnSearch.Name = "pbtnSearch";
+            this.pbtnSearch.Size = new System.Drawing.Size(26, 22);
+            this.pbtnSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbtnSearch.TabIndex = 9;
+            this.pbtnSearch.TabStop = false;
+            this.tMessage.SetToolTip(this.pbtnSearch, "Search");
+            this.pbtnSearch.Click += new System.EventHandler(this.pbtnSearch_Click);
             // 
             // label1
             // 
@@ -122,12 +146,37 @@
             this.dgXls.Location = new System.Drawing.Point(6, 97);
             this.dgXls.Name = "dgXls";
             this.dgXls.ReadOnly = true;
-            this.dgXls.Size = new System.Drawing.Size(1213, 515);
+            this.dgXls.Size = new System.Drawing.Size(1247, 491);
             this.dgXls.TabIndex = 5;
             // 
             // oDialog
             // 
             this.oDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // pbtnUpdate
+            // 
+            this.pbtnUpdate.Enabled = false;
+            this.pbtnUpdate.Image = global::EnviosColombiaGold.Properties.Resources.nut_1420234_640__2___2_;
+            this.pbtnUpdate.Location = new System.Drawing.Point(1168, 41);
+            this.pbtnUpdate.Name = "pbtnUpdate";
+            this.pbtnUpdate.Size = new System.Drawing.Size(62, 50);
+            this.pbtnUpdate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbtnUpdate.TabIndex = 8;
+            this.pbtnUpdate.TabStop = false;
+            this.tMessage.SetToolTip(this.pbtnUpdate, "Update");
+            this.pbtnUpdate.Click += new System.EventHandler(this.pbtnUpdate_Click);
+            // 
+            // pbtnPrint
+            // 
+            this.pbtnPrint.Image = ((System.Drawing.Image)(resources.GetObject("pbtnPrint.Image")));
+            this.pbtnPrint.Location = new System.Drawing.Point(433, 39);
+            this.pbtnPrint.Name = "pbtnPrint";
+            this.pbtnPrint.Size = new System.Drawing.Size(62, 50);
+            this.pbtnPrint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbtnPrint.TabIndex = 9;
+            this.pbtnPrint.TabStop = false;
+            this.tMessage.SetToolTip(this.pbtnPrint, "Print");
+            this.pbtnPrint.Click += new System.EventHandler(this.pbtnPrint_Click);
             // 
             // tabControl1
             // 
@@ -137,7 +186,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1233, 661);
+            this.tabControl1.Size = new System.Drawing.Size(1267, 620);
             this.tabControl1.TabIndex = 9;
             // 
             // tabJobAssay
@@ -151,9 +200,23 @@
             this.tabJobAssay.Location = new System.Drawing.Point(4, 22);
             this.tabJobAssay.Name = "tabJobAssay";
             this.tabJobAssay.Padding = new System.Windows.Forms.Padding(3);
-            this.tabJobAssay.Size = new System.Drawing.Size(1225, 635);
+            this.tabJobAssay.Size = new System.Drawing.Size(1259, 594);
             this.tabJobAssay.TabIndex = 0;
             this.tabJobAssay.Text = "Job Assay Results";
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Britannic Bold", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label7.Location = new System.Drawing.Point(1159, 5);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(83, 35);
+            this.label7.TabIndex = 93;
+            this.label7.Text = "Cargar";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
             // 
@@ -178,7 +241,7 @@
             this.tabReimp.Location = new System.Drawing.Point(4, 22);
             this.tabReimp.Name = "tabReimp";
             this.tabReimp.Padding = new System.Windows.Forms.Padding(3);
-            this.tabReimp.Size = new System.Drawing.Size(1225, 635);
+            this.tabReimp.Size = new System.Drawing.Size(1259, 658);
             this.tabReimp.TabIndex = 1;
             this.tabReimp.Text = "Reimp QC Report";
             // 
@@ -295,95 +358,32 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Job No";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(1084, 51);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(26, 22);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 92;
-            this.pictureBox1.TabStop = false;
-            this.tMessage.SetToolTip(this.pictureBox1, "Search");
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // pbtnSearch
-            // 
-            this.pbtnSearch.Image = ((System.Drawing.Image)(resources.GetObject("pbtnSearch.Image")));
-            this.pbtnSearch.Location = new System.Drawing.Point(1039, 51);
-            this.pbtnSearch.Name = "pbtnSearch";
-            this.pbtnSearch.Size = new System.Drawing.Size(26, 22);
-            this.pbtnSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbtnSearch.TabIndex = 9;
-            this.pbtnSearch.TabStop = false;
-            this.tMessage.SetToolTip(this.pbtnSearch, "Search");
-            this.pbtnSearch.Click += new System.EventHandler(this.pbtnSearch_Click);
-            // 
-            // pbtnUpdate
-            // 
-            this.pbtnUpdate.Enabled = false;
-            this.pbtnUpdate.Image = global::EnviosColombiaGold.Properties.Resources.nut_1420234_640__2___2_;
-            this.pbtnUpdate.Location = new System.Drawing.Point(1145, 41);
-            this.pbtnUpdate.Name = "pbtnUpdate";
-            this.pbtnUpdate.Size = new System.Drawing.Size(62, 50);
-            this.pbtnUpdate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbtnUpdate.TabIndex = 8;
-            this.pbtnUpdate.TabStop = false;
-            this.tMessage.SetToolTip(this.pbtnUpdate, "Update");
-            this.pbtnUpdate.Click += new System.EventHandler(this.pbtnUpdate_Click);
-            // 
-            // pbtnPrint
-            // 
-            this.pbtnPrint.Image = ((System.Drawing.Image)(resources.GetObject("pbtnPrint.Image")));
-            this.pbtnPrint.Location = new System.Drawing.Point(433, 39);
-            this.pbtnPrint.Name = "pbtnPrint";
-            this.pbtnPrint.Size = new System.Drawing.Size(62, 50);
-            this.pbtnPrint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbtnPrint.TabIndex = 9;
-            this.pbtnPrint.TabStop = false;
-            this.tMessage.SetToolTip(this.pbtnPrint, "Print");
-            this.pbtnPrint.Click += new System.EventHandler(this.pbtnPrint_Click);
-            // 
-            // label7
-            // 
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Britannic Bold", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label7.Location = new System.Drawing.Point(1138, 5);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(83, 35);
-            this.label7.TabIndex = 93;
-            this.label7.Text = "Cargar";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // frmCargarResEnvio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.ClientSize = new System.Drawing.Size(1233, 661);
+            this.ClientSize = new System.Drawing.Size(1267, 620);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "frmCargarResEnvio";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Job Assay Results";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmCargarResEnvio_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbtnSearch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgXls)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbtnUpdate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbtnPrint)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabJobAssay.ResumeLayout(false);
             this.tabReimp.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbtnSearch)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbtnUpdate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbtnPrint)).EndInit();
             this.ResumeLayout(false);
 
         }

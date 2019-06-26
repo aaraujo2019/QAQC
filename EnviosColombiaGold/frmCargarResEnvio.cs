@@ -359,6 +359,8 @@ namespace EnviosColombiaGold
 
                 int iAg = 0, iAu = 0, iMn = 0, iFe = 0, iCa = 0, iZn = 0, iS = 0, iAs = 0, iPb = 0, iCu = 0;
                 string stAg = "", stAu = "", stMn = "", stFe = "", stCa = "", stZn = "", stS = "", stAs = "", stPb = "", stCu = "";
+                string textoAgfa = string.Empty;
+                int valAgicp = 0;
 
                 for (int iRowElem = 4; iRowElem < iPosicionFin; iRowElem++)
                 {
@@ -447,23 +449,16 @@ namespace EnviosColombiaGold
                                 }
 
 
+                                //Modificado Alvaro Araujo
+                                //19/06/2019
+
                                 switch (dtElementos.Rows[1][iElem].ToString())
                                 {
-                                    case "AAS12C":
+                                    case "AAS42C":
                                         sAg = "Agfa";
                                         break;
-                                    case "AAS11B":
-                                        sAg = "Agfagr";
-                                        break;
-                                    case "ICM40B (*)":
-                                        sAg = "agicm";
-                                        break;
-                                    case "AAS41B (*)":
-                                        sAg = "Agfagr";
-                                        break;
-
-                                    default:
-                                        sAg = "Agfa";
+                                    case "ICP40B":
+                                        sAg = "Agicp";
                                         break;
                                 }
 
