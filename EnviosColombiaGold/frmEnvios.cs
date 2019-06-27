@@ -14,7 +14,6 @@ namespace EnviosColombiaGold
 {
     public partial class frmEnvios : Form
     {
-
         #region variables
 
         private int iSackos;

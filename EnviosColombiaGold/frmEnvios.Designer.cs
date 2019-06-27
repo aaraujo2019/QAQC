@@ -112,11 +112,11 @@ namespace EnviosColombiaGold
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnSave.Location = new System.Drawing.Point(10, 584);
+            this.btnSave.Location = new System.Drawing.Point(10, 578);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(76, 31);
-            this.btnSave.TabIndex = 24;
+            this.btnSave.TabIndex = 22;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -124,11 +124,11 @@ namespace EnviosColombiaGold
             // btnReport
             // 
             this.btnReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnReport.Location = new System.Drawing.Point(90, 584);
+            this.btnReport.Location = new System.Drawing.Point(90, 578);
             this.btnReport.Margin = new System.Windows.Forms.Padding(2);
             this.btnReport.Name = "btnReport";
             this.btnReport.Size = new System.Drawing.Size(76, 31);
-            this.btnReport.TabIndex = 25;
+            this.btnReport.TabIndex = 23;
             this.btnReport.Text = "Report";
             this.btnReport.UseVisualStyleBackColor = true;
             this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
@@ -136,11 +136,11 @@ namespace EnviosColombiaGold
             // btnClean
             // 
             this.btnClean.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnClean.Location = new System.Drawing.Point(170, 584);
+            this.btnClean.Location = new System.Drawing.Point(170, 578);
             this.btnClean.Margin = new System.Windows.Forms.Padding(2);
             this.btnClean.Name = "btnClean";
             this.btnClean.Size = new System.Drawing.Size(74, 31);
-            this.btnClean.TabIndex = 26;
+            this.btnClean.TabIndex = 24;
             this.btnClean.Text = "Clean";
             this.btnClean.UseVisualStyleBackColor = true;
             this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
@@ -148,11 +148,11 @@ namespace EnviosColombiaGold
             // btnModify
             // 
             this.btnModify.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnModify.Location = new System.Drawing.Point(249, 584);
+            this.btnModify.Location = new System.Drawing.Point(249, 578);
             this.btnModify.Margin = new System.Windows.Forms.Padding(2);
             this.btnModify.Name = "btnModify";
             this.btnModify.Size = new System.Drawing.Size(76, 31);
-            this.btnModify.TabIndex = 27;
+            this.btnModify.TabIndex = 25;
             this.btnModify.Text = "Modify";
             this.btnModify.UseVisualStyleBackColor = true;
             this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
@@ -160,11 +160,11 @@ namespace EnviosColombiaGold
             // btnClose
             // 
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnClose.Location = new System.Drawing.Point(329, 584);
+            this.btnClose.Location = new System.Drawing.Point(329, 578);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(89, 31);
-            this.btnClose.TabIndex = 29;
+            this.btnClose.TabIndex = 26;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -198,12 +198,18 @@ namespace EnviosColombiaGold
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dgDetalleInterval);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.TxtOtAnCod);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.txtMetAnCod);
+            this.groupBox1.Controls.Add(this.txtInstructions);
+            this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.groupBox1.Location = new System.Drawing.Point(594, 248);
+            this.groupBox1.Location = new System.Drawing.Point(594, 222);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(641, 301);
+            this.groupBox1.Size = new System.Drawing.Size(641, 304);
             this.groupBox1.TabIndex = 38;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sack and Samples";
@@ -213,11 +219,11 @@ namespace EnviosColombiaGold
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.dgDetalleInterval.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgDetalleInterval.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgDetalleInterval.Location = new System.Drawing.Point(8, 20);
+            this.dgDetalleInterval.Location = new System.Drawing.Point(12, 23);
             this.dgDetalleInterval.Margin = new System.Windows.Forms.Padding(2);
             this.dgDetalleInterval.Name = "dgDetalleInterval";
             this.dgDetalleInterval.RowTemplate.Height = 24;
-            this.dgDetalleInterval.Size = new System.Drawing.Size(609, 265);
+            this.dgDetalleInterval.Size = new System.Drawing.Size(616, 266);
             this.dgDetalleInterval.TabIndex = 1;
             // 
             // groupBox3
@@ -225,8 +231,6 @@ namespace EnviosColombiaGold
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.comboBox1);
             this.groupBox3.Controls.Add(this.txtDate);
-            this.groupBox3.Controls.Add(this.TxtOtAnCod);
-            this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.CmbSamTyp);
             this.groupBox3.Controls.Add(this.label19);
             this.groupBox3.Controls.Add(this.CmbTypSub);
@@ -239,10 +243,6 @@ namespace EnviosColombiaGold
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.txtBags);
             this.groupBox3.Controls.Add(this.label13);
-            this.groupBox3.Controls.Add(this.txtInstructions);
-            this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Controls.Add(this.txtMetAnCod);
-            this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.CmbAnCod);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.cmbPrepCode);
@@ -264,7 +264,7 @@ namespace EnviosColombiaGold
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(1219, 215);
+            this.groupBox3.Size = new System.Drawing.Size(1219, 192);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
@@ -273,7 +273,7 @@ namespace EnviosColombiaGold
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 10F);
-            this.label2.Location = new System.Drawing.Point(386, 35);
+            this.label2.Location = new System.Drawing.Point(392, 34);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 17);
@@ -283,50 +283,52 @@ namespace EnviosColombiaGold
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(389, 54);
+            this.comboBox1.Location = new System.Drawing.Point(394, 53);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(176, 24);
-            this.comboBox1.TabIndex = 45;
+            this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // txtDate
             // 
             this.txtDate.CustomFormat = "yyyy/MM/dd";
             this.txtDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.txtDate.Location = new System.Drawing.Point(579, 145);
+            this.txtDate.Location = new System.Drawing.Point(209, 148);
             this.txtDate.Margin = new System.Windows.Forms.Padding(2);
             this.txtDate.Name = "txtDate";
-            this.txtDate.Size = new System.Drawing.Size(197, 23);
-            this.txtDate.TabIndex = 11;
+            this.txtDate.Size = new System.Drawing.Size(176, 23);
+            this.txtDate.TabIndex = 12;
             this.txtDate.ValueChanged += new System.EventHandler(this.txtDate_ValueChanged);
             // 
             // TxtOtAnCod
             // 
-            this.TxtOtAnCod.Location = new System.Drawing.Point(210, 145);
+            this.TxtOtAnCod.Location = new System.Drawing.Point(34, 252);
             this.TxtOtAnCod.Margin = new System.Windows.Forms.Padding(2);
             this.TxtOtAnCod.Name = "TxtOtAnCod";
             this.TxtOtAnCod.Size = new System.Drawing.Size(175, 23);
             this.TxtOtAnCod.TabIndex = 6;
+            this.TxtOtAnCod.Visible = false;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Verdana", 10F);
-            this.label11.Location = new System.Drawing.Point(207, 126);
+            this.label11.Location = new System.Drawing.Point(224, 234);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(146, 17);
             this.label11.TabIndex = 42;
             this.label11.Text = "Other Analisis Code";
+            this.label11.Visible = false;
             // 
             // CmbSamTyp
             // 
             this.CmbSamTyp.FormattingEnabled = true;
-            this.CmbSamTyp.Location = new System.Drawing.Point(952, 50);
+            this.CmbSamTyp.Location = new System.Drawing.Point(979, 50);
             this.CmbSamTyp.Margin = new System.Windows.Forms.Padding(2);
             this.CmbSamTyp.Name = "CmbSamTyp";
             this.CmbSamTyp.Size = new System.Drawing.Size(176, 24);
-            this.CmbSamTyp.TabIndex = 1;
+            this.CmbSamTyp.TabIndex = 4;
             this.CmbSamTyp.SelectedIndexChanged += new System.EventHandler(this.CmbSamTyp_SelectedIndexChanged);
             this.CmbSamTyp.RightToLeftChanged += new System.EventHandler(this.CmbSamTyp_RightToLeftChanged);
             this.CmbSamTyp.TabIndexChanged += new System.EventHandler(this.CmbSamTyp_TabIndexChanged);
@@ -336,7 +338,7 @@ namespace EnviosColombiaGold
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Verdana", 10F);
-            this.label19.Location = new System.Drawing.Point(951, 31);
+            this.label19.Location = new System.Drawing.Point(978, 31);
             this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(97, 17);
@@ -350,13 +352,13 @@ namespace EnviosColombiaGold
             this.CmbTypSub.Margin = new System.Windows.Forms.Padding(2);
             this.CmbTypSub.Name = "CmbTypSub";
             this.CmbTypSub.Size = new System.Drawing.Size(176, 24);
-            this.CmbTypSub.TabIndex = 2;
+            this.CmbTypSub.TabIndex = 5;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Verdana", 10F);
-            this.label18.Location = new System.Drawing.Point(16, 82);
+            this.label18.Location = new System.Drawing.Point(16, 81);
             this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(113, 17);
@@ -366,17 +368,17 @@ namespace EnviosColombiaGold
             // CmbNatSamp
             // 
             this.CmbNatSamp.FormattingEnabled = true;
-            this.CmbNatSamp.Location = new System.Drawing.Point(393, 143);
+            this.CmbNatSamp.Location = new System.Drawing.Point(17, 147);
             this.CmbNatSamp.Margin = new System.Windows.Forms.Padding(2);
             this.CmbNatSamp.Name = "CmbNatSamp";
             this.CmbNatSamp.Size = new System.Drawing.Size(176, 24);
-            this.CmbNatSamp.TabIndex = 7;
+            this.CmbNatSamp.TabIndex = 11;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Verdana", 10F);
-            this.label17.Location = new System.Drawing.Point(394, 125);
+            this.label17.Location = new System.Drawing.Point(18, 129);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(130, 17);
@@ -385,17 +387,17 @@ namespace EnviosColombiaGold
             // 
             // txtElements
             // 
-            this.txtElements.Location = new System.Drawing.Point(386, 185);
+            this.txtElements.Location = new System.Drawing.Point(981, 148);
             this.txtElements.Margin = new System.Windows.Forms.Padding(2);
             this.txtElements.Name = "txtElements";
-            this.txtElements.Size = new System.Drawing.Size(147, 23);
+            this.txtElements.Size = new System.Drawing.Size(176, 23);
             this.txtElements.TabIndex = 16;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Verdana", 10F);
-            this.label15.Location = new System.Drawing.Point(386, 168);
+            this.label15.Location = new System.Drawing.Point(980, 129);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(72, 17);
@@ -404,17 +406,17 @@ namespace EnviosColombiaGold
             // 
             // txtObserv
             // 
-            this.txtObserv.Location = new System.Drawing.Point(202, 185);
+            this.txtObserv.Location = new System.Drawing.Point(796, 148);
             this.txtObserv.Margin = new System.Windows.Forms.Padding(2);
             this.txtObserv.Name = "txtObserv";
-            this.txtObserv.Size = new System.Drawing.Size(174, 23);
+            this.txtObserv.Size = new System.Drawing.Size(175, 23);
             this.txtObserv.TabIndex = 15;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Verdana", 10F);
-            this.label14.Location = new System.Drawing.Point(201, 168);
+            this.label14.Location = new System.Drawing.Point(794, 130);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(101, 17);
@@ -424,17 +426,17 @@ namespace EnviosColombiaGold
             // txtBags
             // 
             this.txtBags.Enabled = false;
-            this.txtBags.Location = new System.Drawing.Point(795, 144);
+            this.txtBags.Location = new System.Drawing.Point(394, 149);
             this.txtBags.Margin = new System.Windows.Forms.Padding(2);
             this.txtBags.Name = "txtBags";
             this.txtBags.Size = new System.Drawing.Size(176, 23);
-            this.txtBags.TabIndex = 12;
+            this.txtBags.TabIndex = 13;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Verdana", 10F);
-            this.label13.Location = new System.Drawing.Point(765, 126);
+            this.label13.Location = new System.Drawing.Point(391, 129);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(67, 17);
@@ -443,50 +445,54 @@ namespace EnviosColombiaGold
             // 
             // txtInstructions
             // 
-            this.txtInstructions.Location = new System.Drawing.Point(15, 185);
+            this.txtInstructions.Location = new System.Drawing.Point(34, 204);
             this.txtInstructions.Margin = new System.Windows.Forms.Padding(2);
             this.txtInstructions.Name = "txtInstructions";
             this.txtInstructions.Size = new System.Drawing.Size(176, 23);
             this.txtInstructions.TabIndex = 14;
+            this.txtInstructions.Visible = false;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Verdana", 10F);
-            this.label12.Location = new System.Drawing.Point(16, 169);
+            this.label12.Location = new System.Drawing.Point(230, 255);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(93, 17);
             this.label12.TabIndex = 28;
             this.label12.Text = "Instructions";
+            this.label12.Visible = false;
             // 
             // txtMetAnCod
             // 
-            this.txtMetAnCod.Location = new System.Drawing.Point(17, 145);
+            this.txtMetAnCod.Location = new System.Drawing.Point(34, 228);
             this.txtMetAnCod.Margin = new System.Windows.Forms.Padding(2);
             this.txtMetAnCod.Name = "txtMetAnCod";
             this.txtMetAnCod.Size = new System.Drawing.Size(176, 23);
             this.txtMetAnCod.TabIndex = 5;
+            this.txtMetAnCod.Visible = false;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Verdana", 10F);
-            this.label10.Location = new System.Drawing.Point(17, 126);
+            this.label10.Location = new System.Drawing.Point(230, 210);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(131, 17);
             this.label10.TabIndex = 24;
             this.label10.Text = "Met Analisis Code";
+            this.label10.Visible = false;
             // 
             // CmbAnCod
             // 
             this.CmbAnCod.FormattingEnabled = true;
-            this.CmbAnCod.Location = new System.Drawing.Point(981, 100);
+            this.CmbAnCod.Location = new System.Drawing.Point(981, 101);
             this.CmbAnCod.Margin = new System.Windows.Forms.Padding(2);
             this.CmbAnCod.Name = "CmbAnCod";
             this.CmbAnCod.Size = new System.Drawing.Size(176, 24);
-            this.CmbAnCod.TabIndex = 4;
+            this.CmbAnCod.TabIndex = 10;
             // 
             // label9
             // 
@@ -506,7 +512,7 @@ namespace EnviosColombiaGold
             this.cmbPrepCode.Margin = new System.Windows.Forms.Padding(2);
             this.cmbPrepCode.Name = "cmbPrepCode";
             this.cmbPrepCode.Size = new System.Drawing.Size(176, 24);
-            this.cmbPrepCode.TabIndex = 3;
+            this.cmbPrepCode.TabIndex = 9;
             // 
             // label8
             // 
@@ -522,17 +528,17 @@ namespace EnviosColombiaGold
             // cmbDisp
             // 
             this.cmbDisp.FormattingEnabled = true;
-            this.cmbDisp.Location = new System.Drawing.Point(984, 144);
+            this.cmbDisp.Location = new System.Drawing.Point(579, 148);
             this.cmbDisp.Margin = new System.Windows.Forms.Padding(2);
             this.cmbDisp.Name = "cmbDisp";
-            this.cmbDisp.Size = new System.Drawing.Size(176, 24);
-            this.cmbDisp.TabIndex = 13;
+            this.cmbDisp.Size = new System.Drawing.Size(197, 24);
+            this.cmbDisp.TabIndex = 14;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 10F);
-            this.label7.Location = new System.Drawing.Point(956, 126);
+            this.label7.Location = new System.Drawing.Point(577, 130);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(108, 17);
@@ -546,7 +552,7 @@ namespace EnviosColombiaGold
             this.cmbAnLab.Margin = new System.Windows.Forms.Padding(2);
             this.cmbAnLab.Name = "cmbAnLab";
             this.cmbAnLab.Size = new System.Drawing.Size(197, 24);
-            this.cmbAnLab.TabIndex = 10;
+            this.cmbAnLab.TabIndex = 8;
             // 
             // label6
             // 
@@ -566,14 +572,14 @@ namespace EnviosColombiaGold
             this.cmbPrepLab.Margin = new System.Windows.Forms.Padding(2);
             this.cmbPrepLab.Name = "cmbPrepLab";
             this.cmbPrepLab.Size = new System.Drawing.Size(176, 24);
-            this.cmbPrepLab.TabIndex = 9;
+            this.cmbPrepLab.TabIndex = 7;
             this.cmbPrepLab.SelectedIndexChanged += new System.EventHandler(this.cmbPrepLab_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 10F);
-            this.label5.Location = new System.Drawing.Point(391, 83);
+            this.label5.Location = new System.Drawing.Point(391, 82);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(118, 17);
@@ -587,7 +593,7 @@ namespace EnviosColombiaGold
             this.cmbLab.Margin = new System.Windows.Forms.Padding(2);
             this.cmbLab.Name = "cmbLab";
             this.cmbLab.Size = new System.Drawing.Size(176, 24);
-            this.cmbLab.TabIndex = 8;
+            this.cmbLab.TabIndex = 6;
             this.cmbLab.SelectedIndexChanged += new System.EventHandler(this.cmbLab_SelectedIndexChanged);
             // 
             // label4
@@ -605,7 +611,7 @@ namespace EnviosColombiaGold
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Verdana", 10F);
-            this.label3.Location = new System.Drawing.Point(578, 127);
+            this.label3.Location = new System.Drawing.Point(208, 130);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 17);
@@ -615,11 +621,11 @@ namespace EnviosColombiaGold
             // btnFind
             // 
             this.btnFind.Font = new System.Drawing.Font("Verdana", 10F);
-            this.btnFind.Location = new System.Drawing.Point(864, 52);
+            this.btnFind.Location = new System.Drawing.Point(882, 47);
             this.btnFind.Margin = new System.Windows.Forms.Padding(2);
             this.btnFind.Name = "btnFind";
-            this.btnFind.Size = new System.Drawing.Size(84, 23);
-            this.btnFind.TabIndex = 0;
+            this.btnFind.Size = new System.Drawing.Size(84, 28);
+            this.btnFind.TabIndex = 3;
             this.btnFind.Text = "Find";
             this.btnFind.UseVisualStyleBackColor = true;
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
@@ -628,7 +634,7 @@ namespace EnviosColombiaGold
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 10F);
-            this.label1.Location = new System.Drawing.Point(570, 54);
+            this.label1.Location = new System.Drawing.Point(594, 52);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(99, 17);
@@ -650,11 +656,11 @@ namespace EnviosColombiaGold
             // cmbShipment
             // 
             this.cmbShipment.FormattingEnabled = true;
-            this.cmbShipment.Location = new System.Drawing.Point(670, 52);
+            this.cmbShipment.Location = new System.Drawing.Point(694, 50);
             this.cmbShipment.Margin = new System.Windows.Forms.Padding(2);
             this.cmbShipment.Name = "cmbShipment";
             this.cmbShipment.Size = new System.Drawing.Size(176, 24);
-            this.cmbShipment.TabIndex = 0;
+            this.cmbShipment.TabIndex = 2;
             this.cmbShipment.SelectedIndexChanged += new System.EventHandler(this.cmbShipment_SelectedIndexChanged);
             this.cmbShipment.Leave += new System.EventHandler(this.cmbShipment_Leave);
             // 
@@ -683,7 +689,7 @@ namespace EnviosColombiaGold
             this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.dgInterval);
             this.groupBox2.Font = new System.Drawing.Font("Verdana", 10F);
-            this.groupBox2.Location = new System.Drawing.Point(16, 247);
+            this.groupBox2.Location = new System.Drawing.Point(16, 222);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
@@ -698,7 +704,7 @@ namespace EnviosColombiaGold
             this.cmbHoleId.Location = new System.Drawing.Point(13, 36);
             this.cmbHoleId.Name = "cmbHoleId";
             this.cmbHoleId.Size = new System.Drawing.Size(93, 24);
-            this.cmbHoleId.TabIndex = 18;
+            this.cmbHoleId.TabIndex = 17;
             this.cmbHoleId.SelectedIndexChanged += new System.EventHandler(this.cmbHoleId_SelectedIndexChanged);
             // 
             // lblsampTo
@@ -727,22 +733,22 @@ namespace EnviosColombiaGold
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(434, 21);
+            this.btnDelete.Location = new System.Drawing.Point(423, 28);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(2);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 36);
-            this.btnDelete.TabIndex = 23;
+            this.btnDelete.Size = new System.Drawing.Size(86, 36);
+            this.btnDelete.TabIndex = 21;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(351, 21);
+            this.btnAdd.Location = new System.Drawing.Point(331, 28);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(79, 36);
-            this.btnAdd.TabIndex = 21;
+            this.btnAdd.Size = new System.Drawing.Size(88, 36);
+            this.btnAdd.TabIndex = 20;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -767,7 +773,7 @@ namespace EnviosColombiaGold
             this.CmbTS.Margin = new System.Windows.Forms.Padding(2);
             this.CmbTS.Name = "CmbTS";
             this.CmbTS.Size = new System.Drawing.Size(92, 24);
-            this.CmbTS.TabIndex = 20;
+            this.CmbTS.TabIndex = 19;
             this.CmbTS.SelectedIndexChanged += new System.EventHandler(this.CmbTS_SelectedIndexChanged);
             // 
             // label20
@@ -790,7 +796,7 @@ namespace EnviosColombiaGold
             this.a.Margin = new System.Windows.Forms.Padding(2);
             this.a.Name = "a";
             this.a.Size = new System.Drawing.Size(92, 24);
-            this.a.TabIndex = 19;
+            this.a.TabIndex = 18;
             this.a.SelectedIndexChanged += new System.EventHandler(this.CmbFS_SelectedIndexChanged);
             // 
             // label16
@@ -809,12 +815,12 @@ namespace EnviosColombiaGold
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.dgInterval.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgInterval.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgInterval.Location = new System.Drawing.Point(15, 83);
+            this.dgInterval.Location = new System.Drawing.Point(11, 86);
             this.dgInterval.Margin = new System.Windows.Forms.Padding(2);
             this.dgInterval.Name = "dgInterval";
             this.dgInterval.RowTemplate.Height = 24;
             this.dgInterval.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgInterval.Size = new System.Drawing.Size(550, 203);
+            this.dgInterval.Size = new System.Drawing.Size(546, 203);
             this.dgInterval.TabIndex = 22;
             this.dgInterval.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgInterval_CellContentDoubleClick);
             // 
@@ -856,6 +862,7 @@ namespace EnviosColombiaGold
             this.cmbLaboratory.ResumeLayout(false);
             this.cmbLaboratory.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgDetalleInterval)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
