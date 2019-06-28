@@ -450,7 +450,7 @@ namespace EnviosColombiaGold
 
 
                                 //Modificado Alvaro Araujo
-                                //19/06/2019
+                                //28/06/2019
 
                                 switch (dtElementos.Rows[1][iElem].ToString())
                                 {
@@ -459,6 +459,21 @@ namespace EnviosColombiaGold
                                         break;
                                     case "ICP40B":
                                         sAg = "Agicp";
+                                        break;
+                                    case "AAS12C":
+                                        sAg = "Agfa";
+                                        break;
+                                    case "AAS11B":
+                                        sAg = "Agfagr";
+                                        break;
+                                    case "ICM40B (*)":
+                                        sAg = "agicm";
+                                        break;
+                                    case "AAS41B (*)":
+                                        sAg = "Agfagr";
+                                        break;
+                                    default:
+                                        sAg = "Agfa";
                                         break;
                                 }
 
