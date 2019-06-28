@@ -19,7 +19,8 @@ namespace Entities.Config
         public string Code { get; set; }
         public string Comb { get; set; }
         public bool? Status { get; set; }
-        
+        public string CodeLab { get; set; }
+
 
         public string Description { get; set; }
 

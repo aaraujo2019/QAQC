@@ -306,16 +306,6 @@ namespace EnviosColombiaGold
                 cmbLab.DataSource = query3.Select(c => c.Code).ToList();
                 cmbLab.SelectedIndex = query3.ToList().Count - 1;
 
-                cmbAnLab.DisplayMember = "Code";
-                cmbAnLab.ValueMember = "Code";
-                cmbAnLab.DataSource = query3.Select(c => c.Code).ToList();
-                cmbAnLab.SelectedIndex = query3.ToList().Count - 1;
-
-                cmbPrepLab.DisplayMember = "Code";
-                cmbPrepLab.ValueMember = "Code";
-                cmbPrepLab.DataSource = query3.Select(c => c.Code).ToList();
-                cmbPrepLab.SelectedIndex = query3.ToList().Count - 1;
-
                 cmbPrepCode.DisplayMember = "Code";
                 cmbPrepCode.ValueMember = "Code";
                 var query5 = GetuRfPreparationCodeEntity();
@@ -1721,56 +1711,56 @@ namespace EnviosColombiaGold
                 string sDate = dDate.Year.ToString().PadLeft(4, '0') + dDate.Month.ToString().PadLeft(2, '0') +
                     dDate.Day.ToString().PadLeft(2, '0');
 
-                if (this.cmbDisp.Text.Contains("Select"))
+                if (cmbDisp.Text.Contains("Select"))
                 {
                     MessageBox.Show("El valor del campo Dispatched by es requerido");
                     return "";
                 }
                 else
                 {
-                    if (this.cmbLab.Text.Contains("Select"))
+                    if (cmbLab.Text.Contains("Select"))
                     {
                         MessageBox.Show("El valor del campo Laboratory es requerido");
                         return "";
                     }
                     else
                     {
-                        if (this.cmbPrepLab.Text.Contains("Select"))
+                        if (cmbPrepLab.Text.Contains("Select"))
                         {
                             MessageBox.Show("El valor del campo Preparation Lab es requerido");
                             return "";
                         }
                         else
                         {
-                            if (this.cmbPrepCode.Text.Contains("Select"))
+                            if (cmbPrepCode.Text.Contains("Select"))
                             {
                                 MessageBox.Show("El valor del campo Preparation Code es requerido");
                                 return "";
                             }
                             else
                             {
-                                if (this.CmbAnCod.Text.Contains("Select"))
+                                if (CmbAnCod.Text.Contains("Select"))
                                 {
                                     MessageBox.Show("El valor del campo Au Analisis Code es requerido");
                                     return "";
                                 }
                                 else
                                 {
-                                    if (this.cmbAnLab.Text.Contains("Select"))
+                                    if (cmbAnLab.Text.Contains("Select"))
                                     {
                                         MessageBox.Show("El valor del campo Analitical Lab es requerido");
                                         return "";
                                     }
                                     else
                                     {
-                                        if (this.CmbTypSub.SelectedIndex == 5)
+                                        if (CmbTypSub.SelectedIndex == 5)
                                         {
                                             MessageBox.Show("El valor del campo Shipment Type es requerido");
                                             return "";
                                         }
                                         else
                                         {
-                                            if (this.CmbNatSamp.SelectedIndex == 4)
+                                            if (CmbNatSamp.SelectedIndex == 4)
                                             {
                                                 MessageBox.Show("El valor del campo Nature of Sample es requerido");
                                                 return "";
@@ -2541,8 +2531,7 @@ namespace EnviosColombiaGold
         private void cmbPrepLab_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
-            { //Cambios David Ciro
-              //cmbAnLab.SelectedValue = cmbPrepLab.SelectedValue;
+            { 
                 cmbAnLab.SelectedIndex = cmbPrepLab.SelectedIndex;
             }
             catch (Exception ex)
@@ -2555,19 +2544,64 @@ namespace EnviosColombiaGold
         {
             try
             {
-                if (cmbPrepLab.Items.Count > 0)
+                if (!cmbLab.Text.Contains("Select"))
                 {
-                    cmbPrepLab.SelectedIndex = cmbLab.SelectedIndex;
-                }
+                    var AnLab = GetRfAnalysisCodeLabEntity();
+                    var dataAnLab = AnLab.Where(c => (c.CodeLab == null ? string.Empty : c.CodeLab) == cmbLab.Text).OrderBy(o => o.Code).ToList();
+                    cmbAnLab.DisplayMember = "Code";
+                    cmbAnLab.ValueMember = "Code";
+                    cmbAnLab.DataSource = dataAnLab;
+                    cmbAnLab.SelectedIndex = dataAnLab.ToList().Count - 1;
 
-                if (cmbPrepLab.Items.Count > 0)
-                {
-                    cmbAnLab.SelectedIndex = cmbLab.SelectedIndex;
+                    var PrepLab = GetRfPreparationCodeEntity();
+                    var dataPrepLab = PrepLab.Where(c => (c.CodeLab == null ? string.Empty : c.CodeLab) == cmbLab.Text).OrderBy(o => o.Code).ToList();
+                    cmbPrepLab.DisplayMember = "Code";
+                    cmbPrepLab.ValueMember = "Code";
+                    cmbPrepLab.DataSource = dataPrepLab;
+                    cmbPrepLab.SelectedIndex = dataPrepLab.ToList().Count - 1;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+        private IList<Ent_Prefix> GetRfAnalysisCodeLabEntity()
+        {
+            try
+            {
+                var dtShipment = oShipment.getRfAnalysisCodeLabEntity();
+
+                Ent_Prefix pre = new Ent_Prefix();
+                pre.Identification = -1;
+                pre.Code = "Select an option..";
+                dtShipment.Insert(dtShipment.ToList().Count, pre);
+
+                return dtShipment;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        private IList<Ent_Prefix> GetRfPreparationCodeEntity()
+        {
+            try
+            {
+                var dtShipment = oShipment.getRfPreparationCodeEntity();
+
+                Ent_Prefix pre = new Ent_Prefix();
+                pre.Identification = -1;
+                pre.Code = "Select an option..";
+                dtShipment.Insert(dtShipment.ToList().Count, pre);
+
+                return dtShipment;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
