@@ -391,7 +391,7 @@ namespace EnviosColombiaGold
                                     if (dtElementos.Rows[1][iElem].ToString() == "FAA313" ||
                                         dtElementos.Rows[1][iElem].ToString() == "FAA515")
                                     {
-                                        sVal = (double.Parse(sVal.ToString()) / 1000).ToString("########0.000");
+                                        sVal = (double.Parse(sVal.ToString()) / 1000).ToString("########0.0");
                                     }
                                 }
                                 bConv = true;
@@ -427,7 +427,7 @@ namespace EnviosColombiaGold
                                         if (dtElementos.Rows[iRowElem][iElem].ToString() != "")
                                         {
                                             sVal = (double.Parse(dtElementos.Rows[iRowElem][iElem].ToString()) /
-                                                1000).ToString("########0.000");
+                                                1000).ToString("########0.0");
                                         }
                                         else if (dtElementos.Rows[iRowElem][iElem].ToString() == "")
                                         {
@@ -475,6 +475,11 @@ namespace EnviosColombiaGold
                                     default:
                                         sAg = "Agfa";
                                         break;
+                                }
+
+                                if (sVal.ToString() == ">500")
+                                {
+                                    sVal = "500.1";
                                 }
 
                                 stAg = dtElementos.Rows[0][iElem].ToString();
