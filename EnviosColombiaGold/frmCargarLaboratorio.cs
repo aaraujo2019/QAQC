@@ -27,13 +27,13 @@ namespace EnviosColombiaGold
         private string sNomArchivo;
         private string sDateRep;
         private DataTable dtQCConversion = new DataTable();
-        clsRf oRf = new clsRf();
-        clsLabSubmit oLabSub = new clsLabSubmit();
-        clsAssay oAssay = new clsAssay();
+        private clsRf oRf = new clsRf();
+        private clsLabSubmit oLabSub = new clsLabSubmit();
+        private clsAssay oAssay = new clsAssay();
 
 
         #region Variables Globales
-        SqlConnection conn = new SqlConnection();
+        private SqlConnection conn = new SqlConnection();
         public string codEnvio { get; set; }
         #endregion Variables Globales
 
@@ -121,10 +121,6 @@ namespace EnviosColombiaGold
                 if (result == DialogResult.OK)
                 {
                     txtRuta.Text = oDialog.FileName;
-                    /*Dim fi As New System.IO.FileInfo(fileName) 
-                   Return fi.Name 
-
-                   MessageBox.Show(GetOnlyFileTitle(dlg.FileName));*/
 
                     FileInfo oFi = new FileInfo(oDialog.FileName);
                     string sExt = oFi.Extension.ToString();
@@ -284,9 +280,14 @@ namespace EnviosColombiaGold
             try
             {
                 if (Conn.State == ConnectionState.Open)
+                {
                     Conn.Close();
+                }
                 else
+                {
                     Conn.Open();
+                }
+
                 return Conn;
             }
             catch (SqlException Ex)
@@ -333,13 +334,19 @@ namespace EnviosColombiaGold
                         string muestra = Convert.ToString(hoja1.Cells[numFila, 1].Text);
 
                         if (Convert.ToString(hoja1.Cells[numFila, 2].Text) == "<0.02")
+                        {
                             tenor = "0.01";
+                        }
                         else
                         {
                             if (Convert.ToString(hoja1.Cells[numFila, 2].Text) == ">10")
+                            {
                                 tenor = "10.001";
+                            }
                             else
+                            {
                                 tenor = Convert.ToString(hoja1.Cells[numFila, 2].Text);
+                            }
                         }
 
                         tenorufagr = Convert.ToString(hoja1.Cells[numFila, 2].Text);
@@ -347,9 +354,13 @@ namespace EnviosColombiaGold
                         if (!String.IsNullOrEmpty(hoja1.Cells[numFila, 1].Text))
                         {
                             if ((ValidaSiExiste(Ordentrabajo, muestra)))
+                            {
                                 contextValue = "UPDATE  Assay  SET Aufaaa = '" + tenor + "'  ,  Aglab = '" + tenorag + "' , Agfa = '" + tenorag + "' , aufagr = '" + tenorufagr + "' WHERE jobno= '" + Ordentrabajo + "'  and sample= '" + muestra + "'   ";
+                            }
                             else
+                            {
                                 contextValue = "INSERT INTO Assay (jobno,sample,Aufaaa,aufagr, qaqc , Aglab , Agfa )VALUES('" + Ordentrabajo + "','" + muestra + "' ,'" + tenor + "' ,'" + tenorufagr + "' , 1 , '" + tenorag + "' , '" + tenorag + "' )";
+                            }
 
                             oLabSub.alterdataBase(contextValue);
                         }
@@ -385,9 +396,13 @@ namespace EnviosColombiaGold
                 string sqlbuscar = String.Format("SELECT COUNT(*) FROM Assay  WHERE jobno = @jobno and sample = @sample");
 
                 if (Convert.ToInt32(oLabSub.Exist_DB(sqlbuscar, jobno, sample, "@jobno", "@sample")) > 0)
+                {
                     return true;
+                }
                 else
+                {
                     return false;
+                }
             }
             catch (Exception ex)
             {
@@ -401,10 +416,13 @@ namespace EnviosColombiaGold
             {
                 string sqlbuscar = String.Format("SELECT COUNT(*) FROM LabsumitIn  WHERE Submit= @submit and sample = @sample");
                 if (Convert.ToInt32(oLabSub.Exist_DB(sqlbuscar, submit, sample, "@submit", "@sample")) > 0)
+                {
                     return true;
+                }
                 else
+                {
                     return false;
-
+                }
             }
             catch (Exception ex)
             {
@@ -416,7 +434,8 @@ namespace EnviosColombiaGold
         {
             try
             {
-                SqlConnection cnn = new SqlConnection(@"Server=SEGSVRSQL01;uid=sa;pwd=*Bd6r4nC0l0mb1a*;database=DB_SEG");
+                var coneccion = ConfigurationManager.ConnectionStrings["SqlProvider"].ConnectionString;
+                SqlConnection cnn = new SqlConnection(coneccion);
                 string sqlbuscar = String.Format("SELECT COUNT(*) FROM LabsumitIn  WHERE Submit= @submit");
                 SqlCommand cmd = new SqlCommand(sqlbuscar, cnn);
                 cmd.Parameters.AddWithValue("@submit ", submit);
@@ -442,13 +461,16 @@ namespace EnviosColombiaGold
         {
             try
             {
-                string sqlbuscar = String.Format("SELECT COUNT(*) FROM LabResult WHERE  Submit = @Submit and jobno=@jobno");
+                string sqlbuscar = String.Format("SELECT COUNT(*) FROM LabResult WHERE  Submit = @Submit and jobno = @jobno");
 
                 if (Convert.ToInt32(oLabSub.Exist_DB(sqlbuscar, jobno, Submit, "@jobno", "@Submit")) > 0)
+                {
                     return true;
+                }
                 else
+                {
                     return false;
-
+                }
             }
             catch (Exception ex)
             {
@@ -458,17 +480,17 @@ namespace EnviosColombiaGold
 
         internal void cargarenlabresult(string ordentrabajo, string envio, DateTime fecha)
         {
-            //SqlConnection objconexion = OpenConexion(@"Server=10.10.203.4\gcg;uid=sa;pwd=BdZandor123*;database=GZC");
-            //System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand();
-
             string valueCommandText = string.Empty;
-
             string valueDate = string.Concat(fecha.Day, "/0", fecha.Month, "/", fecha.Year, " ", "00:00:00");
 
             if ((ValidaSiExisteLabResult(ordentrabajo, envio)))
+            {
                 valueCommandText = "UPDATE  LabResult  SET   jobno ='" + @ordentrabajo + "', DateReport ='" + valueDate + "', lab='" + "GZC" + "'  WHERE submit='" + envio + "'";
+            }
             else
+            {
                 valueCommandText = "INSERT INTO LabResult (lab, jobno,submit,DateReport)VALUES('" + "GZC" + "','" + ordentrabajo + "','" + envio + "','" + valueDate + "'  )";
+            }
 
             oLabSub.alterdataBase(valueCommandText);
         }
@@ -510,16 +532,14 @@ namespace EnviosColombiaGold
                     int iInicial = 9;
 
                     if (!dtQcReport.Columns.Contains("DupDe"))
+                    {
                         for (int i = 0; i < dtQcReport.Rows.Count; i++)
                         {
-
                             oSheet.Cells[iInicial, 1] = dtQcReport.Rows[i]["HoleID"].ToString();//Hole
                             oSheet.Cells[iInicial, 2] = dtQcReport.Rows[i]["From"].ToString();//From
                             oSheet.Cells[iInicial, 3] = dtQcReport.Rows[i]["To"].ToString();//To
                             oSheet.Cells[iInicial, 4] = dtQcReport.Rows[i]["Sample"].ToString();//Sample
                             oSheet.Cells[iInicial, 5] = dtQcReport.Rows[i]["SampleType"].ToString();//Type
-
-
 
                             oSheet.Cells[iInicial, 6] = dtQcReport.Rows[i]["aufaaa"].ToString();//Au ppm
                             oSheet.Cells[iInicial, 7] = dtQcReport.Rows[i]["aufagr"].ToString();//AuGr ppm
@@ -539,33 +559,12 @@ namespace EnviosColombiaGold
                             oSheet.Cells[iInicial, 14] = dtQcReport.Rows[i]["Comments"].ToString();
                             iInicial += 1;
 
-                            //No apto para usuario Adriana
-                            //if (dtQcReport.Columns.Contains("DupDe"))
-                            //oSheet.Cells[iInicial, 6] = dtQcReport.Rows[0]["DupDe"].ToString();
-
-                            //oSheet.Cells[iInicial, 7] = dtQcReport.Rows[i]["aufaaa"].ToString();//Au ppm
-                            //oSheet.Cells[iInicial, 8] = dtQcReport.Rows[i]["aufagr"].ToString();//AuGr ppm
-                            //oSheet.Cells[iInicial, 9] = dtQcReport.Rows[i]["agfa"].ToString();//Ag ppm
-                            //oSheet.Cells[iInicial, 10] = dtQcReport.Rows[i]["agfagr"].ToString();//AgGr ppm
-                            //oSheet.Cells[iInicial, 11] = dtQcReport.Rows[i]["CertifiedValue_ppm"].ToString();//Qc ppm
-
-                            //if (dtQcReport.Rows[i]["+3st"].ToString() != "")
-                            //{
-                            //    oSheet.Cells[iInicial, 12] = dtQcReport.Rows[i]["QCAu"].ToString();
-
-                            //    oSheet.Cells[iInicial, 13] = dtQcReport.Rows[i]["AgCertifiedValue_ppm"].ToString();
-                            //    oSheet.Cells[iInicial, 14] = dtQcReport.Rows[i]["QCAg"].ToString();
-
-                            //}
-
-                            //oSheet.Cells[iInicial, 15] = dtQcReport.Rows[i]["Comments"].ToString();
-                            //iInicial += 1;
-
                         }
+                    }
                     else
+                    {
                         for (int i = 0; i < dtQcReport.Rows.Count; i++)
                         {
-
                             oSheet.Cells[iInicial, 1] = dtQcReport.Rows[i]["HoleID"].ToString();//Hole
                             oSheet.Cells[iInicial, 2] = dtQcReport.Rows[i]["From"].ToString();//From
                             oSheet.Cells[iInicial, 3] = dtQcReport.Rows[i]["To"].ToString();//To
@@ -573,7 +572,9 @@ namespace EnviosColombiaGold
                             oSheet.Cells[iInicial, 5] = dtQcReport.Rows[i]["SampleType"].ToString();//Type
 
                             if (dtQcReport.Columns.Contains("DupDe"))
+                            {
                                 oSheet.Cells[iInicial, 6] = dtQcReport.Rows[0]["DupDe"].ToString();
+                            }
 
                             oSheet.Cells[iInicial, 7] = dtQcReport.Rows[i]["aufaaa"].ToString();//Au ppm
                             oSheet.Cells[iInicial, 8] = dtQcReport.Rows[i]["aufagr"].ToString();//AuGr ppm
@@ -591,6 +592,7 @@ namespace EnviosColombiaGold
                             oSheet.Cells[iInicial, 15] = dtQcReport.Rows[i]["Comments"].ToString();
                             iInicial += 1;
                         }
+                    }
                 }
                 else if (dtQcReport.Rows.Count == 0)
                 {
@@ -599,7 +601,6 @@ namespace EnviosColombiaGold
 
                 oXL.Visible = true;
                 oXL.UserControl = true;
-
             }
             catch (Exception ex)
             {
@@ -612,50 +613,51 @@ namespace EnviosColombiaGold
                     MessageBox.Show(ex.Message);
                 }
             }
-
         }
 
         internal void Cargar(DataGridView dgView, string SLibro)
         {
             try
             {
-                System.Data.OleDb.OleDbConnection MyConnection;
-                System.Data.DataSet DtSet;
-                System.Data.OleDb.OleDbDataAdapter MyCommand;
-                MyConnection = new System.Data.OleDb.OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + SLibro + ";Extended Properties='Excel 8.0;HDR=NO;IMEX=1'");
-                MyConnection.Open();
-
-                System.Data.DataTable dt = MyConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                OleDbConnection oleDbConnection;
+                try
+                {
+                    oleDbConnection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.16.0;Data Source=" + SLibro + ";Extended Properties=\"Excel 16.0;HDR=NO;IMEX=1\"");
+                    oleDbConnection.Open();
+                }
+                catch (Exception)
+                {
+                    oleDbConnection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + SLibro + ";Extended Properties=\"Excel 12.0;HDR=NO;IMEX=1\"");
+                    oleDbConnection.Open();
+                }
+                DataTable oleDbSchemaTable = oleDbConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
 
                 string sheetName = string.Empty;
-                if (dt != null)
+                if (oleDbSchemaTable != null)
                 {
-                    for (int i = 0; i < dt.Rows.Count; i++)
+                    for (int i = 0; i < oleDbSchemaTable.Rows.Count; i++)
                     {
-                        if (dt.Rows[i]["TABLE_NAME"].ToString().ToUpper().Trim().Contains("REPORTE"))
-
+                        if (oleDbSchemaTable.Rows[i]["TABLE_NAME"].ToString().ToUpper().Trim().Contains("REPORTE"))
                         {
-                            sheetName = dt.Rows[i]["TABLE_NAME"].ToString().ToUpper().Trim();
+                            sheetName = oleDbSchemaTable.Rows[i]["TABLE_NAME"].ToString().ToUpper().Trim();
                             break;
                         }
                     }
-
                 }
 
-                MyCommand = new System.Data.OleDb.OleDbDataAdapter("select * from [" + sheetName + "]", MyConnection);
-                MyCommand.TableMappings.Add("Table", "TestTable");
-                DtSet = new System.Data.DataSet();
-                MyCommand.Fill(DtSet);
+                OleDbDataAdapter oleDbDataAdapter = new OleDbDataAdapter("select * from [" + sheetName + "]", oleDbConnection);
+                oleDbDataAdapter.TableMappings.Add("Table", "TestTable");
+                DataSet DtSet = new DataSet();
+                oleDbDataAdapter.Fill(DtSet);
                 dgView.DataSource = DtSet.Tables[0];
                 dgView.AutoResizeColumns();
-                MyConnection.Close();
+                oleDbConnection.Close();
             }
             catch (Exception oMsg)
             {
                 MessageBox.Show(oMsg.Message, "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private void pbtnSearch_Click(object sender, EventArgs e)
         {
@@ -666,16 +668,14 @@ namespace EnviosColombiaGold
                 result.Filter = "Todos los archivos (*.xlsx)|*.xls;*.xlsx;*.csv;*.txt";
                 result.Multiselect = false;
                 result.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer);
+
                 if (result.ShowDialog() == DialogResult.OK)
                 {
                     txtRuta.Text = result.FileName;
                     label2.Enabled = true;
                 }
-                if (txtRuta.Text == "")
-                {
 
-                }
-                else
+                if (txtRuta.Text != string.Empty)
                 {
                     try
                     {
@@ -685,18 +685,15 @@ namespace EnviosColombiaGold
 
                         string sExt = oFi.Extension.ToString();
                         sNomArchivo = oFi.Name.Substring(0, oFi.Name.ToString().Length - sExt.ToString().Length);
-
                     }
                     catch (OleDbException ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
-
                 }
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
         }
@@ -732,6 +729,7 @@ namespace EnviosColombiaGold
                 MessageBox.Show("Cargue el archivo reporte de análisis químico.");
                 return;
             }
+
             label2.Visible = true;
 
             try
@@ -750,7 +748,6 @@ namespace EnviosColombiaGold
                     }
                     // Obtenemos la primera hoja del documento
                     ExcelWorksheet hoja1 = paquete.Workbook.Worksheets.First();
-
                     string envio = hoja1.Cells[12, 2].Text.Trim();
                     codEnvio = hoja1.Cells[11, 2].Text.Trim();
 
@@ -770,17 +767,20 @@ namespace EnviosColombiaGold
                         if (!muestra.Trim().ToUpper().Contains("DUPLIC"))
                         {
                             if (Convert.ToString(hoja1.Cells[numFila, 2].Text) == "<0.02")
+                            {
                                 tenor = "0.01";
+                            }
                             else
                             {
                                 if (hoja1.Cells[numFila, 2].Text.Trim() == ">10" || hoja1.Cells[numFila, 2].Text.Trim() == ">10.0" || hoja1.Cells[numFila, 2].Text.ToString().Trim() == "˃10.00")
-
                                 {
                                     tenor = "10.001";
                                     aufagr = Convert.ToString(hoja1.Cells[numFila, 3].Text);
                                 }
                                 else
+                                {
                                     tenor = Convert.ToString(hoja1.Cells[numFila, 2].Text);
+                                }
                             }
 
                             tenorufagr = Convert.ToString(hoja1.Cells[numFila, 3].Text);
@@ -788,13 +788,17 @@ namespace EnviosColombiaGold
                             if (!String.IsNullOrEmpty(hoja1.Cells[numFila, 1].Text))
                             {
                                 if (!indicate)
+                                {
                                     if (!ValidateLabsumitPather(envio))
                                     {
                                         MessageBox.Show("EnvÍo no encontrado en base de datos VERIFICAR EXCEL!");
                                         return;
                                     }
                                     else
+                                    {
                                         indicate = true;
+                                    }
+                                }
 
                                 if (ValidateLabsumit(envio, muestra))
                                 {
@@ -812,23 +816,29 @@ namespace EnviosColombiaGold
                                 else
                                 {
                                     if (!String.IsNullOrEmpty(envioNoEncontrados) && !envioNoEncontrados.Contains("Blanco") && !envioNoEncontrados.Contains("STD") && !envioNoEncontrados.Contains("Dup") && !envioNoEncontrados.Contains("Duplic"))
-
+                                    {
                                         envioNoEncontrados = string.Concat(envioNoEncontrados, muestra, ",");
+                                    }
                                     else
+                                    {
                                         envioNoEncontrados = string.Concat(muestra, ",", envioNoEncontrados);
+                                    }
                                 }
                             }
                         }
                     }
 
                     cargarenlabresult(codEnvio, envio, fecha);
-
                     Clear();
                 }
                 if (String.IsNullOrEmpty(envioNoEncontrados))
+                {
                     MessageBox.Show("Importacion Finalizada con exito");
+                }
                 else
+                {
                     MessageBox.Show(string.Concat("Importacion Finalizada con Detalles!", Environment.NewLine, "Muestras no enviadas:", Environment.NewLine, envioNoEncontrados.TrimEnd(',')));
+                }
 
                 label2.Visible = false;
                 QCReport(codEnvio);
@@ -847,7 +857,6 @@ namespace EnviosColombiaGold
                     conn.Close();
                 }
             }
-
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -871,12 +880,13 @@ namespace EnviosColombiaGold
             ds = cal.ExecuteDataset(sqlbuscar, arr, CommandType.Text);
 
             if (ds.Tables.Count > 0)
-
+            {
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     txtSubmit.Text = ds.Tables[0].Rows[0][0].ToString().Trim();
                     comboBox1.Text = ds.Tables[0].Rows[0][1].ToString().Trim();
                 }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

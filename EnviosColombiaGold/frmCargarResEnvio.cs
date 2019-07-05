@@ -934,9 +934,7 @@ namespace EnviosColombiaGold
 
                     Excel.Application oExc = new Excel.Application();
                     //Excel.Worksheet oSheeds = new Excel.Worksheet();
-                    oExc.Workbooks.Open(txtRuta.Text, 0, true, 5,
-                                Type.Missing, Type.Missing, false, Excel.XlPlatform.xlWindows,
-                                "\t", false, false, 0, true, null, null);
+                    oExc.Workbooks.Open(txtRuta.Text, 0, true, 5, Type.Missing, Type.Missing, false, Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, null, null);
                     oExc.Quit();
                 }
                 try
