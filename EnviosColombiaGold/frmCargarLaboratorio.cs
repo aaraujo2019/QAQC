@@ -627,8 +627,17 @@ namespace EnviosColombiaGold
                 }
                 catch (Exception)
                 {
-                    oleDbConnection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + SLibro + ";Extended Properties=\"Excel 12.0;HDR=NO;IMEX=1\"");
-                    oleDbConnection.Open();
+                    try
+                    {
+                        oleDbConnection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + SLibro + ";Extended Properties=\"Excel 12.0;HDR=NO;IMEX=1\"");
+                        oleDbConnection.Open();
+                    }
+                    catch (Exception)
+                    {
+                        oleDbConnection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.15.0;Data Source=" + SLibro + ";Extended Properties=\"Excel 8.0;HDR=NO;IMEX=1\"");
+                        oleDbConnection.Open();
+                    }
+                    
                 }
                 DataTable oleDbSchemaTable = oleDbConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
 
