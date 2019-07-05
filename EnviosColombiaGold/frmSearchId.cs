@@ -1,24 +1,19 @@
-﻿using System;
+﻿using Entities.Config;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
-using System.Security.Cryptography;
-using System.Configuration;
-using System.Diagnostics;
-using RN.Entity;
-using RN;
-using Entities.Config;
 
 namespace EnviosColombiaGold
 {
     public partial class frmSearchId : Form
     {
-        clsLabSubmit oLabS = new clsLabSubmit();
-       public int cargarConsulta { get; set; }
+        private clsLabSubmit oLabS = new clsLabSubmit();
+        public int cargarConsulta { get; set; }
 
 
         #region Delegados
@@ -107,61 +102,51 @@ namespace EnviosColombiaGold
 
         private void dataGridViewConsulta_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            int Fill = dataGridViewConsulta.CurrentCell.RowIndex;
-            Pasado(dataGridViewConsulta[0, Fill].Value.ToString());
-            Close();
         }
 
         private void buttonBuscar_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(TxbConsulta.Text))
+            if (!string.IsNullOrEmpty(TxbConsulta.Text) && this.cargarConsulta == 0)
             {
-                if (this.cargarConsulta == 0)
-                {
-                    var ent_dtCmbShipm = LoadLabSubmit1("3", TxbConsulta.Text);
 
-                    this.dataGridViewConsulta.AutoGenerateColumns = true;
+                var ent_dtCmbShipm = LoadLabSubmit1("3", TxbConsulta.Text);
+                this.dataGridViewConsulta.AutoGenerateColumns = true;
+                DataTable dt = ConvertToDataTable(ent_dtCmbShipm);
+                //dataGridViewConsulta.DataSource = ent_dtCmbShipm.Select(x => new { Preparation = x.Ssumit }).ToList();
+                var valueDisplay = ent_dtCmbShipm.Select(x => new { Preparation = x.Ssumit }).ToList();
+                dataGridViewConsulta.DataSource = valueDisplay;
+                //timer1.Stop();
 
-                    DataTable dt = ConvertToDataTable(ent_dtCmbShipm);
-                    //dataGridViewConsulta.DataSource = ent_dtCmbShipm.Select(x => new { Preparation = x.Ssumit }).ToList();
-
-                    var valueDisplay = ent_dtCmbShipm.Select(x => new { Preparation = x.Ssumit }).ToList();
-
-                    dataGridViewConsulta.DataSource = valueDisplay;
-
-                    //timer1.Stop();
-                }
             }
             if (this.cargarConsulta > 0)
             {
                 clsRf oRf = new clsRf();
-
-            var ent_dtCmbShipm = oRf.getLabResult("3", TxbConsulta.Text);
-
+                var ent_dtCmbShipm = oRf.getLabResult("3", TxbConsulta.Text);
                 this.dataGridViewConsulta.AutoGenerateColumns = true;
-
-           
                 dataGridViewConsulta.DataSource = ent_dtCmbShipm;
             }
             //progressBar1.Visible = false;
 
         }
-
-       
-    
-
+                     
         public DataTable ConvertToDataTable<T>(IList<T> data)
         {
             PropertyDescriptorCollection properties =
                TypeDescriptor.GetProperties(typeof(T));
             DataTable table = new DataTable();
             foreach (PropertyDescriptor prop in properties)
+            {
                 table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            }
+
             foreach (T item in data)
             {
                 DataRow row = table.NewRow();
                 foreach (PropertyDescriptor prop in properties)
+                {
                     row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+                }
+
                 table.Rows.Add(row);
             }
             return table;
@@ -186,7 +171,14 @@ namespace EnviosColombiaGold
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void dataGridViewConsulta_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int Fill = dataGridViewConsulta.CurrentCell.RowIndex;
+            Pasado(dataGridViewConsulta[0, Fill].Value.ToString());
+            Close();
         }
     }
 }

@@ -123,7 +123,7 @@
             this.dataGridViewConsulta.Size = new System.Drawing.Size(290, 121);
             this.dataGridViewConsulta.TabIndex = 29;
             this.dataGridViewConsulta.TabStop = false;
-            this.dataGridViewConsulta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewConsulta_CellContentClick);
+            this.dataGridViewConsulta.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewConsulta_CellContentDoubleClick);
             // 
             // timer1
             // 

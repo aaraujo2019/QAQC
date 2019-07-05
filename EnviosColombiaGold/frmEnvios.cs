@@ -116,7 +116,6 @@ namespace EnviosColombiaGold
         {
             try
             {
-
                 iSackos = 1;
                 iCont = 1;
                 if (dgInterval.Rows.Count == 0)
@@ -593,19 +592,30 @@ namespace EnviosColombiaGold
         {
             try
             {
-                //getDHSamples
                 DataTable dtFrom = new DataTable();
                 DataTable dtTo = new DataTable();
                 oDHSamp.sOpcion = "2";
-                oDHSamp.sHoleID = cmbHoleId.SelectedValue.ToString();
+
+                if (cmbHoleId.SelectedValue != null)
+                {
+                    oDHSamp.sHoleID = cmbHoleId.SelectedValue.ToString();
+                }
+
                 dtFrom = oDHSamp.getDHSamples();
-                dtTo = dtFrom.Copy(); //oDHSamp.getDHSamples();
+                dtTo = dtFrom.Copy();
 
                 a.DisplayMember = "Sample";//"From";
-                a.ValueMember = "SKDHSamples";
+                if (a.ValueMember == string.Empty)
+                {
+                    a.ValueMember = "SKDHSamples";
+                }
 
                 CmbTS.DisplayMember = "Sample"; //"To";
-                CmbTS.ValueMember = "SKDHSamples";
+                if (CmbTS.ValueMember == string.Empty)
+                {
+                    CmbTS.ValueMember = "SKDHSamples";
+                }
+
                 a.DataSource = dtFrom; //dtFromR;
                 CmbTS.DataSource = dtTo; //dtToR;
 
@@ -678,10 +688,18 @@ namespace EnviosColombiaGold
                 oRock.sOpcion = "1";
                 DataTable dtFromToR = oRock.getGCSamplesRockAll();
 
-                a.DisplayMember = "Sample";
-                a.ValueMember = "Sample";
-                CmbTS.DisplayMember = "Sample";
-                CmbTS.ValueMember = "Sample";
+                a.DisplayMember = "Sample";//"From";
+                if (a.ValueMember == string.Empty)
+                {
+                    a.ValueMember = "Sample";
+                }
+
+                CmbTS.DisplayMember = "Sample"; //"To";
+                if (CmbTS.ValueMember == string.Empty)
+                {
+                    CmbTS.ValueMember = "Sample";
+                }
+
                 a.DataSource = dtFromToR;
                 CmbTS.DataSource = dtFromToR.Copy();
             }
@@ -741,23 +759,31 @@ namespace EnviosColombiaGold
 
         private DataTable LoadCmbHoleDril()
         {
-            clsDHSamples clsDHSamples = new clsDHSamples();
-            DataTable dHSamplesDistinct = clsDHSamples.getDHSamplesDistinct();
-            for (int i = 0; i < 2; i++)
+            try
             {
-                try
+                clsDHSamples clsDHSamples = new clsDHSamples();
+                DataTable dHSamplesDistinct = clsDHSamples.getDHSamplesDistinct();
+                for (int i = 0; i < 2; i++)
                 {
-                    cmbHoleId.ValueMember = "HoleID";
+                    try
+                    {
+                        cmbHoleId.ValueMember = "HoleID";
+                    }
+                    catch
+                    {
+                    }
+                    cmbHoleId.DisplayMember = "Comb";
+                    cmbHoleId.DataSource = dHSamplesDistinct;
+                    cmbHoleId.Enabled = true;
+                    cmbHoleId.SelectedItem = "";
                 }
-                catch
-                {
-                }
-                cmbHoleId.DisplayMember = "Comb";
-                cmbHoleId.DataSource = dHSamplesDistinct;
-                cmbHoleId.Enabled = true;
-                cmbHoleId.SelectedItem = "";
+                return dHSamplesDistinct;
             }
-            return dHSamplesDistinct;
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
 
         private DataTable LoadSampleofnatureAll()
@@ -911,13 +937,11 @@ namespace EnviosColombiaGold
 
                     if (dtCmbShipm.Rows.Count > 0)
                     {
-
                         DateTime calculateDate = Convert.ToDateTime(dtCmbShipm.Rows[0]["DateShipment"]);
-
                         string fecha = String.Format("{0: dd/MM/yyyy}", calculateDate);
 
                         TimeSpan dTime = (DateTime.Today - Convert.ToDateTime(fecha));
-                        if (dTime.Days > 20 && bcmbModify == true)
+                        if (dTime.Days > 20 && bcmbModify)
                         {
                             MessageBox.Show("It was created 20 days ago. Blocked");
                             bcmbModify = false;
@@ -946,7 +970,6 @@ namespace EnviosColombiaGold
                         cmbDisp.DataSource = oLabS.getLabSubmit_Dispatchedby();
                         cmbDisp.SelectedValue = dtCmbShipm.Rows[0]["DispatchedBy"].ToString();
 
-
                         cmbPrepCode.Text = dtCmbShipm.Rows[0]["PrepCode"].ToString();
                         CmbAnCod.Text = dtCmbShipm.Rows[0]["AnalisysCode"].ToString();
                         txtMetAnCod.Text = dtCmbShipm.Rows[0]["MetAnalisysCode"].ToString();
@@ -959,18 +982,19 @@ namespace EnviosColombiaGold
 
                         CmbNatSamp.DisplayMember = "description";
                         CmbNatSamp.ValueMember = "Id";
-                        //CmbNatSamp.DataSource = LoadSampleofnature(int.Parse(dtCmbShipm.Rows[0]["SampleNature"].ToString()));
                         CmbNatSamp.DataSource = LoadSampleofnatureAll();
                         if (dtCmbShipm.Rows[0]["SampleNature"].ToString() != "")
                         {
                             CmbNatSamp.SelectedValue = dtCmbShipm.Rows[0]["SampleNature"].ToString();
                         }
 
-
                         CmbSamTyp.DisplayMember = "Description";
                         CmbSamTyp.ValueMember = "Code";
-                        //CmbSamTyp.DataSource = LoadSampShipment(dtCmbShipm.Rows[0]["SampleType"].ToString());
-                        CmbSamTyp.DataSource = LoadSampShipmentAll();
+                        if (CmbSamTyp.DataSource == null)
+                        {
+                            CmbSamTyp.DataSource = LoadSampShipmentAll();
+                        }
+
                         if (dtCmbShipm.Rows[0]["SampleType"].ToString() != "")
                         {
                             CmbSamTyp.SelectedValue = dtCmbShipm.Rows[0]["SampleType"].ToString();
@@ -987,7 +1011,7 @@ namespace EnviosColombiaGold
                         CmbTypSub.DisplayMember = "Description";
                         CmbTypSub.ValueMember = "Code";
                         var query1 = LoadShipmentAllTypSubEntity();
-                        CmbTypSub.DataSource = query1.Select(c => c.Description).ToList(); ;
+                        CmbTypSub.DataSource = query1.Select(c => c.Description).ToList();
                         CmbTypSub.SelectedIndex = query1.ToList().Count - 1;
 
                         if (dtCmbShipm.Rows[0]["TypeSumit"].ToString() != "")
@@ -1010,22 +1034,19 @@ namespace EnviosColombiaGold
                         {
                             LoadFromTo();
                         }
-                        else
+
+                        if (CmbSamTyp.SelectedValue.ToString() == ConfigurationSettings.AppSettings["Rocks"].ToString())
                         {
-                            if (CmbSamTyp.SelectedValue.ToString() == ConfigurationSettings.AppSettings["Rocks"].ToString())
-                            {
-                                LoadFromToRocks();
-                            }
-                            else
-                            {
-                                if (CmbSamTyp.SelectedValue.ToString() == ConfigurationSettings.AppSettings["Channels"].ToString())
-                                {
-                                    LoadFromTo();
-                                    LoadFromToRocks();
-                                }
-                            }
+                            LoadFromToRocks();
                         }
-                                               
+
+                        if (CmbSamTyp.SelectedValue.ToString() == ConfigurationSettings.AppSettings["Channels"].ToString())
+                        {
+                            LoadFromTo();
+                            LoadFromToRocks();
+                        }
+
+
                         DataTable dtInterval = new DataTable();
                         dtInterval = LoadLabSubmitInterval("4", cmbShipment.Text.ToString());
                         dgInterval.DataSource = dtInterval;
@@ -1063,8 +1084,6 @@ namespace EnviosColombiaGold
                             clsLabSumitInterval.dtIntervals.Rows.Add(dr);
                         }
 
-
-
                         DataTable dtIn = new DataTable();
                         dtIn = LoadLabSubmitIn("4", cmbShipment.Text.ToString());
                         dgDetalleInterval.DataSource = dtIn;
@@ -1095,7 +1114,7 @@ namespace EnviosColombiaGold
                             sCantSack = dtIn.Rows[i]["Sack"].ToString();
                             clsLabsumitIn.dtIn.Rows.Add(drDetail);
                         }
-                      
+
                         if (clsLabsumitIn.dtIn.Rows.Count > 0)
                         {
                             dgDetalleInterval.Columns[1].Visible = false;
@@ -1123,9 +1142,17 @@ namespace EnviosColombiaGold
 
         public void EjecutaPasarDato(string Dato)
         {
-            cmbShipment.Items.Clear();
-            cmbShipment.Text = Dato;
-            cmbShipment_Leave(null, null);
+            try
+            {
+                cmbShipment.Items.Clear();
+                cmbShipment.Text = Dato;
+                cmbShipment_Leave(null, null);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
 
         private void btnFind_Click(object sender, EventArgs e)
@@ -1981,9 +2008,6 @@ namespace EnviosColombiaGold
                     {
                         return;
                     }
-
-
-
                 }
 
                 if (bcmbFind == false)
@@ -2011,7 +2035,6 @@ namespace EnviosColombiaGold
 
                             }
                         }
-
                     }
                     else
                     {
@@ -2531,7 +2554,7 @@ namespace EnviosColombiaGold
         private void cmbPrepLab_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
-            { 
+            {
                 cmbAnLab.SelectedIndex = cmbPrepLab.SelectedIndex;
             }
             catch (Exception ex)
@@ -2826,7 +2849,11 @@ namespace EnviosColombiaGold
         {
             try
             {
-                a.DataSource = null;
+                if (a.DataSource == null)
+                {
+                    a.DataSource = null;
+                }
+
                 CmbTS.DataSource = null;
                 LoadCmbHoleId();
             }
