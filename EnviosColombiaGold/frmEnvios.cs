@@ -1000,14 +1000,6 @@ namespace EnviosColombiaGold
                             CmbSamTyp.SelectedValue = dtCmbShipm.Rows[0]["SampleType"].ToString();
                         }
 
-                        //LoadCmbHoleId();
-                        //Implementacion David Ciro
-                        //CmbTypSub.DisplayMember = "Description";
-                        //CmbTypSub.ValueMember = "Code";
-                        ////CmbTypSub.DataSource = LoadShipment(dtCmbShipm.Rows[0]["TypeSumit"].ToString());
-                        //CmbTypSub.DataSource = LoadShipmentAll();
-
-
                         CmbTypSub.DisplayMember = "Description";
                         CmbTypSub.ValueMember = "Code";
                         var query1 = LoadShipmentAllTypSubEntity();
