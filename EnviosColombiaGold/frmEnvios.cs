@@ -975,7 +975,7 @@ namespace EnviosColombiaGold
                         txtMetAnCod.Text = dtCmbShipm.Rows[0]["MetAnalisysCode"].ToString();
                         TxtOtAnCod.Text = dtCmbShipm.Rows[0]["OtherAnalisysCode"].ToString();
                         txtInstructions.Text = dtCmbShipm.Rows[0]["Instructions"].ToString();
-                        //txtBags.Text = "";//dtCmbShipm.Rows[0]["NoBags"].ToString();
+                        //txtBags.Text = dtCmbShipm.Rows[0]["NoBags"].ToString();
                         txtObserv.Text = dtCmbShipm.Rows[0]["Observations"].ToString();
                         txtElements.Text = dtCmbShipm.Rows[0]["Element"].ToString();
                         //cmbHoleId.Text = dtCmbShipm.Rows[0]["HoleID"].ToString();
@@ -2746,7 +2746,7 @@ namespace EnviosColombiaGold
         {
             try
             {
-                if (a.DataSource == null)
+                if (a.DataSource != null)
                 {
                     DataTable dtIdF = new DataTable();
                     string code = LoadSampShipmentAllEnt()[CmbSamTyp.SelectedIndex].Code.ToString().Trim();
