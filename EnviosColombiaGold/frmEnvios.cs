@@ -1355,6 +1355,12 @@ namespace EnviosColombiaGold
                     }
                     else if (code == ConfigurationSettings.AppSettings["Rocks"].ToString())
                     {
+                        ///Modificación de versión funcional. 08/07/2019 Alvaro Araujo
+                        if (!(code == ConfigurationSettings.AppSettings["Channels"].ToString()))
+                        {
+                            break;
+                        }
+
                         DataTable dtRF = oRock.getGC_SamplesRockBySample(a.SelectedValue.ToString());
                         if (oRock.getGC_SamplesRock_getRangeValid(dgInterval.Rows[i].Cells["SampleFrom"].Value.ToString(),
                             dgInterval.Rows[i].Cells["SampleTo"].Value.ToString(), dtRF.Rows[0]["SKSamplesRock"].ToString()).Rows.Count > 0)
@@ -1462,8 +1468,8 @@ namespace EnviosColombiaGold
                         {
                             oCh.sCHId = cmbHoleId.SelectedValue.ToString();
                         }
-                        dr["TotalSample"] = oCh.getCHSamplesBySample(a.Text.ToString(), CmbTS.Text.ToString()).Rows.Count;
 
+                        dr["TotalSample"] = oCh.getCHSamplesBySample(a.Text.ToString(), CmbTS.Text.ToString()).Rows.Count;
                     }
                     else
                     {
@@ -1475,6 +1481,7 @@ namespace EnviosColombiaGold
                         {
                             oCh.sCHId = this.cmbHoleId.SelectedValue.ToString();
                         }
+
                         int num = 0;
                         if (this.oDHSamp.sHoleID != null && this.oDHSamp.sHoleID != string.Empty)
                         {
@@ -1492,6 +1499,7 @@ namespace EnviosColombiaGold
 
                     clsLabSumitInterval.dtIntervals.Rows.Add(dr);
                     dgInterval.DataSource = clsLabSumitInterval.dtIntervals;
+
                     if (clsLabSumitInterval.dtIntervals.Rows.Count > 0)
                     {
                         dgInterval.Columns[0].Visible = false;
@@ -1535,13 +1543,11 @@ namespace EnviosColombiaGold
 
                             if ((iCont % int.Parse(ConfigurationSettings.AppSettings["CantSackos"].ToString())) == 0)
                             {
-                                iSackos += 1;
+                                iSackos ++;
                             }
 
-                            iCont += 1;
-
+                            iCont ++;
                         }
-
                     }
                     else if (code == ConfigurationSettings.AppSettings["Rocks"].ToString())
                     {
@@ -1554,7 +1560,6 @@ namespace EnviosColombiaGold
 
                         for (int i = 0; i < dtDetail.Rows.Count; i++)
                         {
-
                             DataRow drDetail = clsLabsumitIn.dtIn.NewRow();
                             drDetail["IDInterval"] = iInterval.ToString();
                             drDetail["Sample"] = dtDetail.Rows[i]["Sample"].ToString();
@@ -1565,11 +1570,10 @@ namespace EnviosColombiaGold
 
                             if ((iCont % int.Parse(ConfigurationSettings.AppSettings["CantSackos"].ToString())) == 0)
                             {
-                                iSackos += 1;
+                                iSackos ++;
                             }
 
-                            iCont += 1;
-
+                            iCont ++;
                         }
                     }
                     else if (code == ConfigurationSettings.AppSettings["Channels"].ToString())
@@ -1603,25 +1607,24 @@ namespace EnviosColombiaGold
 
                             if ((iCont % int.Parse(ConfigurationSettings.AppSettings["CantSackos"].ToString())) == 0)
                             {
-                                iSackos += 1;
+                                iSackos ++;
                             }
 
-                            iCont += 1;
-
+                            iCont ++;
                         }
 
                     }
 
                     txtBags.Text = sCantSack.ToString();
-
                     dgDetalleInterval.DataSource = clsLabsumitIn.dtIn;
+
                     if (clsLabsumitIn.dtIn.Rows.Count > 0)
                     {
                         dgDetalleInterval.Columns[1].Visible = false;
                         dgDetalleInterval.Columns[4].Visible = false;
                     }
                     //Variable para identificar el registro en ambos grid
-                    iInterval += 1;
+                    iInterval ++;
                 }
                 else if (sMens == "NOK")
                 {
