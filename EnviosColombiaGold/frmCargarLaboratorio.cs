@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
+using Spire.Xls;
 
 namespace EnviosColombiaGold
 {
@@ -665,6 +666,45 @@ namespace EnviosColombiaGold
             catch (Exception oMsg)
             {
                 MessageBox.Show(oMsg.Message, "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Este metodo es una forma simple de cargar un archivo de excel evitando el uso de los Provider=Microsoft.ACE.OLEDB, que causa tantos problemas en ocaciones,
+        /// es por eso que para usar este fragmento de codigo se deberá crear en el archivo de excel un fila con un solo valor en la primera celda, ya que
+        /// sino se hace la funcion tomará la primera linea como si fuera el encabezado del archivo.
+        ///  * Llamada del metodo: CargaExcelFormaSinProvider(openFileDialog);
+        /// </summary>
+        /// <param name="openFileDialog">Objeto OpenFileDialog, para abir en explorador del equipo.</param>
+        private void CargaExcelFormaSinProvider(OpenFileDialog openFileDialog)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                label2.Visible = true;
+                txtRuta.Text = openFileDialog.FileName;
+                FileInfo oFi = new FileInfo(openFileDialog.FileName);
+                string sExt = oFi.Extension.ToString();
+                sNomArchivo = oFi.Name.Substring(0, oFi.Name.ToString().Length - sExt.ToString().Length);
+
+                Excel.Application oExc = new Excel.Application();
+                oExc.Workbooks.Open(txtRuta.Text, 0, true, 5, Type.Missing, Type.Missing, false, Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, null, null);
+                oExc.Quit();
+            }
+            try
+            {
+                DataTable dtXls = new DataTable();
+                Workbook workbook = new Workbook();
+
+                workbook.LoadFromFile(txtRuta.Text);
+                Worksheet sheet = workbook.Worksheets[0];
+                dtXls = sheet.ExportDataTable();
+                ds.Tables.Add(dtXls);
+                dgXls.DataSource = dtXls;
+                dgXls.AutoResizeColumns();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
