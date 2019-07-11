@@ -92,9 +92,9 @@ namespace EnviosColombiaGold
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
-            this.CmbTS = new System.Windows.Forms.ComboBox();
+            this.CmbToSamp = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.a = new System.Windows.Forms.ComboBox();
+            this.cmbFrom = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.dgInterval = new System.Windows.Forms.DataGridView();
             this.TabShipm = new System.Windows.Forms.TabControl();
@@ -674,15 +674,15 @@ namespace EnviosColombiaGold
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cmbFrom);
             this.groupBox2.Controls.Add(this.cmbHoleId);
             this.groupBox2.Controls.Add(this.lblsampTo);
             this.groupBox2.Controls.Add(this.lblsampfrom);
             this.groupBox2.Controls.Add(this.btnDelete);
             this.groupBox2.Controls.Add(this.btnAdd);
             this.groupBox2.Controls.Add(this.label21);
-            this.groupBox2.Controls.Add(this.CmbTS);
+            this.groupBox2.Controls.Add(this.CmbToSamp);
             this.groupBox2.Controls.Add(this.label20);
-            this.groupBox2.Controls.Add(this.a);
             this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.dgInterval);
             this.groupBox2.Font = new System.Drawing.Font("Verdana", 10F);
@@ -761,17 +761,17 @@ namespace EnviosColombiaGold
             this.label21.TabIndex = 41;
             this.label21.Text = "To Sample";
             // 
-            // CmbTS
+            // CmbToSamp
             // 
-            this.CmbTS.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.CmbTS.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.CmbTS.FormattingEnabled = true;
-            this.CmbTS.Location = new System.Drawing.Point(224, 36);
-            this.CmbTS.Margin = new System.Windows.Forms.Padding(2);
-            this.CmbTS.Name = "CmbTS";
-            this.CmbTS.Size = new System.Drawing.Size(92, 24);
-            this.CmbTS.TabIndex = 19;
-            this.CmbTS.SelectedIndexChanged += new System.EventHandler(this.CmbTS_SelectedIndexChanged);
+            this.CmbToSamp.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.CmbToSamp.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.CmbToSamp.FormattingEnabled = true;
+            this.CmbToSamp.Location = new System.Drawing.Point(224, 36);
+            this.CmbToSamp.Margin = new System.Windows.Forms.Padding(2);
+            this.CmbToSamp.Name = "CmbToSamp";
+            this.CmbToSamp.Size = new System.Drawing.Size(92, 24);
+            this.CmbToSamp.TabIndex = 19;
+            this.CmbToSamp.SelectedIndexChanged += new System.EventHandler(this.CmbTS_SelectedIndexChanged);
             // 
             // label20
             // 
@@ -784,17 +784,17 @@ namespace EnviosColombiaGold
             this.label20.TabIndex = 39;
             this.label20.Text = "From Sample";
             // 
-            // a
+            // cmbFrom
             // 
-            this.a.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.a.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.a.FormattingEnabled = true;
-            this.a.Location = new System.Drawing.Point(120, 36);
-            this.a.Margin = new System.Windows.Forms.Padding(2);
-            this.a.Name = "a";
-            this.a.Size = new System.Drawing.Size(92, 24);
-            this.a.TabIndex = 18;
-            this.a.SelectedIndexChanged += new System.EventHandler(this.CmbFS_SelectedIndexChanged);
+            this.cmbFrom.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbFrom.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.cmbFrom.FormattingEnabled = true;
+            this.cmbFrom.Location = new System.Drawing.Point(122, 35);
+            this.cmbFrom.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbFrom.Name = "cmbFrom";
+            this.cmbFrom.Size = new System.Drawing.Size(97, 24);
+            this.cmbFrom.TabIndex = 18;
+            this.cmbFrom.SelectedIndexChanged += new System.EventHandler(this.CmbFS_SelectedIndexChanged);
             // 
             // label16
             // 
@@ -928,9 +928,9 @@ namespace EnviosColombiaGold
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.ComboBox CmbTS;
+        private System.Windows.Forms.ComboBox CmbToSamp;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.ComboBox a;
+        private System.Windows.Forms.ComboBox cmbFrom;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.DataGridView dgInterval;
         private System.Windows.Forms.TabControl TabShipm;

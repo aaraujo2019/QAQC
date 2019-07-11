@@ -1,20 +1,17 @@
-﻿using System;
+﻿using Entities.Config;
+using Entities.Person;
+using Spire.Xls;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Threading;
+using System.Data.OleDb;
 using System.Globalization;
 using System.IO;
-using System.Data.OleDb;
+using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
-using System.Reflection;
-using System.Configuration;
-using Entities.Config;
-using Entities.Person;
 
 namespace EnviosColombiaGold
 {
@@ -124,18 +121,8 @@ namespace EnviosColombiaGold
                 getRfTypeSample.Description = "Select an option..";
                 RfTypeSample.Insert(RfTypeSample.ToList().Count, getRfTypeSample);
 
-
-                //DataTable dtSampleT = new DataTable();
-                //dtSampleT = oRf.getRfTypeSampleQaqc();
-                //DataRow dr1 = dtSampleT.NewRow();
-                //dr1[0] = "-1";
-                //dr1[1] = "Select an option..";
-                //dtSampleT.Rows.Add(dr1);
-
                 cmbSampleType.DisplayMember = "Comb";
                 cmbSampleType.ValueMember = "Code";
-                //cmbSampleType.DataSource = dtSampleT;
-                //cmbSampleType.SelectedValue = -1;
                 cmbSampleType.DataSource = RfTypeSample;
                 cmbSampleType.SelectedValue = value.ToList().Count - 1;
 
@@ -146,26 +133,6 @@ namespace EnviosColombiaGold
                 getUsersValue.code = "-1";
                 getUsersValue.Project = "Select an option..";
                 getUsers.Insert(getUsers.ToList().Count, getUsersValue);
-
-
-
-
-                //DataTable dtUsers = new DataTable();
-                //dtUsers = oRf.getUsers("");
-
-                //DataRow[] datoU = dtUsers.Select("grupo in ('Administradores','Perforacion')");
-                //DataTable dtToR = dtUsers.Clone();
-
-                //foreach (DataRow r in datoU)
-                //{
-                //    dtToR.ImportRow(r);
-                //}
-
-
-                //DataRow dr2 = dtToR.NewRow();
-                //dr2[0] = "-1";
-                //dr2[7] = "Select an option..";
-                //dtToR.Rows.Add(dr2);
 
                 cmbGeologist.DisplayMember = "Project";
                 cmbGeologist.ValueMember = "code";
@@ -501,6 +468,45 @@ namespace EnviosColombiaGold
 
         }
 
+        /// <summary>
+        /// Este metodo es una forma simple de cargar un archivo de excel evitando el uso de los Provider=Microsoft.ACE.OLEDB, que causa tantos problemas en ocaciones,
+        /// es por eso que para usar este fragmento de codigo se deberá crear en el archivo de excel un fila con un solo valor en la primera celda, ya que
+        /// sino se hace la funcion tomará la primera linea como si fuera el encabezado del archivo.
+        ///  * Llamada del metodo: CargaExcelFormaSinProvider(openFileDialog);
+        /// </summary>
+        /// <param name="openFileDialog">Objeto OpenFileDialog, para abir en explorador del equipo.</param>
+        private void CargaExcelFormaSinProvider(OpenFileDialog openFileDialog)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                label2.Visible = true;
+                txtRuta.Text = openFileDialog.FileName;
+                FileInfo oFi = new FileInfo(openFileDialog.FileName);
+                string sExt = oFi.Extension.ToString();
+                sNomArchivo = oFi.Name.Substring(0, oFi.Name.ToString().Length - sExt.ToString().Length);
+
+                Excel.Application oExc = new Excel.Application();
+                oExc.Workbooks.Open(txtRuta.Text, 0, true, 5, Type.Missing, Type.Missing, false, Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, null, null);
+                oExc.Quit();
+            }
+            try
+            {
+                DataTable dtXls = new DataTable();
+                Workbook workbook = new Workbook();
+
+                workbook.LoadFromFile(txtRuta.Text);
+                Worksheet sheet = workbook.Worksheets[0];
+                dtXls = sheet.ExportDataTable();
+                //ds.Tables.Add(dtXls);
+                dgAssignQControl.DataSource = dtXls;
+                dgAssignQControl.AutoResizeColumns();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void pbtnSearch_Click(object sender, EventArgs e)
         {
             try
@@ -509,11 +515,6 @@ namespace EnviosColombiaGold
                 if (result == DialogResult.OK)
                 {
                     txtRuta.Text = oDialog.FileName;
-                    /*Dim fi As New System.IO.FileInfo(fileName) 
-                   Return fi.Name 
-
-                   MessageBox.Show(GetOnlyFileTitle(dlg.FileName));*/
-
                     FileInfo oFi = new FileInfo(oDialog.FileName);
                     string sExt = oFi.Extension.ToString();
                     sNomArchivo = oFi.Name.Substring(0, oFi.Name.ToString().Length - sExt.ToString().Length);

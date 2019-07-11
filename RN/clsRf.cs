@@ -374,8 +374,6 @@ public class clsRf
             SqlParameter[] arr = oData.GetParameters(0);
             dtRfPrefix = oData.ExecuteDataset("usp_Prefix_List", arr, CommandType.StoredProcedure);
             return dtRfPrefix.Tables[0];
-
-
         }
         catch (Exception ex)
         {

@@ -82,8 +82,8 @@ namespace EnviosColombiaGold
             txtElements.Text = string.Empty;
 
             cmbHoleId.SelectedIndex = -1;
-            a.SelectedIndex = -1;
-            CmbTS.SelectedIndex = -1;
+            cmbFrom.SelectedIndex = -1;
+            CmbToSamp.SelectedIndex = -1;
 
             dgInterval.DataSource = null;
             dgDetalleInterval.DataSource = null;
@@ -604,21 +604,20 @@ namespace EnviosColombiaGold
                 dtFrom = oDHSamp.getDHSamples();
                 dtTo = dtFrom.Copy();
 
-                a.DisplayMember = "Sample";//"From";
-                if (a.ValueMember == string.Empty)
+                cmbFrom.DisplayMember = "Sample";//"From";
+                if (cmbFrom.ValueMember == string.Empty)
                 {
-                    a.ValueMember = "SKDHSamples";
+                    cmbFrom.ValueMember = "SKDHSamples";
                 }
 
-                CmbTS.DisplayMember = "Sample"; //"To";
-                if (CmbTS.ValueMember == string.Empty)
+                CmbToSamp.DisplayMember = "Sample"; //"To";
+                if (CmbToSamp.ValueMember == string.Empty)
                 {
-                    CmbTS.ValueMember = "SKDHSamples";
+                    CmbToSamp.ValueMember = "SKDHSamples";
                 }
 
-                a.DataSource = dtFrom; //dtFromR;
-                CmbTS.DataSource = dtTo; //dtToR;
-
+                    cmbFrom.DataSource = dtFrom;
+                    CmbToSamp.DataSource = dtTo;
             }
             catch (Exception ex)
             {
@@ -665,14 +664,14 @@ namespace EnviosColombiaGold
                 Ent_Prefix[] value1 = cHSamplesEntity.ToArray();
                 Ent_Prefix[] value2 = value1;
 
-                a.DisplayMember = "Sample";
-                a.ValueMember = "Sample";
+                cmbFrom.DisplayMember = "Sample";
+                cmbFrom.ValueMember = "Sample";
 
-                CmbTS.DisplayMember = "Sample";
-                CmbTS.ValueMember = "Sample";
+                CmbToSamp.DisplayMember = "Sample";
+                CmbToSamp.ValueMember = "Sample";
 
-                a.DataSource = cHSamplesEntity;
-                CmbTS.DataSource = value2;
+                cmbFrom.DataSource = cHSamplesEntity;
+                CmbToSamp.DataSource = value2;
             }
             catch (Exception ex)
             {
@@ -688,20 +687,20 @@ namespace EnviosColombiaGold
                 oRock.sOpcion = "1";
                 DataTable dtFromToR = oRock.getGCSamplesRockAll();
 
-                a.DisplayMember = "Sample";//"From";
-                if (a.ValueMember == string.Empty)
+                cmbFrom.DisplayMember = "Sample";//"From";
+                if (cmbFrom.ValueMember == string.Empty)
                 {
-                    a.ValueMember = "Sample";
+                    cmbFrom.ValueMember = "Sample";
                 }
 
-                CmbTS.DisplayMember = "Sample"; //"To";
-                if (CmbTS.ValueMember == string.Empty)
+                CmbToSamp.DisplayMember = "Sample"; //"To";
+                if (CmbToSamp.ValueMember == string.Empty)
                 {
-                    CmbTS.ValueMember = "Sample";
+                    CmbToSamp.ValueMember = "Sample";
                 }
 
-                a.DataSource = dtFromToR;
-                CmbTS.DataSource = dtFromToR.Copy();
+                cmbFrom.DataSource = dtFromToR;
+                CmbToSamp.DataSource = dtFromToR.Copy();
             }
             catch (Exception ex)
             {
@@ -997,7 +996,7 @@ namespace EnviosColombiaGold
 
                         if (dtCmbShipm.Rows[0]["SampleType"].ToString() != "")
                         {
-                            CmbSamTyp.SelectedValue = dtCmbShipm.Rows[0]["SampleType"].ToString();
+                           CmbSamTyp.SelectedValue = dtCmbShipm.Rows[0]["SampleType"].ToString();
                         }
 
                         CmbTypSub.DisplayMember = "Description";
@@ -1064,13 +1063,13 @@ namespace EnviosColombiaGold
                             dr["SampleTo"] = dtInterval.Rows[i]["SampleTo"].ToString();
                             dr["TotalSample"] = dtInterval.Rows[i]["TotalSample"].ToString();
 
-                            if (a.SelectedValue != null)
+                            if (cmbFrom.SelectedValue != null)
                             {
-                                dr["IdFrom"] = a.SelectedValue.ToString();
+                                dr["IdFrom"] = cmbFrom.SelectedValue.ToString();
                             }
-                            if (CmbTS.SelectedValue != null)
+                            if (CmbToSamp.SelectedValue != null)
                             {
-                                dr["IdTo"] = CmbTS.SelectedValue.ToString();
+                                dr["IdTo"] = CmbToSamp.SelectedValue.ToString();
                             }
 
                             clsLabSumitInterval.dtIntervals.Rows.Add(dr);
@@ -1207,7 +1206,8 @@ namespace EnviosColombiaGold
                 txtInstructions.Text = "";
                 TxtOtAnCod.Text = "";
                 txtObserv.Text = "";
-                a.Text = ""; CmbTS.Text = "";
+                cmbFrom.Text = "";
+                CmbToSamp.Text = "";
 
                 clsLabsumitIn.dtIn = new DataTable();
                 clsLabSumitInterval.dtIntervals = new DataTable();
@@ -1340,14 +1340,14 @@ namespace EnviosColombiaGold
                     if (code == ConfigurationSettings.AppSettings["Drill"].ToString())
                     {
                         if (oDHSamp.getDHSamples_getRangeValid(dgInterval.Rows[i].Cells["SampleFrom"].Value.ToString(),
-                            dgInterval.Rows[i].Cells["SampleTo"].Value.ToString(), a.SelectedValue.ToString()).Rows.Count > 0)
+                            dgInterval.Rows[i].Cells["SampleTo"].Value.ToString(), cmbFrom.SelectedValue.ToString()).Rows.Count > 0)
                         {
                             sMens = "NOK";
                             break;
                         }
 
                         if (oDHSamp.getDHSamples_getRangeValid(dgInterval.Rows[i].Cells["SampleFrom"].Value.ToString(),
-                            dgInterval.Rows[i].Cells["SampleTo"].Value.ToString(), CmbTS.SelectedValue.ToString()).Rows.Count > 0)
+                            dgInterval.Rows[i].Cells["SampleTo"].Value.ToString(), CmbToSamp.SelectedValue.ToString()).Rows.Count > 0)
                         {
                             sMens = "NOK";
                             break;
@@ -1361,7 +1361,7 @@ namespace EnviosColombiaGold
                             break;
                         }
 
-                        DataTable dtRF = oRock.getGC_SamplesRockBySample(a.SelectedValue.ToString());
+                        DataTable dtRF = oRock.getGC_SamplesRockBySample(cmbFrom.SelectedValue.ToString());
                         if (oRock.getGC_SamplesRock_getRangeValid(dgInterval.Rows[i].Cells["SampleFrom"].Value.ToString(),
                             dgInterval.Rows[i].Cells["SampleTo"].Value.ToString(), dtRF.Rows[0]["SKSamplesRock"].ToString()).Rows.Count > 0)
                         {
@@ -1369,7 +1369,7 @@ namespace EnviosColombiaGold
                             break;
                         }
 
-                        DataTable dtRT = oRock.getGC_SamplesRockBySample(a.SelectedValue.ToString());
+                        DataTable dtRT = oRock.getGC_SamplesRockBySample(cmbFrom.SelectedValue.ToString());
                         if (oRock.getGC_SamplesRock_getRangeValid(dgInterval.Rows[i].Cells["SampleFrom"].Value.ToString(),
                             dgInterval.Rows[i].Cells["SampleTo"].Value.ToString(), dtRF.Rows[0]["SKSamplesRock"].ToString()).Rows.Count > 0)
                         {
@@ -1443,22 +1443,22 @@ namespace EnviosColombiaGold
                     if (code == ConfigurationSettings.AppSettings["Drill"].ToString())
                     {
 
-                        dr["SampleFrom"] = a.Text.ToString();
-                        dr["SampleTo"] = CmbTS.Text.ToString();
-                        dr["TotalSample"] = oDHSamp.getDHSamplesBySamp(a.Text.ToString(), CmbTS.Text.ToString()).Rows.Count;
+                        dr["SampleFrom"] = cmbFrom.Text.ToString();
+                        dr["SampleTo"] = CmbToSamp.Text.ToString();
+                        dr["TotalSample"] = oDHSamp.getDHSamplesBySamp(cmbFrom.Text.ToString(), CmbToSamp.Text.ToString()).Rows.Count;
 
                     }
                     else if (code == ConfigurationSettings.AppSettings["Rocks"].ToString())
                     {
-                        dr["SampleFrom"] = a.SelectedValue.ToString();
-                        dr["SampleTo"] = CmbTS.SelectedValue.ToString();
-                        dr["TotalSample"] = oRock.getGC_SamplesRockById(a.SelectedValue.ToString(), CmbTS.SelectedValue.ToString()).Rows.Count;
+                        dr["SampleFrom"] = cmbFrom.SelectedValue.ToString();
+                        dr["SampleTo"] = CmbToSamp.SelectedValue.ToString();
+                        dr["TotalSample"] = oRock.getGC_SamplesRockById(cmbFrom.SelectedValue.ToString(), CmbToSamp.SelectedValue.ToString()).Rows.Count;
 
                     }
                     else if (code == ConfigurationSettings.AppSettings["Channels"].ToString())
                     {
-                        dr["SampleFrom"] = a.Text.ToString();
-                        dr["SampleTo"] = CmbTS.Text.ToString();
+                        dr["SampleFrom"] = cmbFrom.Text.ToString();
+                        dr["SampleTo"] = CmbToSamp.Text.ToString();
 
                         if (cmbHoleId.SelectedValue == null)
                         {
@@ -1469,7 +1469,7 @@ namespace EnviosColombiaGold
                             oCh.sCHId = cmbHoleId.SelectedValue.ToString();
                         }
 
-                        dr["TotalSample"] = oCh.getCHSamplesBySample(a.Text.ToString(), CmbTS.Text.ToString()).Rows.Count;
+                        dr["TotalSample"] = oCh.getCHSamplesBySample(cmbFrom.Text.ToString(), CmbToSamp.Text.ToString()).Rows.Count;
                     }
                     else
                     {
@@ -1485,17 +1485,17 @@ namespace EnviosColombiaGold
                         int num = 0;
                         if (this.oDHSamp.sHoleID != null && this.oDHSamp.sHoleID != string.Empty)
                         {
-                            num = this.oDHSamp.getDHSamplesBySamp(this.a.Text.ToString(), this.CmbTS.Text.ToString()).Rows.Count;
+                            num = this.oDHSamp.getDHSamplesBySamp(this.cmbFrom.Text.ToString(), this.CmbToSamp.Text.ToString()).Rows.Count;
                         }
-                        dr["SampleFrom"] = this.a.SelectedValue.ToString();
-                        dr["SampleTo"] = this.CmbTS.SelectedValue.ToString();
-                        dr["TotalSample"] = oCh.getCHSamplesBySample(this.a.Text.ToString(), this.CmbTS.Text.ToString()).Rows.Count + oRock.getGC_SamplesRockById(this.a.SelectedValue.ToString(), this.CmbTS.SelectedValue.ToString()).Rows.Count + num;
+                        dr["SampleFrom"] = this.cmbFrom.SelectedValue.ToString();
+                        dr["SampleTo"] = this.CmbToSamp.SelectedValue.ToString();
+                        dr["TotalSample"] = oCh.getCHSamplesBySample(this.cmbFrom.Text.ToString(), this.CmbToSamp.Text.ToString()).Rows.Count + oRock.getGC_SamplesRockById(this.cmbFrom.SelectedValue.ToString(), this.CmbToSamp.SelectedValue.ToString()).Rows.Count + num;
 
                     }
 
                     oDHSamp.sHoleID = cmbHoleId.Text.ToString();
-                    dr["IdFrom"] = a.SelectedValue.ToString();
-                    dr["IdTo"] = CmbTS.SelectedValue.ToString();
+                    dr["IdFrom"] = cmbFrom.SelectedValue.ToString();
+                    dr["IdTo"] = CmbToSamp.SelectedValue.ToString();
 
                     clsLabSumitInterval.dtIntervals.Rows.Add(dr);
                     dgInterval.DataSource = clsLabSumitInterval.dtIntervals;
@@ -1524,7 +1524,7 @@ namespace EnviosColombiaGold
                     if (code == ConfigurationSettings.AppSettings["Drill"].ToString())
                     {
 
-                        dtDetail = oDHSamp.getDHSamplesBySamp(a.Text.ToString(), CmbTS.Text.ToString());
+                        dtDetail = oDHSamp.getDHSamplesBySamp(cmbFrom.Text.ToString(), CmbToSamp.Text.ToString());
                         if (!SampleType.Contains("Drill"))
                         {
                             SampleType = string.Concat(SampleType, "Drill,");
@@ -1551,7 +1551,7 @@ namespace EnviosColombiaGold
                     }
                     else if (code == ConfigurationSettings.AppSettings["Rocks"].ToString())
                     {
-                        dtDetail = oRock.getGC_SamplesRockById(a.SelectedValue.ToString(), CmbTS.SelectedValue.ToString());
+                        dtDetail = oRock.getGC_SamplesRockById(cmbFrom.SelectedValue.ToString(), CmbToSamp.SelectedValue.ToString());
 
                         if (!SampleType.Contains("Rocks"))
                         {
@@ -1587,7 +1587,7 @@ namespace EnviosColombiaGold
                             oCh.sCHId = cmbHoleId.SelectedValue.ToString();
                         }
 
-                        dtDetail = oCh.getCHSamplesBySample(a.Text.ToString(), CmbTS.Text.ToString());
+                        dtDetail = oCh.getCHSamplesBySample(cmbFrom.Text.ToString(), CmbToSamp.Text.ToString());
 
                         if (!SampleType.Contains("Channels"))
                         {
@@ -2746,14 +2746,14 @@ namespace EnviosColombiaGold
         {
             try
             {
-                if (a.DataSource != null)
+                if (cmbFrom.DataSource != null)
                 {
                     DataTable dtIdF = new DataTable();
                     string code = LoadSampShipmentAllEnt()[CmbSamTyp.SelectedIndex].Code.ToString().Trim();
 
                     if (code == ConfigurationSettings.AppSettings["Drill"].ToString())
                     {
-                        dtIdF = oDHSamp.getDHSamplesById(a.SelectedValue.ToString(), a.SelectedValue.ToString());
+                        dtIdF = oDHSamp.getDHSamplesById(cmbFrom.SelectedValue.ToString(), cmbFrom.SelectedValue.ToString());
 
                         if (dtIdF.Rows.Count == 0)
                         {
@@ -2763,7 +2763,7 @@ namespace EnviosColombiaGold
                     }
                     else
                     {
-                        string sCadena = a.SelectedValue.ToString();
+                        string sCadena = cmbFrom.SelectedValue.ToString();
                         string sNumero = "";
                         string sLetras = "";
                         foreach (char val in sCadena.ToCharArray())
@@ -2795,14 +2795,14 @@ namespace EnviosColombiaGold
         {
             try
             {
-                if (CmbTS.DataSource != null)
+                if (CmbToSamp.DataSource != null)
                 {
                     DataTable dtIdT = new DataTable();
                     string code = LoadSampShipmentAllEnt()[CmbSamTyp.SelectedIndex].Code.ToString().Trim();
 
                     if (code == ConfigurationSettings.AppSettings["Drill"].ToString())
                     {
-                        dtIdT = oDHSamp.getDHSamplesById(CmbTS.SelectedValue.ToString(), CmbTS.SelectedValue.ToString());
+                        dtIdT = oDHSamp.getDHSamplesById(CmbToSamp.SelectedValue.ToString(), CmbToSamp.SelectedValue.ToString());
                         if (dtIdT.Rows.Count == 0)
                         {
                             return;
@@ -2812,7 +2812,7 @@ namespace EnviosColombiaGold
                     }
                     else
                     {
-                        string sCadena = CmbTS.SelectedValue.ToString();
+                        string sCadena = CmbToSamp.SelectedValue.ToString();
                         string sNumero = "";
                         string sLetras = "";
                         foreach (char val in sCadena.ToCharArray())
@@ -2844,12 +2844,8 @@ namespace EnviosColombiaGold
         {
             try
             {
-                if (a.DataSource == null)
-                {
-                    a.DataSource = null;
-                }
-
-                CmbTS.DataSource = null;
+                cmbFrom.DataSource = null;
+                CmbToSamp.DataSource = null;
                 LoadCmbHoleId();
             }
             catch (Exception ex)

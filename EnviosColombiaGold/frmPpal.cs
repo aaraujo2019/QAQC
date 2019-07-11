@@ -198,10 +198,6 @@ namespace EnviosColombiaGold
                 if (query.Count() > 0)
                 {
                     frmEnvios oEnvios = new frmEnvios();
-                    //oEnvios.MdiParent = this;                 
-                    //oEnvios.Close();
-                    //oEnvios.Dispose();
-
                     oEnvios = new frmEnvios();
                     oEnvios.MdiParent = this;
                     oEnvios.Show();
