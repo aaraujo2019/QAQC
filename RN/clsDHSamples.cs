@@ -124,6 +124,32 @@ public class clsDHSamples
         }
     }
 
+    /// <summary>
+    /// Creado por Alvaro Araujo Arrieta
+    /// </summary>
+    /// <returns></returns>
+    public DataTable getDHSamplesDetallado(string submit)
+    {
+        try
+        {
+            DataSet dtDHSamples = new DataSet();
+            SqlParameter[] arr = oData.GetParameters(3);
+            arr[0].ParameterName = "@Opcion";
+            arr[0].Value = sOpcion;
+            arr[1].ParameterName = "@HoleId";
+            arr[1].Value = sHoleID;
+            arr[2].ParameterName = "@Submit";
+            arr[2].Value = submit;
+            dtDHSamples = oData.ExecuteDataset("usp_DH_Samples_List_Detallado", arr, CommandType.StoredProcedure);
+            return dtDHSamples.Tables[0];
+
+        }
+        catch (Exception eX)
+        {
+            throw new Exception("Error in DHSamples: " + eX.Message);
+        }
+    }
+
     public DataTable getDHSamplesBySamp(string _sample1, string _sample2)
     {
         try

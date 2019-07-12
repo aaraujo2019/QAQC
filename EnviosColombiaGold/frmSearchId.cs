@@ -180,5 +180,13 @@ namespace EnviosColombiaGold
             Pasado(dataGridViewConsulta[0, Fill].Value.ToString());
             Close();
         }
+
+        private void TxbConsulta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)(Keys.Enter))
+            {
+                buttonBuscar_Click(null, null);
+            }
+        }
     }
 }

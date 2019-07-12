@@ -601,7 +601,9 @@ namespace EnviosColombiaGold
                     oDHSamp.sHoleID = cmbHoleId.SelectedValue.ToString();
                 }
 
-                dtFrom = oDHSamp.getDHSamples();
+                //Modificado Alvaro Araujo 12/07/2019
+                //dtFrom = oDHSamp.getDHSamples();
+                dtFrom = oDHSamp.getDHSamplesDetallado(cmbShipment.Text);
                 dtTo = dtFrom.Copy();
 
                 cmbFrom.DisplayMember = "Sample";//"From";
@@ -759,25 +761,18 @@ namespace EnviosColombiaGold
 
         private DataTable LoadCmbHoleDril()
         {
-            #region Mejora por requerimiento
-            //try
+            #region Solución Mejorada
+            //clsDHSamples clsDHSamples = new clsDHSamples();
+            //DataTable dHSamplesDistinct = clsDHSamples.getDHSamplesDistinct();
+            //for (int i = 0; i < 2; i++)
             //{
-            //    clsDHSamples clsDHSamples = new clsDHSamples();
-            //    DataTable dHSamplesDistinct = clsDHSamples.getDHSamplesDistinct();
-            //    for (int i = 0; i < 2; i++)
-            //    {
-            //        cmbHoleId.ValueMember = "HoleID";
-            //        cmbHoleId.DisplayMember = "Comb";
-            //        cmbHoleId.DataSource = dHSamplesDistinct;
-            //        cmbHoleId.Enabled = true;
-            //        cmbHoleId.SelectedItem = string.Empty;
-            //    }
-            //    return dHSamplesDistinct;
+            //    cmbHoleId.ValueMember = "HoleID";
+            //    cmbHoleId.DisplayMember = "Comb";
+            //    cmbHoleId.DataSource = dHSamplesDistinct;
+            //    cmbHoleId.Enabled = true;
+            //    cmbHoleId.SelectedItem = string.Empty;
             //}
-            //catch (Exception ex)
-            //{
-            //    throw;
-            //}
+            //return dHSamplesDistinct;
             #endregion
 
             try
@@ -792,11 +787,10 @@ namespace EnviosColombiaGold
                 cmbHoleId.SelectedItem = string.Empty;
                 return dHSamples;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
-            }
-
+            }            
         }
 
         private DataTable LoadSampleofnatureAll()
@@ -1208,7 +1202,12 @@ namespace EnviosColombiaGold
                 cmbLab.SelectedIndex = cmbLab.Items.Count - 1;
                 cmbPrepLab.SelectedIndex = cmbPrepLab.Items.Count - 1;
                 cmbAnLab.SelectedIndex = cmbAnLab.Items.Count - 1;
-                cmbDisp.SelectedIndex = cmbDisp.Items.Count - 1;
+                cmbDisp.DataSource = null;
+                cmbDisp.DisplayMember = "Name";
+                cmbDisp.ValueMember = "Identification";
+                var query2 = LoadDispatchedbySubEntity();
+                cmbDisp.DataSource = query2;
+                cmbDisp.SelectedIndex = query2.ToList().Count - 1;
 
                 GetItemsPrimary();
 
@@ -1223,6 +1222,10 @@ namespace EnviosColombiaGold
                 cmbFrom.Text = string.Empty;
                 CmbToSamp.Text = string.Empty;
                 cmbShipment.Text = string.Empty;
+                cmbPrepLab.Text = string.Empty;
+                cmbAnLab.Text = string.Empty;
+                lblsampfrom.Text = "From Sample";
+                lblsampTo.Text = "To Sample";
 
                 clsLabsumitIn.dtIn = new DataTable();
                 clsLabSumitInterval.dtIntervals = new DataTable();

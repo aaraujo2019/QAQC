@@ -75,6 +75,7 @@
             this.TxbConsulta.Name = "TxbConsulta";
             this.TxbConsulta.Size = new System.Drawing.Size(254, 20);
             this.TxbConsulta.TabIndex = 32;
+            this.TxbConsulta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxbConsulta_KeyPress);
             // 
             // dataGridViewConsulta
             // 
