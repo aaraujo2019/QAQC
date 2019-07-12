@@ -46,6 +46,24 @@ public class clsDHSamples
         }
     }
 
+    public DataTable getDHSamplesPersonalizado(string _submit)
+    {
+        try
+        {
+            DataSet dtDHSamplesAll = new DataSet();
+            SqlParameter[] arr = oData.GetParameters(1);
+            arr[0].ParameterName = "@Submit";
+            arr[0].Value = _submit;
+            dtDHSamplesAll = oData.ExecuteDataset("usp_DH_Samples_Personalizado", arr, CommandType.StoredProcedure);
+            return dtDHSamplesAll.Tables[0];
+
+        }
+        catch (Exception eX)
+        {
+            throw new Exception("Error in DHSamplesDistinct: " + eX.Message);
+        }
+    }
+
     public DataTable getDHSamplesIDSamp(string _sSample)
     {
         try
@@ -106,7 +124,6 @@ public class clsDHSamples
         }
     }
 
-    
     public DataTable getDHSamplesBySamp(string _sample1, string _sample2)
     {
         try

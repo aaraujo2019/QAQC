@@ -1,11 +1,8 @@
-﻿using System;
+﻿using RN.DataAccess;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using DataAccess;
 using System.Data;
 using System.Data.SqlClient;
-using RN.DataAccess;
-using Entities.Config;
 
 public class clsInvSamples
 {

@@ -86,6 +86,7 @@ namespace EnviosColombiaGold
             this.cmbShipment = new System.Windows.Forms.ComboBox();
             this.lblUser = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cmbFrom = new System.Windows.Forms.ComboBox();
             this.cmbHoleId = new System.Windows.Forms.ComboBox();
             this.lblsampTo = new System.Windows.Forms.Label();
             this.lblsampfrom = new System.Windows.Forms.Label();
@@ -94,7 +95,6 @@ namespace EnviosColombiaGold
             this.label21 = new System.Windows.Forms.Label();
             this.CmbToSamp = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
-            this.cmbFrom = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.dgInterval = new System.Windows.Forms.DataGridView();
             this.TabShipm = new System.Windows.Forms.TabControl();
@@ -674,10 +674,10 @@ namespace EnviosColombiaGold
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.cmbFrom);
-            this.groupBox2.Controls.Add(this.cmbHoleId);
             this.groupBox2.Controls.Add(this.lblsampTo);
             this.groupBox2.Controls.Add(this.lblsampfrom);
+            this.groupBox2.Controls.Add(this.cmbFrom);
+            this.groupBox2.Controls.Add(this.cmbHoleId);
             this.groupBox2.Controls.Add(this.btnDelete);
             this.groupBox2.Controls.Add(this.btnAdd);
             this.groupBox2.Controls.Add(this.label21);
@@ -694,6 +694,18 @@ namespace EnviosColombiaGold
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Interval";
+            // 
+            // cmbFrom
+            // 
+            this.cmbFrom.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbFrom.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.cmbFrom.FormattingEnabled = true;
+            this.cmbFrom.Location = new System.Drawing.Point(121, 35);
+            this.cmbFrom.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbFrom.Name = "cmbFrom";
+            this.cmbFrom.Size = new System.Drawing.Size(97, 24);
+            this.cmbFrom.TabIndex = 18;
+            this.cmbFrom.SelectedIndexChanged += new System.EventHandler(this.CmbFS_SelectedIndexChanged);
             // 
             // cmbHoleId
             // 
@@ -721,7 +733,7 @@ namespace EnviosColombiaGold
             this.lblsampfrom.AutoSize = true;
             this.lblsampfrom.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblsampfrom.ForeColor = System.Drawing.Color.Blue;
-            this.lblsampfrom.Location = new System.Drawing.Point(121, 62);
+            this.lblsampfrom.Location = new System.Drawing.Point(122, 62);
             this.lblsampfrom.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblsampfrom.Name = "lblsampfrom";
             this.lblsampfrom.Size = new System.Drawing.Size(83, 13);
@@ -783,18 +795,6 @@ namespace EnviosColombiaGold
             this.label20.Size = new System.Drawing.Size(100, 17);
             this.label20.TabIndex = 39;
             this.label20.Text = "From Sample";
-            // 
-            // cmbFrom
-            // 
-            this.cmbFrom.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cmbFrom.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.cmbFrom.FormattingEnabled = true;
-            this.cmbFrom.Location = new System.Drawing.Point(122, 35);
-            this.cmbFrom.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbFrom.Name = "cmbFrom";
-            this.cmbFrom.Size = new System.Drawing.Size(97, 24);
-            this.cmbFrom.TabIndex = 18;
-            this.cmbFrom.SelectedIndexChanged += new System.EventHandler(this.CmbFS_SelectedIndexChanged);
             // 
             // label16
             // 

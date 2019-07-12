@@ -31,6 +31,24 @@ public class clsGCSamplesRock
         }
     }
 
+    public DataTable getGCSamplesRockPersonalizado(string _submit)
+    {
+        try
+        {
+            DataSet dtGCSamplesRock = new DataSet();
+            SqlParameter[] arr = oData.GetParameters(1);
+            arr[0].ParameterName = "@Submit";
+            arr[0].Value = _submit;
+            dtGCSamplesRock = oData.ExecuteDataset("usp_GC_SamplesRocks_Personalizado", arr, CommandType.StoredProcedure);
+            return dtGCSamplesRock.Tables[0];
+
+        }
+        catch (Exception eX)
+        {
+            throw new Exception("Error in GCSamplesRockAll: " + eX.Message);
+        }
+    }
+
     //[usp_GC_SamplesRock_ListSample]
     public DataTable getGC_SamplesRockBySample(string _Sample)
     {
