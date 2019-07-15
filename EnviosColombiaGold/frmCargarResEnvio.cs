@@ -836,29 +836,6 @@ namespace EnviosColombiaGold
                             oSheet.Cells[iInicial, 15] = dtQcReport.Rows[i]["Comments"].ToString();
                             iInicial += 1;
 
-                            //No apto para usuario Adriana
-                            //if (dtQcReport.Columns["DupDe"] != null)
-                            //    oSheet.Cells[iInicial, 6] = dtQcReport.Rows[i]["DupDe"].ToString();
-
-                            //if (dtQcReport.Columns["DupOf"] != null)
-                            //    oSheet.Cells[iInicial, 6] = dtQcReport.Rows[i]["DupOf"].ToString();
-
-                            //oSheet.Cells[iInicial, 7] = dtQcReport.Rows[i]["aufaaa"].ToString();//Au ppm
-                            //oSheet.Cells[iInicial, 8] = dtQcReport.Rows[i]["aufagr"].ToString();//AuGr ppm
-                            //oSheet.Cells[iInicial, 9] = dtQcReport.Rows[i]["agfa"].ToString();//Ag ppm
-                            //oSheet.Cells[iInicial, 10] = dtQcReport.Rows[i]["agfagr"].ToString();//AgGr ppm
-                            //oSheet.Cells[iInicial, 11] = dtQcReport.Rows[i]["CertifiedValue_ppm"].ToString();//Qc ppm
-
-                            //if (dtQcReport.Rows[i]["+3st"].ToString() != "")
-                            //{
-                            //    oSheet.Cells[iInicial, 12] = dtQcReport.Rows[i]["QCAu"].ToString();
-
-                            //    oSheet.Cells[iInicial, 13] = dtQcReport.Rows[i]["AgCertifiedValue_ppm"].ToString();
-                            //    oSheet.Cells[iInicial, 14] = dtQcReport.Rows[i]["QCAg"].ToString();
-                            //}
-
-                            //oSheet.Cells[iInicial, 15] = dtQcReport.Rows[i]["Comments"].ToString();
-                            //iInicial += 1;
                         }
                     else
                         for (int i = 0; i < dtQcReport.Rows.Count; i++)
