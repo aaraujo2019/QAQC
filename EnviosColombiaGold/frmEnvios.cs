@@ -646,19 +646,26 @@ namespace EnviosColombiaGold
             }
         }
 
+
         private void LoadFromToChannels()
         {
             try
             {
                 clsCHSamples oCh = new clsCHSamples();
-                oCh.sOpcion = "2";
-                if (cmbHoleId.SelectedValue == null)
+                //oCh.sOpcion = "2";
+                oCh.sOpcion = "3"; // Parametro Submit
+                if (cmbHoleId.SelectedValue == null && oCh.sOpcion != "3")
                 {
                     oCh.sCHId = string.Empty;
                 }
-                else
+                else if(oCh.sOpcion == "2")
                 {
                     oCh.sCHId = cmbHoleId.SelectedValue.ToString();
+                }
+
+                if (oCh.sOpcion == "3")
+                {
+                    oCh.sCHId = cmbShipment.Text;
                 }
 
                 IList<Ent_Prefix> cHSamplesEntity = getCHSamplesEntity(oCh.sOpcion, oCh.sCHId);
@@ -745,10 +752,10 @@ namespace EnviosColombiaGold
                     else
                     {
                         dtHoleId = new DataTable();
-                        this.cmbHoleId.DataSource = dtHoleId;
-                        this.cmbHoleId.Enabled = false;
-                        this.LoadFromToRocks();
-                        this.LoadFromToChannels();
+                        cmbHoleId.DataSource = dtHoleId;
+                        cmbHoleId.Enabled = false;
+                        LoadFromToRocks();
+                        LoadFromToChannels();
                     }
                 }
             }
@@ -954,8 +961,7 @@ namespace EnviosColombiaGold
                             bcmbModify = false;
                             return;
                         }
-
-
+                        
                         if (dtCmbShipm.Rows[0]["TypeSumit"].ToString() == "RE")
                         {
                             isRean = true;
@@ -1041,8 +1047,9 @@ namespace EnviosColombiaGold
 
                         if (CmbSamTyp.SelectedValue.ToString() == ConfigurationSettings.AppSettings["Channels"].ToString())
                         {
-                            LoadFromTo();
-                            LoadFromToRocks();
+                            //LoadFromTo();
+                            //LoadFromToRocks();
+                            LoadFromToChannels();
                         }
 
 
@@ -1810,8 +1817,8 @@ namespace EnviosColombiaGold
                                                 oLabS.sDateShipment = sDate.ToString();
                                                 oLabS.sLabCode = cmbLab.Text;
                                                 oLabS.sPreparationLab = cmbPrepLab.Text;
-                                                oLabS.sPrepCode = cmbPrepCode.Text;
-                                                oLabS.sDispatchedBy = cmbDisp.Text;
+                                                oLabS.sPrepCode = cmbPrepCode.SelectedValue.ToString();
+                                                oLabS.sDispatchedBy = cmbDisp.SelectedValue.ToString();
                                                 oLabS.sAnalisysCode = CmbAnCod.Text;
                                                 oLabS.sInstructions = txtInstructions.Text;
                                                 oLabS.sReturnResults = string.Empty;

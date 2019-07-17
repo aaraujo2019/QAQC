@@ -54,7 +54,7 @@ public class clsDHSamples
             SqlParameter[] arr = oData.GetParameters(1);
             arr[0].ParameterName = "@Submit";
             arr[0].Value = _submit;
-            dtDHSamplesAll = oData.ExecuteDataset("usp_DH_Samples_Personalizado", arr, CommandType.StoredProcedure);
+            dtDHSamplesAll = oData.ExecuteDataset("usp_DH_Samples_Personalized", arr, CommandType.StoredProcedure);
             return dtDHSamplesAll.Tables[0];
 
         }
@@ -140,7 +140,7 @@ public class clsDHSamples
             arr[1].Value = sHoleID;
             arr[2].ParameterName = "@Submit";
             arr[2].Value = submit;
-            dtDHSamples = oData.ExecuteDataset("usp_DH_Samples_List_Detallado", arr, CommandType.StoredProcedure);
+            dtDHSamples = oData.ExecuteDataset("usp_DH_Samples_List_Detailed", arr, CommandType.StoredProcedure);
             return dtDHSamples.Tables[0];
 
         }
