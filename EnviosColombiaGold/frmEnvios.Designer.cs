@@ -53,7 +53,7 @@ namespace EnviosColombiaGold
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbGrups = new System.Windows.Forms.ComboBox();
             this.txtDate = new System.Windows.Forms.DateTimePicker();
             this.CmbSamTyp = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -86,10 +86,10 @@ namespace EnviosColombiaGold
             this.cmbShipment = new System.Windows.Forms.ComboBox();
             this.lblUser = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cmbFrom = new System.Windows.Forms.ComboBox();
-            this.cmbHoleId = new System.Windows.Forms.ComboBox();
             this.lblsampTo = new System.Windows.Forms.Label();
             this.lblsampfrom = new System.Windows.Forms.Label();
+            this.cmbFrom = new System.Windows.Forms.ComboBox();
+            this.cmbHoleId = new System.Windows.Forms.ComboBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
@@ -292,7 +292,7 @@ namespace EnviosColombiaGold
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.comboBox1);
+            this.groupBox3.Controls.Add(this.cmbGrups);
             this.groupBox3.Controls.Add(this.txtDate);
             this.groupBox3.Controls.Add(this.CmbSamTyp);
             this.groupBox3.Controls.Add(this.label19);
@@ -343,14 +343,14 @@ namespace EnviosColombiaGold
             this.label2.TabIndex = 46;
             this.label2.Text = "Select group";
             // 
-            // comboBox1
+            // cmbGrups
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(394, 53);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(176, 24);
-            this.comboBox1.TabIndex = 1;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cmbGrups.FormattingEnabled = true;
+            this.cmbGrups.Location = new System.Drawing.Point(394, 53);
+            this.cmbGrups.Name = "cmbGrups";
+            this.cmbGrups.Size = new System.Drawing.Size(176, 24);
+            this.cmbGrups.TabIndex = 1;
+            this.cmbGrups.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // txtDate
             // 
@@ -695,27 +695,6 @@ namespace EnviosColombiaGold
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Interval";
             // 
-            // cmbFrom
-            // 
-            this.cmbFrom.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cmbFrom.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.cmbFrom.FormattingEnabled = true;
-            this.cmbFrom.Location = new System.Drawing.Point(121, 35);
-            this.cmbFrom.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbFrom.Name = "cmbFrom";
-            this.cmbFrom.Size = new System.Drawing.Size(97, 24);
-            this.cmbFrom.TabIndex = 18;
-            this.cmbFrom.SelectedIndexChanged += new System.EventHandler(this.CmbFS_SelectedIndexChanged);
-            // 
-            // cmbHoleId
-            // 
-            this.cmbHoleId.FormattingEnabled = true;
-            this.cmbHoleId.Location = new System.Drawing.Point(13, 36);
-            this.cmbHoleId.Name = "cmbHoleId";
-            this.cmbHoleId.Size = new System.Drawing.Size(93, 24);
-            this.cmbHoleId.TabIndex = 17;
-            this.cmbHoleId.SelectedIndexChanged += new System.EventHandler(this.cmbHoleId_SelectedIndexChanged);
-            // 
             // lblsampTo
             // 
             this.lblsampTo.AutoSize = true;
@@ -739,6 +718,27 @@ namespace EnviosColombiaGold
             this.lblsampfrom.Size = new System.Drawing.Size(83, 13);
             this.lblsampfrom.TabIndex = 42;
             this.lblsampfrom.Text = "From Sample";
+            // 
+            // cmbFrom
+            // 
+            this.cmbFrom.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cmbFrom.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.cmbFrom.FormattingEnabled = true;
+            this.cmbFrom.Location = new System.Drawing.Point(121, 35);
+            this.cmbFrom.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbFrom.Name = "cmbFrom";
+            this.cmbFrom.Size = new System.Drawing.Size(97, 24);
+            this.cmbFrom.TabIndex = 18;
+            this.cmbFrom.SelectedIndexChanged += new System.EventHandler(this.CmbFS_SelectedIndexChanged);
+            // 
+            // cmbHoleId
+            // 
+            this.cmbHoleId.FormattingEnabled = true;
+            this.cmbHoleId.Location = new System.Drawing.Point(13, 36);
+            this.cmbHoleId.Name = "cmbHoleId";
+            this.cmbHoleId.Size = new System.Drawing.Size(93, 24);
+            this.cmbHoleId.TabIndex = 17;
+            this.cmbHoleId.SelectedIndexChanged += new System.EventHandler(this.cmbHoleId_SelectedIndexChanged);
             // 
             // btnDelete
             // 
@@ -884,7 +884,7 @@ namespace EnviosColombiaGold
         private System.Windows.Forms.DataGridView dgDetalleInterval;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbGrups;
         private System.Windows.Forms.Label lblUser;
         private System.Windows.Forms.DateTimePicker txtDate;
         private System.Windows.Forms.TextBox TxtOtAnCod;

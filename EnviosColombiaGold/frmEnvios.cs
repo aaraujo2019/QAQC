@@ -64,7 +64,7 @@ namespace EnviosColombiaGold
         public void clear()
         {
 
-            comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
+            cmbGrups.SelectedIndex = cmbGrups.Items.Count - 1;
             CmbSamTyp.SelectedIndex = CmbSamTyp.Items.Count - 1;
             CmbTypSub.SelectedIndex = CmbTypSub.Items.Count - 1;
             cmbPrepCode.SelectedIndex = cmbPrepCode.Items.Count - 1;
@@ -106,10 +106,10 @@ namespace EnviosColombiaGold
             lista.Add(new Item("Others Shipment", string.Concat("SOT18-0001", DateTime.Now.ToString("yy"), "-")));
             lista.Add(new Item("Ore Stockyard Shipment", string.Concat("SOS18-0001", DateTime.Now.ToString("yy"), "-")));
             lista.Add(new Item("Select an option..", string.Empty));
-            comboBox1.DisplayMember = "Name";
-            comboBox1.ValueMember = "Value";
-            comboBox1.DataSource = lista;
-            comboBox1.SelectedIndex = lista.Count() - 1;
+            cmbGrups.DisplayMember = "Name";
+            cmbGrups.ValueMember = "Value";
+            cmbGrups.DataSource = lista;
+            cmbGrups.SelectedIndex = lista.Count() - 1;
         }
 
         private void initVbles()
@@ -190,9 +190,9 @@ namespace EnviosColombiaGold
         {
             try
             {
-                if (!String.IsNullOrEmpty(comboBox1.Text))
+                if (!String.IsNullOrEmpty(cmbGrups.Text))
                 {
-                    string sPrefix = comboBox1.Text.Substring(0, 3);
+                    string sPrefix = cmbGrups.Text.Substring(0, 3);
                     var ent_dtCmbShipm = LoadLabSubmit1("3", sPrefix);
                     int yearValue = 0;
                     cmbShipment.DisplayMember = "Ssumit";
@@ -602,8 +602,12 @@ namespace EnviosColombiaGold
                 }
 
                 //Modificado Alvaro Araujo 12/07/2019
-                //dtFrom = oDHSamp.getDHSamples();
-                dtFrom = oDHSamp.getDHSamplesDetallado(cmbShipment.Text);
+
+                if (modificate)
+                    dtFrom = oDHSamp.getDHSamplesDetallado(cmbShipment.Text);
+                else
+                    dtFrom = oDHSamp.getDHSamples();
+
                 dtTo = dtFrom.Copy();
 
                 cmbFrom.DisplayMember = "Sample";//"From";
@@ -652,21 +656,19 @@ namespace EnviosColombiaGold
             try
             {
                 clsCHSamples oCh = new clsCHSamples();
-                //oCh.sOpcion = "2";
-                oCh.sOpcion = "3"; // Parametro Submit
-                if (cmbHoleId.SelectedValue == null && oCh.sOpcion != "3")
-                {
+
+                if (modificate)
+                    oCh.sOpcion = "3"; // Busqueda para reanalisis
+                else oCh.sOpcion = "2";
+
+                if (cmbHoleId.SelectedValue == null)
                     oCh.sCHId = string.Empty;
-                }
-                else if(oCh.sOpcion == "2")
-                {
+                
+                if (oCh.sOpcion == "2")
                     oCh.sCHId = cmbHoleId.SelectedValue.ToString();
-                }
 
                 if (oCh.sOpcion == "3")
-                {
                     oCh.sCHId = cmbShipment.Text;
-                }
 
                 IList<Ent_Prefix> cHSamplesEntity = getCHSamplesEntity(oCh.sOpcion, oCh.sCHId);
 
@@ -692,10 +694,14 @@ namespace EnviosColombiaGold
         {
             try
             {
+                DataTable dtFromToR;
                 clsGCSamplesRock oRock = new clsGCSamplesRock();
                 oRock.sOpcion = "1";
-                //DataTable dtFromToR = oRock.getGCSamplesRockAll();
-                DataTable dtFromToR = oRock.getGCSamplesRockPersonalizado(cmbShipment.Text);
+
+                if (modificate)
+                    dtFromToR = oRock.getGCSamplesRockPersonalizado(cmbShipment.Text);
+                else
+                    dtFromToR = oRock.getGCSamplesRockAll();
 
                 cmbFrom.DisplayMember = "Sample";//"From";
                 if (cmbFrom.ValueMember == string.Empty)
@@ -721,7 +727,7 @@ namespace EnviosColombiaGold
         private void LoadCmbHoleId()
         {
             try
-            {
+                {
                 DataTable dtHoleId = new DataTable();
                 //if (CmbSamTyp.SelectedValue != null)
 
@@ -1047,8 +1053,8 @@ namespace EnviosColombiaGold
 
                         if (CmbSamTyp.SelectedValue.ToString() == ConfigurationSettings.AppSettings["Channels"].ToString())
                         {
-                            //LoadFromTo();
-                            //LoadFromToRocks();
+                            LoadFromTo();
+                            LoadFromToRocks();
                             LoadFromToChannels();
                         }
 
@@ -1165,11 +1171,10 @@ namespace EnviosColombiaGold
         {
             try
             {
+                modificate = true;
                 frmSearchId FrmConsultas = new frmSearchId();
                 FrmConsultas.Pasado += new frmSearchId.PasarDatoSeleccionado(EjecutaPasarDato);
                 FrmConsultas.ShowDialog();
-                modificate = true;
-
             }
             catch (Exception ex)
             {
@@ -1200,7 +1205,7 @@ namespace EnviosColombiaGold
         {
             try
             {
-                comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
+                cmbGrups.SelectedIndex = cmbGrups.Items.Count - 1;
                 CmbSamTyp.SelectedIndex = CmbSamTyp.Items.Count - 1;
                 CmbTypSub.SelectedIndex = CmbTypSub.Items.Count - 1;
                 cmbPrepCode.SelectedIndex = cmbPrepCode.Items.Count - 1;
@@ -1244,6 +1249,7 @@ namespace EnviosColombiaGold
                 bcmbModify = false;
                 bcmbReanalisis = false;
                 isRean = false;
+                modificate = false;
             }
             catch (Exception ex)
             {
