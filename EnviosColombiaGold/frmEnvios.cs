@@ -1474,18 +1474,15 @@ namespace EnviosColombiaGold
 
                     if (code == ConfigurationSettings.AppSettings["Drill"].ToString())
                     {
-
                         dr["SampleFrom"] = cmbFrom.Text.ToString();
                         dr["SampleTo"] = CmbToSamp.Text.ToString();
                         dr["TotalSample"] = oDHSamp.getDHSamplesBySamp(cmbFrom.Text.ToString(), CmbToSamp.Text.ToString()).Rows.Count;
-
                     }
                     else if (code == ConfigurationSettings.AppSettings["Rocks"].ToString())
                     {
                         dr["SampleFrom"] = cmbFrom.Text;
                         dr["SampleTo"] = CmbToSamp.Text;
                         dr["TotalSample"] = oRock.getGC_SamplesRockById(cmbFrom.Text, CmbToSamp.Text).Rows.Count;
-
                     }
                     else if (code == ConfigurationSettings.AppSettings["Channels"].ToString())
                     {
@@ -1522,7 +1519,6 @@ namespace EnviosColombiaGold
                         dr["SampleFrom"] = cmbFrom.SelectedValue.ToString();
                         dr["SampleTo"] = CmbToSamp.SelectedValue.ToString();
                         dr["TotalSample"] = oCh.getCHSamplesBySample(cmbFrom.Text, CmbToSamp.Text).Rows.Count + oRock.getGC_SamplesRockById(cmbFrom.Text, CmbToSamp.Text).Rows.Count + num;
-
                     }
 
                     oDHSamp.sHoleID = cmbHoleId.Text;
@@ -1555,7 +1551,6 @@ namespace EnviosColombiaGold
                     DataTable dtDetail = new DataTable();
                     if (code == ConfigurationSettings.AppSettings["Drill"].ToString())
                     {
-
                         dtDetail = oDHSamp.getDHSamplesBySamp(cmbFrom.Text, CmbToSamp.Text);
                         if (!SampleType.Contains("Drill"))
                         {
@@ -1564,7 +1559,6 @@ namespace EnviosColombiaGold
 
                         for (int i = 0; i < dtDetail.Rows.Count; i++)
                         {
-
                             DataRow drDetail = clsLabsumitIn.dtIn.NewRow();
                             drDetail["IDInterval"] = iInterval.ToString();
                             drDetail["Sample"] = dtDetail.Rows[i]["Sample"].ToString();
@@ -1628,7 +1622,6 @@ namespace EnviosColombiaGold
 
                         for (int i = 0; i < dtDetail.Rows.Count; i++)
                         {
-
                             DataRow drDetail = clsLabsumitIn.dtIn.NewRow();
                             drDetail["IDInterval"] = iInterval.ToString();
                             drDetail["Sample"] = dtDetail.Rows[i]["Sample"].ToString();
@@ -1644,7 +1637,42 @@ namespace EnviosColombiaGold
 
                             iCont++;
                         }
+                    }
+                    else
+                    {
+                        if (cmbHoleId.SelectedValue == null)
+                        {
+                            oCh.sCHId = string.Empty;
+                        }
+                        else
+                        {
+                            oCh.sCHId = cmbHoleId.SelectedValue.ToString();
+                        }
 
+                        dtDetail = oCh.getCHSamplesBySample(cmbFrom.Text, CmbToSamp.Text);
+
+                        if (!SampleType.Contains("Channels"))
+                        {
+                            SampleType = string.Concat(SampleType, "Channels,");
+                        }
+
+                        for (int i = 0; i < dtDetail.Rows.Count; i++)
+                        {
+                            DataRow drDetail = clsLabsumitIn.dtIn.NewRow();
+                            drDetail["IDInterval"] = iInterval.ToString();
+                            drDetail["Sample"] = dtDetail.Rows[i]["Sample"].ToString();
+                            drDetail["Sack"] = iSackos.ToString();
+                            drDetail["IdAut"] = dtDetail.Rows[i]["SKCHSamples"].ToString();
+                            sCantSack = iSackos.ToString();
+                            clsLabsumitIn.dtIn.Rows.Add(drDetail);
+
+                            if ((iCont % int.Parse(ConfigurationSettings.AppSettings["CantSackos"].ToString())) == 0)
+                            {
+                                iSackos++;
+                            }
+
+                            iCont++;
+                        }
                     }
 
                     txtBags.Text = sCantSack.ToString();
