@@ -663,8 +663,7 @@ namespace EnviosColombiaGold
 
                 if (cmbHoleId.SelectedValue == null)
                     oCh.sCHId = string.Empty;
-                
-                if (oCh.sOpcion == "2")
+                else 
                     oCh.sCHId = cmbHoleId.SelectedValue.ToString();
 
                 if (oCh.sOpcion == "3")
@@ -774,31 +773,33 @@ namespace EnviosColombiaGold
 
         private DataTable LoadCmbHoleDril()
         {
-            #region Solución Mejorada
-            //clsDHSamples clsDHSamples = new clsDHSamples();
-            //DataTable dHSamplesDistinct = clsDHSamples.getDHSamplesDistinct();
-            //for (int i = 0; i < 2; i++)
-            //{
-            //    cmbHoleId.ValueMember = "HoleID";
-            //    cmbHoleId.DisplayMember = "Comb";
-            //    cmbHoleId.DataSource = dHSamplesDistinct;
-            //    cmbHoleId.Enabled = true;
-            //    cmbHoleId.SelectedItem = string.Empty;
-            //}
-            //return dHSamplesDistinct;
-            #endregion
-
             try
             {
                 clsDHSamples clsDHSamples = new clsDHSamples();
-                DataTable dHSamples = clsDHSamples.getDHSamplesPersonalizado(cmbShipment.Text);
+                if (modificate)
+                {
+                    DataTable dHSamples = clsDHSamples.getDHSamplesPersonalizado(cmbShipment.Text);
 
-                cmbHoleId.ValueMember = "HoleID";
-                cmbHoleId.DisplayMember = "Comb";
-                cmbHoleId.DataSource = dHSamples;
-                cmbHoleId.Enabled = true;
-                cmbHoleId.SelectedItem = string.Empty;
-                return dHSamples;
+                    cmbHoleId.ValueMember = "HoleID";
+                    cmbHoleId.DisplayMember = "Comb";
+                    cmbHoleId.DataSource = dHSamples;
+                    cmbHoleId.Enabled = true;
+                    cmbHoleId.SelectedItem = string.Empty;
+                    return dHSamples;
+                }
+                else
+                {
+                    DataTable dHSamplesDistinct = clsDHSamples.getDHSamplesDistinct();
+                    for (int i = 0; i < 2; i++)
+                    {
+                        cmbHoleId.ValueMember = "HoleID";
+                        cmbHoleId.DisplayMember = "Comb";
+                        cmbHoleId.DataSource = dHSamplesDistinct;
+                        cmbHoleId.Enabled = true;
+                        cmbHoleId.SelectedItem = string.Empty;
+                    }
+                    return dHSamplesDistinct;
+                }
             }
             catch (Exception)
             {
