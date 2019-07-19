@@ -305,6 +305,20 @@ namespace EnviosColombiaGold
                 cmbLab.DataSource = query3.Select(c => c.Code).ToList();
                 cmbLab.SelectedIndex = query3.ToList().Count - 1;
 
+                cmbPrepLab.DisplayMember = "Code";
+                cmbPrepLab.ValueMember = "Code";
+                var preparaction = GetRfCodeLabEntity();
+                cmbPrepLab.DataSource = preparaction.Select(c => c.Code).ToList();
+                cmbPrepLab.SelectedIndex = preparaction.ToList().Count - 1;
+
+                cmbAnLab.DisplayMember = "Code";
+                cmbAnLab.ValueMember = "Code";
+                var analitical = GetRfCodeLabEntity();
+                cmbAnLab.DataSource = analitical.Select(c => c.Code).ToList();
+                cmbAnLab.SelectedIndex = analitical.ToList().Count - 1;
+
+
+
                 cmbPrepCode.DisplayMember = "Code";
                 cmbPrepCode.ValueMember = "Code";
                 var query5 = GetuRfPreparationCodeEntity();
@@ -740,12 +754,10 @@ namespace EnviosColombiaGold
                     }
                     else if (code == ConfigurationSettings.AppSettings["Rocks"].ToString())
                     {
-
                         dtHoleId = new DataTable();
                         cmbHoleId.DataSource = dtHoleId;
                         cmbHoleId.Enabled = false;
                         LoadFromToRocks();
-
                     }
                     else if (code == ConfigurationSettings.AppSettings["Channels"].ToString())
                     {
@@ -2579,37 +2591,31 @@ namespace EnviosColombiaGold
             }
         }
 
-        private void cmbPrepLab_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                cmbAnLab.SelectedIndex = cmbPrepLab.SelectedIndex;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        }
-
         private void cmbLab_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
                 if (!cmbLab.Text.Contains("Select"))
                 {
-                    var AnLab = GetRfAnalysisCodeLabEntity();
-                    var dataAnLab = AnLab.Where(c => (c.CodeLab == null ? string.Empty : c.CodeLab) == cmbLab.Text).OrderBy(o => o.Code).ToList();
-                    cmbAnLab.DisplayMember = "Code";
-                    cmbAnLab.ValueMember = "Code";
-                    cmbAnLab.DataSource = dataAnLab;
-                    cmbAnLab.SelectedIndex = dataAnLab.ToList().Count - 1;
+                    cmbPrepLab.SelectedIndex = cmbLab.SelectedIndex;
+                    cmbAnLab.SelectedIndex = cmbLab.SelectedIndex;
 
-                    var PrepLab = GetRfPreparationCodeEntity();
-                    var dataPrepLab = PrepLab.Where(c => (c.CodeLab == null ? string.Empty : c.CodeLab) == cmbLab.Text).OrderBy(o => o.Code).ToList();
-                    cmbPrepLab.DisplayMember = "Code";
-                    cmbPrepLab.ValueMember = "Code";
-                    cmbPrepLab.DataSource = dataPrepLab;
-                    cmbPrepLab.SelectedIndex = dataPrepLab.ToList().Count - 1;
+                    //******** SE debe validar primero con Juan Ortiz porque no tienen relaciones ******
+                    // 19/07/2019 - Alvaro Araujo Arrieta
+
+                    //var PrepCode = GetuRfPreparationCodeEntity();
+                    //var dataPrepCode = PrepCode.Select(c => (c.CodeLab == null ? string.Empty : c.CodeLab) == cmbLab.Text).ToList();
+                    //cmbPrepCode.DisplayMember = "Code";
+                    //cmbPrepCode.ValueMember = "Code";
+                    //cmbPrepCode.DataSource = dataPrepCode;
+                    //cmbPrepCode.SelectedIndex = dataPrepCode.ToList().Count - 1;
+
+                    //var AnalCode = GetuRfAnalysisCodeLabEntity();
+                    //var dataAnalCode = AnalCode.Select(c => (c.CodeLab == null ? string.Empty : c.CodeLab) == cmbLab.Text).ToList();
+                    //CmbAnCod.DisplayMember = "Code";
+                    //CmbAnCod.ValueMember = "Code";
+                    //CmbAnCod.DataSource = dataAnalCode;
+                    //CmbAnCod.SelectedIndex = dataAnalCode.ToList().Count - 1;
                 }
             }
             catch (Exception ex)

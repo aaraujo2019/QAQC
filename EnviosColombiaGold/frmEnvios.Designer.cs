@@ -570,7 +570,6 @@ namespace EnviosColombiaGold
             this.cmbPrepLab.Name = "cmbPrepLab";
             this.cmbPrepLab.Size = new System.Drawing.Size(176, 24);
             this.cmbPrepLab.TabIndex = 7;
-            this.cmbPrepLab.SelectedIndexChanged += new System.EventHandler(this.cmbPrepLab_SelectedIndexChanged);
             // 
             // label5
             // 
