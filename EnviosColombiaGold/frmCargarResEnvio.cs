@@ -448,10 +448,6 @@ namespace EnviosColombiaGold
                                     sAg = "Agicm"; //Se guarda el dato en el segundo campo en DB
                                 }
 
-
-                                //Modificado Alvaro Araujo
-                                //28/06/2019
-
                                 switch (dtElementos.Rows[1][iElem].ToString())
                                 {
                                     case "AAS42C":
@@ -479,7 +475,12 @@ namespace EnviosColombiaGold
 
                                 if (sVal.ToString() == ">500")
                                 {
-                                    sVal = "500.1";
+                                    sVal = "5.001";
+                                }
+
+                                if (sVal.ToString() == ">4000")
+                                {
+                                    sVal = "4001";
                                 }
 
                                 stAg = dtElementos.Rows[0][iElem].ToString();

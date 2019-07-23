@@ -136,3 +136,4 @@ Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\Envio
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\EnviosColombiaGold.csproj.CopyComplete
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\QAQC.exe
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\QAQC.pdb
+Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\EnviosColombiaGold.frmCargaAnalisisAls.resources

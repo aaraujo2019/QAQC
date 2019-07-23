@@ -164,6 +164,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonUI\GlobalValue.cs" />
+    <Compile Include="frmCargaAnalisisAls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCargaAnalisisAls.Designer.cs">
+      <DependentUpon>frmCargaAnalisisAls.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCargarLaboratorio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -267,6 +273,9 @@
     <Compile Include="Topography\frmMoventLabor.Designer.cs">
       <DependentUpon>frmMoventLabor.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmCargaAnalisisAls.resx">
+      <DependentUpon>frmCargaAnalisisAls.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCargarLaboratorio.resx">
       <DependentUpon>frmCargarLaboratorio.cs</DependentUpon>
       <SubType>Designer</SubType>

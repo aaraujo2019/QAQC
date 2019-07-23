@@ -37,6 +37,7 @@
             this.jobAssayLaboratoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sGSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aCTLABSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuAls = new System.Windows.Forms.ToolStripMenuItem();
             this.selectDBToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graficasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,11 +45,11 @@
             this.topographyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administradorDeRolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administradorPermisosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -106,7 +107,8 @@
             // 
             this.jobAssayLaboratoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sGSToolStripMenuItem,
-            this.aCTLABSToolStripMenuItem});
+            this.aCTLABSToolStripMenuItem,
+            this.MenuAls});
             this.jobAssayLaboratoryToolStripMenuItem.Name = "jobAssayLaboratoryToolStripMenuItem";
             this.jobAssayLaboratoryToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.jobAssayLaboratoryToolStripMenuItem.Text = "Job Assay Laboratory";
@@ -114,16 +116,23 @@
             // sGSToolStripMenuItem
             // 
             this.sGSToolStripMenuItem.Name = "sGSToolStripMenuItem";
-            this.sGSToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
+            this.sGSToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sGSToolStripMenuItem.Text = "SGS";
             this.sGSToolStripMenuItem.Click += new System.EventHandler(this.sGSToolStripMenuItem_Click);
             // 
             // aCTLABSToolStripMenuItem
             // 
             this.aCTLABSToolStripMenuItem.Name = "aCTLABSToolStripMenuItem";
-            this.aCTLABSToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
+            this.aCTLABSToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aCTLABSToolStripMenuItem.Text = "GZC";
             this.aCTLABSToolStripMenuItem.Click += new System.EventHandler(this.aCTLABSToolStripMenuItem_Click);
+            // 
+            // MenuAls
+            // 
+            this.MenuAls.Name = "MenuAls";
+            this.MenuAls.Size = new System.Drawing.Size(180, 22);
+            this.MenuAls.Text = "ALS";
+            this.MenuAls.Click += new System.EventHandler(this.MenuAls_Click);
             // 
             // selectDBToolStripMenuItem1
             // 
@@ -167,16 +176,23 @@
             // adminToolStripMenuItem
             // 
             this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            this.adminToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.adminToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.adminToolStripMenuItem.Text = "Admin";
             this.adminToolStripMenuItem.Click += new System.EventHandler(this.adminToolStripMenuItem_Click);
             // 
             // movementToolStripMenuItem
             // 
             this.movementToolStripMenuItem.Name = "movementToolStripMenuItem";
-            this.movementToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.movementToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.movementToolStripMenuItem.Text = "Labor";
             this.movementToolStripMenuItem.Click += new System.EventHandler(this.movementToolStripMenuItem_Click);
+            // 
+            // loadCSVToolStripMenuItem
+            // 
+            this.loadCSVToolStripMenuItem.Name = "loadCSVToolStripMenuItem";
+            this.loadCSVToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.loadCSVToolStripMenuItem.Text = "Load CSV";
+            this.loadCSVToolStripMenuItem.Click += new System.EventHandler(this.loadCSVToolStripMenuItem_Click);
             // 
             // seguridadToolStripMenuItem
             // 
@@ -206,13 +222,6 @@
             this.helloToolStripMenuItem.Name = "helloToolStripMenuItem";
             this.helloToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.helloToolStripMenuItem.Text = "Hello";
-            // 
-            // loadCSVToolStripMenuItem
-            // 
-            this.loadCSVToolStripMenuItem.Name = "loadCSVToolStripMenuItem";
-            this.loadCSVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.loadCSVToolStripMenuItem.Text = "Load CSV";
-            this.loadCSVToolStripMenuItem.Click += new System.EventHandler(this.loadCSVToolStripMenuItem_Click);
             // 
             // FrmPpal
             // 
@@ -261,6 +270,7 @@
         private System.Windows.Forms.ToolStripMenuItem helloToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem movementToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadCSVToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuAls;
     }
 }
 

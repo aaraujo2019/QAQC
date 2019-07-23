@@ -315,10 +315,16 @@ namespace EnviosColombiaGold
 
         private void loadCSVToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             frmLoadArchive frmMovent = new frmLoadArchive();
             frmMovent.MdiParent = this;
             frmMovent.Show();
+        }
+
+        private void MenuAls_Click(object sender, EventArgs e)
+        {
+            frmCargaAnalisisAls frmCargaAnalisisAls = new frmCargaAnalisisAls();
+            frmCargaAnalisisAls.MdiParent = this;
+            frmCargaAnalisisAls.Show();
         }
     }
 }
