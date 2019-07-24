@@ -363,7 +363,7 @@ namespace EnviosColombiaGold
                 }
 
                 label2.Visible = false;
-                QCReport(envio);
+                //QCReport(envio);
                 pbtnUpdate.Enabled = false;
                 limpiar();
 
