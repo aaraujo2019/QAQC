@@ -190,9 +190,9 @@ namespace EnviosColombiaGold
         {
             try
             {
-                if (!String.IsNullOrEmpty(cmbGrups.Text))
+                if (!String.IsNullOrEmpty(cmbGrups.SelectedValue.ToString()))
                 {
-                    string sPrefix = cmbGrups.Text.Substring(0, 3);
+                    string sPrefix = cmbGrups.SelectedValue.ToString().Substring(0, 3);
                     var ent_dtCmbShipm = LoadLabSubmit1("3", sPrefix);
                     int yearValue = 0;
                     cmbShipment.DisplayMember = "Ssumit";
@@ -1997,7 +1997,8 @@ namespace EnviosColombiaGold
                     oLabSIn.sSample = dgDetalleInterval.Rows[i].Cells[2].Value.ToString();
                     oLabSIn.iSack = int.Parse(dgDetalleInterval.Rows[i].Cells[3].Value.ToString());
                     oLabSIn.iWeight = 0;
-                    oLabSIn.iId = int.Parse(dgDetalleInterval.Rows[i].Cells[4].Value.ToString());
+                    oLabSIn.iId = (dgDetalleInterval.Rows[i].Cells[4].Value.ToString() == string.Empty 
+                        ? 0 : int.Parse(dgDetalleInterval.Rows[i].Cells[4].Value.ToString()));
 
                     sRes = oLabSIn.LabSubmitIn_Add();
 

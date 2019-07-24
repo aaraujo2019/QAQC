@@ -115,6 +115,7 @@ Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\bin\Debug\zh-Ha
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\bin\Debug\zh-Hant\Microsoft.SqlServer.Types.resources.dll
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\EnviosColombiaGold.csprojAssemblyReference.cache
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\EnviosColombiaGold.csproj.ResolveComReference.cache
+Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\EnviosColombiaGold.frmCargaAnalisisAls.resources
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\EnviosColombiaGold.frmCargarLaboratorio.resources
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\EnviosColombiaGold.frmCargarResEnvio.resources
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\EnviosColombiaGold.frmControlSampling.resources
@@ -136,4 +137,3 @@ Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\Envio
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\EnviosColombiaGold.csproj.CopyComplete
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\QAQC.exe
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\QAQC.pdb
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\EnviosColombiaGold.frmCargaAnalisisAls.resources
