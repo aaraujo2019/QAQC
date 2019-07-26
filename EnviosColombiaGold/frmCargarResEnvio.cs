@@ -25,9 +25,9 @@ namespace EnviosColombiaGold
         private string sNomArchivo;
         //private string sDateRep;
         private DataTable dtQCConversion = new DataTable();
-        clsRf oRf = new clsRf();
-        clsLabSubmit oLabSub = new clsLabSubmit();
-        clsAssay oAssay = new clsAssay();
+        private clsRf oRf = new clsRf();
+        private clsLabSubmit oLabSub = new clsLabSubmit();
+        private clsAssay oAssay = new clsAssay();
 
         public frmCargarResEnvio()
         {
@@ -65,7 +65,7 @@ namespace EnviosColombiaGold
         {
             string myXMLfile = Application.StartupPath.ToString() + @"\Datos.xml";
             ds = new DataSet();
-            FileStream fsReadXml = new System.IO.FileStream (myXMLfile, FileMode.Open);
+            FileStream fsReadXml = new System.IO.FileStream(myXMLfile, FileMode.Open);
             try
             {
                 ds.ReadXml(fsReadXml);
@@ -382,18 +382,13 @@ namespace EnviosColombiaGold
                             {
                                 sVal = dato[0].ItemArray[2].ToString();
 
-
                                 //El oro Au tiene un trato especial por que el resultado viene en ppb y no en ppm como los demas elementos
-                                if (words[0].ToUpper() == "AU" &&
-                                    dtElementos.Rows[0][iElem].ToString().ToUpper() == "PPB")
+                                if (words[0].ToUpper() == "AU" && dtElementos.Rows[0][iElem].ToString().ToUpper() == "PPB" &&
+                                    (dtElementos.Rows[1][iElem].ToString() == "FAA313" || dtElementos.Rows[1][iElem].ToString() == "FAA515"))
                                 {
-
-                                    if (dtElementos.Rows[1][iElem].ToString() == "FAA313" ||
-                                        dtElementos.Rows[1][iElem].ToString() == "FAA515")
-                                    {
-                                        sVal = (double.Parse(sVal.ToString()) / 1000).ToString("########0.0");
-                                    }
+                                    sVal = (double.Parse(sVal.ToString()) / 1000.0).ToString("########0.000");
                                 }
+
                                 bConv = true;
                             }
                             else
@@ -408,33 +403,36 @@ namespace EnviosColombiaGold
                             if (words[0].ToUpper() == "AU")
                             {
                                 string sAu = "Aufaaa";
-
-                                iAu += 1;
+                                iAu++;
 
                                 if (iAu > 1) //Si esta mas de una vez el elemento
                                 {
                                     sAu = "Aufagr"; //Se guarda el dato en el segundo campo en DB
-
                                 }
                                 stAu = dtElementos.Rows[0][iElem].ToString();
 
-
-                                if (words[0].ToUpper() == "AU" &&
-                                dtElementos.Rows[0][iElem].ToString().ToUpper() == "PPB")
+                                if (words[0].ToUpper() == "AU" && dtElementos.Rows[0][iElem].ToString().ToUpper() == "PPB" && !bConv)
                                 {
-                                    if (bConv == false)
+                                    if (dtElementos.Rows[iRowElem][iElem].ToString() != string.Empty)
                                     {
-                                        if (dtElementos.Rows[iRowElem][iElem].ToString() != "")
-                                        {
-                                            sVal = (double.Parse(dtElementos.Rows[iRowElem][iElem].ToString()) /
-                                                1000).ToString("########0.0");
-                                        }
-                                        else if (dtElementos.Rows[iRowElem][iElem].ToString() == "")
-                                        {
-                                            sVal = "5.555"; //Valor cuando el valor de laboratorio de Au viene con -- o vacio
-                                        }
+                                        sVal = (double.Parse(dtElementos.Rows[iRowElem][iElem].ToString()) / 1000.0).ToString("########0.000");
+                                    }
+                                    else if (dtElementos.Rows[iRowElem][iElem].ToString() == string.Empty)
+                                    {
+                                        sVal = "5.555"; //Valor cuando el valor de laboratorio de Au viene con -- o vacio
                                     }
                                 }
+
+                                if (sVal.ToString() == ">500")
+                                {
+                                    sVal = "500.1";
+                                }
+
+                                if (sVal.ToString() == ">4000")
+                                {
+                                    sVal = "4001";
+                                }
+
                                 sCampos += ",[" + sAu + "]";
                                 sCamposVal += ",'" + sVal.ToString() + "'";
                             }
@@ -475,7 +473,7 @@ namespace EnviosColombiaGold
 
                                 if (sVal.ToString() == ">500")
                                 {
-                                    sVal = "5.001";
+                                    sVal = "500.1";
                                 }
 
                                 if (sVal.ToString() == ">4000")
@@ -538,6 +536,7 @@ namespace EnviosColombiaGold
                                         }
                                     }
                                 }
+
                                 stCu = dtElementos.Rows[0][iElem].ToString();
                                 sCampos += ",[" + sCu + "]";
                                 sCamposVal += ",'" + sVal.ToString() + "'";
@@ -652,7 +651,6 @@ namespace EnviosColombiaGold
                                 stPb = dtElementos.Rows[0][iElem].ToString();
                                 sCampos += ",[" + sPb + "]";
                                 sCamposVal += ",'" + sVal.ToString() + "'";
-
                             }
 
                             else if (words[0].ToUpper() == "WEIGHT")
@@ -805,6 +803,7 @@ namespace EnviosColombiaGold
                     //int iTotalMuestras = 0;
                     int iInicial = 9;
                     if (dtQcReport.Columns["DupDe"] != null || dtQcReport.Columns["DupOf"] != null)
+                    {
                         for (int i = 0; i < dtQcReport.Rows.Count; i++)
                         {
 
@@ -815,10 +814,14 @@ namespace EnviosColombiaGold
                             oSheet.Cells[iInicial, 5] = dtQcReport.Rows[i]["SampleType"].ToString();//Type
 
                             if (dtQcReport.Columns["DupDe"] != null)
+                            {
                                 oSheet.Cells[iInicial, 6] = dtQcReport.Rows[i]["DupDe"].ToString();
+                            }
 
                             if (dtQcReport.Columns["DupOf"] != null)
+                            {
                                 oSheet.Cells[iInicial, 6] = dtQcReport.Rows[i]["DupOf"].ToString();
+                            }
 
                             oSheet.Cells[iInicial, 7] = dtQcReport.Rows[i]["aufaaa"].ToString();//Au ppm
                             oSheet.Cells[iInicial, 8] = dtQcReport.Rows[i]["aufagr"].ToString();//AuGr ppm
@@ -838,7 +841,9 @@ namespace EnviosColombiaGold
                             iInicial += 1;
 
                         }
+                    }
                     else
+                    {
                         for (int i = 0; i < dtQcReport.Rows.Count; i++)
                         {
 
@@ -865,9 +870,8 @@ namespace EnviosColombiaGold
 
                             oSheet.Cells[iInicial, 14] = dtQcReport.Rows[i]["Comments"].ToString();
                             iInicial += 1;
-
-
                         }
+                    }
                 }
                 else if (dtQcReport.Rows.Count == 0)
                 {
@@ -955,7 +959,6 @@ namespace EnviosColombiaGold
                     //Lleno los registros del nuevo datatable
                     for (int a = iPosicionElem + 1; a < dtXls.Rows.Count; a++)
                     {
-
                         drElem = dtElementos.NewRow();
                         int irElem = 0; //Variable para el manejo de poblar solo las columnas que tengan titulo
                         for (int iElem = 0; iElem < dtXls.Columns.Count; iElem++)
@@ -970,9 +973,9 @@ namespace EnviosColombiaGold
 
                                 drElem[dtElementos.Columns[irElem].Caption] = sCampo.ToString();
                                 irElem += 1;
-
                             }
                         }
+
                         dtElementos.Rows.Add(drElem);
                         pbtnUpdate.Enabled = true;
                     }
@@ -1042,12 +1045,13 @@ namespace EnviosColombiaGold
             ds = cal.ExecuteDataset(sqlbuscar, arr, CommandType.Text);
 
             if (ds.Tables.Count > 0)
-
+            {
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     txtSubmit.Text = ds.Tables[0].Rows[0][0].ToString().Trim();
                     comboBox1.Text = ds.Tables[0].Rows[0][1].ToString().Trim();
                 }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

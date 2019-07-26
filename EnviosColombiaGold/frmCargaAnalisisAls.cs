@@ -319,7 +319,7 @@ namespace EnviosColombiaGold
                         {
                             contextValue = "UPDATE  Assay SET Aufaaa = '" + tenorAufaaa + "'  ,  Aufagr = '" + tenorAufagr
                                             + "' , Agfa = '" + tenorAgfa + "' , Agfagr = '" + aufAgfagr
-                                            + "' , Weight = '" + weight
+                                            + "' , Weight = '" + weight  + ", qaqc = 1"
                                             + "' WHERE jobno= '" + codEnvio + "'  and sample= '" + muestra + "'   ";
                         }
                         else
@@ -328,7 +328,8 @@ namespace EnviosColombiaGold
                                                              + codEnvio + "','"
                                                              + muestra + "' ,'"
                                                              + tenorAufaaa + "' ,'"
-                                                             + tenorAufagr + "' , 1, '"
+                                                             + tenorAufagr + "' " +
+                                                             ", 1, '"
                                                              + aufAgfagr + "' ,'"
                                                              + tenorAgfa + "' ,'"
                                                              + weight + "' )";
@@ -363,7 +364,7 @@ namespace EnviosColombiaGold
                 }
 
                 label2.Visible = false;
-                //QCReport(envio);
+                QCReport(envio);
                 pbtnUpdate.Enabled = false;
                 limpiar();
 
@@ -424,7 +425,7 @@ namespace EnviosColombiaGold
 
         private void cmbJobNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string sqlbuscar = String.Format("SELECT LabResult.Submit,Labsumit.SampleType FROM LabResult INNER JOIN Labsumit ON LabResult.Submit = Labsumit.Submit WHERE JOBNO = @jobs");
+            string sqlbuscar = String.Format("SELECT LabResult.Submit, Labsumit.SampleType FROM LabResult INNER JOIN Labsumit ON LabResult.Submit = Labsumit.Submit WHERE JOBNO = @jobs");
             DataAccess.ManagerDA cal = new DataAccess.ManagerDA();
             SqlParameter[] arr = cal.GetParameters(1);
             arr[0].ParameterName = "@jobs";
@@ -583,7 +584,7 @@ namespace EnviosColombiaGold
                 }
                 else if (dtQcReport.Rows.Count == 0)
                 {
-                    MessageBox.Show("There is no sa4ples in DHSamples", "Shipment", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("There is no samples in DHSamples", "Shipment", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 oXL.Visible = true;
