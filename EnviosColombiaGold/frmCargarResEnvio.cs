@@ -428,6 +428,11 @@ namespace EnviosColombiaGold
                                     sVal = "500.1";
                                 }
 
+                                if (sVal.ToString() == "5.001")
+                                {
+                                    sVal = "500.1";
+                                }
+
                                 if (sVal.ToString() == ">4000")
                                 {
                                     sVal = "4001";
@@ -472,6 +477,11 @@ namespace EnviosColombiaGold
                                 }
 
                                 if (sVal.ToString() == ">500")
+                                {
+                                    sVal = "500.1";
+                                }
+
+                                if (sVal.ToString() == "5.001")
                                 {
                                     sVal = "500.1";
                                 }

@@ -149,7 +149,7 @@ namespace EnviosColombiaGold
             }
             try
             {
-                DataTable dtXls = new DataTable();
+                //DataTable dtXls = new DataTable();
                 Workbook workbook = new Workbook();
 
                 workbook.LoadFromFile(txtRuta.Text);
@@ -158,6 +158,55 @@ namespace EnviosColombiaGold
                 dsCarga.Tables.Add(dtXls);
                 dgXls.DataSource = dtXls;
                 dgXls.AutoResizeColumns();
+
+                dtElementos = new DataTable();
+                //Capturo la posicion de la tabla donde debo empezar
+                int iPosicionElem = 0;
+                for (int a = 0; a < dtXls.Rows.Count; a++)
+                {
+                    if (dtXls.Rows[a][0].ToString() == "SAMPLE")
+                    {
+                        iPosicionElem = a;
+                    }
+                }
+
+                //Genero las columnas del nuevo datatable
+                for (int i = 0; i < dtXls.Columns.Count; i++)
+                {
+                    if (dtXls.Rows[iPosicionElem][i].ToString() != "")
+                    {
+                        dtElementos.Columns.Add(dtXls.Rows[iPosicionElem][i].ToString() + '*' + i.ToString());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Prepare the file before load", "Result", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+
+                //Lleno los registros del nuevo datatable
+                for (int a = iPosicionElem + 1; a < dtXls.Rows.Count; a++)
+                {
+                    drElem = dtElementos.NewRow();
+                    int irElem = 0; //Variable para el manejo de poblar solo las columnas que tengan titulo
+                    for (int iElem = 0; iElem < dtXls.Columns.Count; iElem++)
+                    {
+                        if (dtXls.Rows[iPosicionElem][iElem].ToString() != "")
+                        {
+                            string sCampo = "";
+                            if (dtXls.Rows[a][iElem].ToString() != "--")
+                            {
+                                sCampo = dtXls.Rows[a][iElem].ToString();
+                            }
+
+                            drElem[dtElementos.Columns[irElem].Caption] = sCampo.ToString();
+                            irElem += 1;
+                        }
+                    }
+
+                    dtElementos.Rows.Add(drElem);
+                    pbtnUpdate.Enabled = true;
+                }
             }
             catch (Exception ex)
             {
@@ -173,7 +222,9 @@ namespace EnviosColombiaGold
         public void limpiar()
         {
             dgXls.DataSource = null;
+            dsCarga = new DataSet();
             txtRuta.Text = string.Empty;
+            label2.Visible = false;
         }
 
         private void pbtnUpdate_Click(object sender, EventArgs e)
@@ -191,187 +242,224 @@ namespace EnviosColombiaGold
                 string envioNoEncontrados = string.Empty;
                 string codEnvio = string.Empty;
                 string envio = string.Empty;
-                //variables de insercion
-                string contextValue = string.Empty;
+                int countSamples = 0;
 
-                string[] envioExtraido = dsCarga.Tables[1].Rows[0][0].ToString().Split('-');
+                string sCampos = "";
+                string sCamposVal = "";
+                string sSQL = "";
+                var culturaCol = CultureInfo.GetCultureInfo("es-CO");
+
+                string[] envioExtraido = dtXls.Columns[0].Caption.ToString().Split('-');
                 envio = envioExtraido[0].Trim();
 
-                string[] fechaExtraida = dsCarga.Tables[1].Rows[3][0].ToString().Split(' ');
+                string[] fechaExtraida = dsCarga.Tables[1].Rows[2][0].ToString().Split(' ');
                 DateTime fecha = Convert.ToDateTime(fechaExtraida[8]);
 
-                string[] codEnvioExtraido = dsCarga.Tables[1].Rows[6][0].ToString().Split(' ');
+                string[] codEnvioExtraido = dsCarga.Tables[1].Rows[5][0].ToString().Split(' ');
                 codEnvio = codEnvioExtraido[3];
 
-                bool indicate = false;
-                for (int numFila = 10; numFila <= dsCarga.Tables[1].Rows.Count -1; numFila++)
+                string[] cantExtraido = dsCarga.Tables[1].Rows[1][0].ToString().Split(' ');
+                countSamples = Convert.ToInt32(cantExtraido[4].Trim());
+
+
+                sLab = "ALS Global";
+                DateTime dateReport = Convert.ToDateTime(fecha.ToString(), culturaCol);
+                string valueDate = string.Concat(dateReport.Day, "/", dateReport.Month, "/", DateTime.Now.Year, " 00:00");
+
+
+                sEnvio = envio.Trim();
+                sSample = codEnvio.Trim();
+                sQaqc = ConfigurationSettings.AppSettings["Qaqc"].ToString();
+
+                oAssay.sJob = sEnvio;
+                oAssay.AssayLabresult_Delete();
+
+                string sInsertLabRes = "";
+                sInsertLabRes += "Insert into LabResult (Submit, Jobno, CantSample, Lab, DateReport) Values ('" +
+                    sSample + "','" + sEnvio + "'," + countSamples + ",'" + sLab + "','" + valueDate + "')";
+
+
+                DataTable dtLabSInterval = new DataTable();
+                clsLabSumitInterval oLabSInterval = new clsLabSumitInterval();
+
+                oLabSInterval.sOpcion = "1";
+                oLabSInterval.sSubmit = sSample;
+                dtLabSInterval = oLabSInterval.getLabSubmitInterval();
+
+                if (dtLabSInterval.Rows.Count == 0)
                 {
-                    string tenorAufaaa = string.Empty;
-                    string tenorAgfa = string.Empty;
-                    string tenorAufagr = string.Empty;
-                    string aufAgfagr = string.Empty;
-                    string weight = string.Empty;
-                    string muestra = string.Empty;
+                    MessageBox.Show("El envío '" + sEnvio + "' No existe en la tabla 'labsumit'");
+                    return;
+                }
 
-                    if (dsCarga.Tables[1].Rows[numFila][0].ToString() != string.Empty)
-                    {
-                        muestra = dsCarga.Tables[1].Rows[numFila][0].ToString();
-                    }
+                string sResp = oRf.ExecSQL(sInsertLabRes);
 
-                    if (dsCarga.Tables[1].Rows[numFila][1].ToString() != string.Empty)
-                    {
-                        weight = dsCarga.Tables[1].Rows[numFila][1].ToString();
-                    }
+                if (sResp != "OK")
+                {
+                    MessageBox.Show(sResp.ToString());
+                    return;
+                }
+             
+                oRf.InsertTrans("LabResult", "Insert", clsRf.sUser.ToString(),
+                                "Submit = " + sEnvio +
+                                ". Jobno = " + sSample +
+                                ". CantSample = " + countSamples +
+                                ". Lab = " + sLab +
+                                ". DateReport = " + valueDate);
 
-                    if (dsCarga.Tables[1].Rows[numFila][2].ToString() == "<0.2")
+                oLabSub.sOpcion = "1";
+                oLabSub.sSubmit = sSample.ToString();
+                DataTable dtType = oLabSub.getLabSubmit();
+                if (dtType.Rows.Count > 0)
+                {
+                    sType = dtType.Rows[0]["SampleType"].ToString();
+                }
+                else { sType = ""; }
+
+                int iPosicionFin = 0;
+                iPosicionFin = dtElementos.Rows.Count-1;
+
+                int iAg = 0, iAu = 0, iS = 0;
+                string stAg = "", stAu = "", stS = "";
+                string textoAgfa = string.Empty;
+
+                for (int iRowElem = 1; iRowElem < iPosicionFin; iRowElem++)
+                {
+                    iAg = 0; iAu = 0; iS = 0; 
+                    stAg = ""; stAu = ""; stS = "";
+
+                    for (int iElem = 0; iElem < dtElementos.Columns.Count; iElem++)
                     {
-                        tenorAufaaa = "0.1";
-                    }
-                    else
-                    {
-                        if (dsCarga.Tables[1].Rows[numFila][2].ToString() == ">10"
-                            || dsCarga.Tables[1].Rows[numFila][2].ToString() == ">10.0"
-                            || dsCarga.Tables[1].Rows[numFila][2].ToString() == "˃10.00")
+                        string[] words = dtElementos.Columns[iElem].Caption.ToString().Split('*');
+
+                        if (words[0].ToString().Equals("Recvd Wt."))
                         {
-                            tenorAufaaa = "10.001";
-                        }                       
-                        else
+                            words[0] = "WEIGHT";
+                        }
+
+                        var dtrow = dsCarga.Tables[0].Select("IdLab='" + words[0].ToString() + "'");
+                        if (dtrow.Length > 0)
                         {
-                            tenorAufaaa = dsCarga.Tables[1].Rows[numFila][2].ToString();
+                            bool bConv = false;
+                            string sVal = dtElementos.Rows[iRowElem][iElem].ToString();
+
+                            if (words[0].ToUpper() == "AU")
+                            {
+                                string sAu = "Aufaaa";
+                                iAu++;
+
+                                if (iAu > 1)
+                                {
+                                    sAu = "Aufagr"; 
+                                }
+
+                                if (sVal.ToString() == ">10.0")
+                                {
+                                    sVal = "10.001";
+                                }
+
+                                if(sVal.ToString() == "<0.005")
+                                {
+                                    sVal = "0.003";
+                                }
+
+
+                                sCampos += ",[" + sAu + "]";
+                                sCamposVal += ",'" + sVal.ToString() + "'";
+                            }
+                            else if (words[0].ToUpper() == "AG")
+                            {
+                                string sAg = "Agfa";
+                                iAg++;
+
+                                if (iAg > 1) //Si esta mas de una vez el elemento
+                                {
+                                    sAg = "Agfagr"; //Se guarda el dato en el segundo campo en DB
+                                }
+                                
+                                if (sVal.ToString() == "<0.2")
+                                {
+                                    sVal = "0.1";
+                                }
+
+                                if (sVal.ToString() == ">100")
+                                {
+                                    sVal = "101";
+                                }
+
+                                stAg = dtElementos.Rows[0][iElem].ToString();
+                                sCampos += ",[" + sAg + "]";
+                                sCamposVal += ",'" + sVal.ToString() + "'";
+                            }
+                            
+                            else if (words[0].ToUpper() == "WEIGHT")
+                            {
+                                string sS = "Weight";
+
+                                if (sVal.ToString() == "<0.02")
+                                {
+                                    sVal = "0.01";
+                                }
+
+                                sCampos += ",[" + sS + "]";
+                                sCamposVal += ",'" + sVal.ToString() + "'";
+                            }
+
+                            bConv = false;
                         }
                     }
 
-                    if (dsCarga.Tables[1].Rows[numFila][4].ToString() == "<0.2")
-                    {
-                        tenorAgfa = "0.1";
-                    }
-                    else
-                    {
-                        if (dsCarga.Tables[1].Rows[numFila][4].ToString() == ">10"
-                            || dsCarga.Tables[1].Rows[numFila][4].ToString() == ">10.0"
-                            || dsCarga.Tables[1].Rows[numFila][4].ToString() == "˃10.00")
-                        {
-                            tenorAgfa = "10.001";
-                        }
-                        else if (dsCarga.Tables[1].Rows[numFila][4].ToString() == ">100")
-                        {
-                            tenorAgfa = "100.1";
-                        }
-                        else
-                        {
-                            tenorAgfa = dsCarga.Tables[1].Rows[numFila][4].ToString();
-                        }
-                    }
 
-                    if (dsCarga.Tables[1].Rows[numFila][5].ToString() == "<0.2")
-                    {
-                        tenorAufagr = "0.1";
-                    }
-                    else
-                    {
-                        if (dsCarga.Tables[1].Rows[numFila][5].ToString() == ">10"
-                            || dsCarga.Tables[1].Rows[numFila][5].ToString() == ">10.0"
-                            || dsCarga.Tables[1].Rows[numFila][5].ToString() == "˃10.00")
-                        {
-                            tenorAufagr = "10.001";
-                        }
-                        else
-                        {
-                            tenorAufagr = dsCarga.Tables[1].Rows[numFila][5].ToString();
-                        }
-                    }
+                    /*  Implementar logica para actualizar el campo qaqc solo si la muestra 
+                      no ha sido reenviada */
 
+                    clsLabsumitIn oLIn = new clsLabsumitIn();
+                    oLIn.sSample = dtElementos.Rows[iRowElem][0].ToString().Trim();
+                    DataTable dtLIn = oLIn.getLabSubmitInBySampleReAssay();
 
-                    if (dsCarga.Tables[1].Rows[numFila][7].ToString() == "<0.2")
+                    if (!dtElementos.Rows[iRowElem][0].ToString().Trim().Contains("*DUP"))
                     {
-                        aufAgfagr = "0.1";
-                    }
-                    else
-                    {
-                        if (dsCarga.Tables[1].Rows[numFila][7].ToString() == ">10"
-                            || dsCarga.Tables[1].Rows[numFila][7].ToString() == ">10.0"
-                            || dsCarga.Tables[1].Rows[numFila][7].ToString() == "˃10.00")
-                        {
-                            aufAgfagr = "10.001";
-                        }
-                        else
-                        {
-                            aufAgfagr = dsCarga.Tables[1].Rows[numFila][7].ToString();
-                        }
-                    }
+                        sSQL = "Insert into Assay (JobNo, [Sample], Qaqc, [Type] " +
+                            sCampos + ") Values ('" + sEnvio + "','" + dtElementos.Rows[iRowElem][0].ToString().Trim() +
+                            "','" + sQaqc + "','" + sType + "'" + sCamposVal + ")";
+                        string sRespAss = oRf.ExecSQL(sSQL);
 
-                    if (!indicate)
-                    {
-                        if (!ValidateLabsumitPather(codEnvio))
+                        if (sRespAss != "OK")
                         {
-                            MessageBox.Show("EnvÍo no encontrado en base de datos VERIFICAR EXCEL!");
+                            //Implemento una especie de rollback para el archivo que se intento cargar
+                            sSQL = "Delete from Assay Where JobNo = '" + sNomArchivo.ToString() + "'";
+                            oRf.ExecSQL(sSQL);
+                            sSQL = "Delete from LabResult Where Jobno = '" + sNomArchivo.ToString() + "'";
+                            oRf.ExecSQL(sSQL);
+
+                            MessageBox.Show(sRespAss.ToString());
                             return;
                         }
-                        else
-                        {
-                            indicate = true;
-                        }
-                    }
 
-                    if (ValidateLabsumit(codEnvio, muestra))
-                    {
-                        if (ValidaSiExiste(envio, muestra))
-                        {
-                            contextValue = "UPDATE  Assay SET Aufaaa = '" + tenorAufaaa + "'  ,  Aufagr = '" + tenorAufagr
-                                            + "' , Agfa = '" + tenorAgfa + "' , Agfagr = '" + aufAgfagr
-                                            + "' , Weight = '" + weight  + ", qaqc = 1"
-                                            + "' WHERE jobno= '" + codEnvio + "'  and sample= '" + muestra + "'   ";
-                        }
-                        else
-                        {
-                            contextValue = "INSERT INTO Assay (jobno, sample, Aufaaa, Aufagr, qaqc , Agfagr , Agfa,  Weight) VALUES('"
-                                                             + codEnvio + "','"
-                                                             + muestra + "' ,'"
-                                                             + tenorAufaaa + "' ,'"
-                                                             + tenorAufagr + "' " +
-                                                             ", 1, '"
-                                                             + aufAgfagr + "' ,'"
-                                                             + tenorAgfa + "' ,'"
-                                                             + weight + "' )";
-                        }
 
-                        oLabSub.alterdataBase(contextValue);
+                        //Insertar el registro para el historial de transacciones por usuario
+                        oRf.InsertTrans("Assay", "Insert", clsRf.sUser.ToString(),
+                                        "JobNo = " + sEnvio +
+                                        ". [Sample] = " + dtElementos.Rows[iRowElem][0].ToString().Trim() +
+                                        ". Qaqc = " + sQaqc +
+                                        ". [Type] = " + sType +
+                                        ". Elementos = " + sCampos + ". Valores elementos:" + sCamposVal);
+
                     }
-                    else
-                    {
-                        if (!String.IsNullOrEmpty(envioNoEncontrados) && !envioNoEncontrados.Contains("Blanco") && !envioNoEncontrados.Contains("STD") && !envioNoEncontrados.Contains("Dup") && !envioNoEncontrados.Contains("Duplic"))
-                        {
-                            envioNoEncontrados = string.Concat(envioNoEncontrados, muestra, ",");
-                        }
-                        else
-                        {
-                            envioNoEncontrados = string.Concat(muestra, ",", envioNoEncontrados);
-                        }
-                    }
+                    sCampos = "";
+                    sCamposVal = "";
 
                 }
-
-                cargarenlabresult(codEnvio, envio, fecha);
-                Clear();
-
-                if (String.IsNullOrEmpty(envioNoEncontrados))
-                {
-                    MessageBox.Show("Importacion Finalizada con exito");
-                }
-                else
-                {
-                    MessageBox.Show(string.Concat("Importacion Finalizada con Detalles!", Environment.NewLine, "Muestras no enviadas:", Environment.NewLine, envioNoEncontrados.TrimEnd(',')));
-                }
-
-                label2.Visible = false;
-                QCReport(envio);
+                MessageBox.Show("Successful", "Shipment", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                QCReport(sEnvio);
                 pbtnUpdate.Enabled = false;
                 limpiar();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message, "Shipment", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                label2.Visible = false;
             }
         }
 

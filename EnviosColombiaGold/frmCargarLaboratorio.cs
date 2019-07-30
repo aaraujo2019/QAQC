@@ -927,6 +927,7 @@ namespace EnviosColombiaGold
         public void limpiar()
         {
             dgXls.DataSource = null;
+            dsCarga = new DataSet();
             txtRuta.Text = string.Empty;
         }
 

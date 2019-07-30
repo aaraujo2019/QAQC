@@ -170,36 +170,22 @@ namespace EnviosColombiaGold
         {
             try
             {
-
-                //ConfigurationSettings.AppSettings["IDProject"].ToString()
                 oRf.iIdProject = int.Parse(ConfigurationSettings.AppSettings["IDProject"].ToString());
-                //var dtVers = oRf.getVersionProject();
                 DataTable dtVers = oRf.getVersionProject1();
-
-                //if (double.Parse(dtVers.Select(c => c.version).FirstOrDefault().ToString()) >
-                //    double.Parse(ConfigurationSettings.AppSettings["Version"].ToString()))
 
                 if (double.Parse(dtVers.Rows[0]["version"].ToString()) >
                    double.Parse(ConfigurationSettings.AppSettings["Version"].ToString()))
                 {
-
                     bAct = true;
-
                     MessageBox.Show("Version Update");
-
                     this.Close();
-
                     Process[] _proceses = null;
                     _proceses = Process.GetProcessesByName("EnviosColombiaGold.exe");
                     foreach (Process proces in _proceses)
                     {
                         proces.Kill();
                     }
-
-
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -211,7 +197,7 @@ namespace EnviosColombiaGold
         {
             if (bAct == true)
             {
-                Process.Start("Actualizar.bat");
+                Process.Start(@"\\mdesvrfs01\Publica\Aplicaciones\Actualizaciones\QAQC.bat");
             }
         }
 
