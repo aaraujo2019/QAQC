@@ -618,9 +618,13 @@ namespace EnviosColombiaGold
                 //Modificado Alvaro Araujo 12/07/2019
 
                 if (modificate)
+                {
                     dtFrom = oDHSamp.getDHSamplesDetallado(cmbShipment.Text);
+                }
                 else
+                {
                     dtFrom = oDHSamp.getDHSamples();
+                }
 
                 dtTo = dtFrom.Copy();
 
@@ -644,7 +648,7 @@ namespace EnviosColombiaGold
                 throw new Exception(ex.Message);
             }
         }
-
+              
         private IList<Ent_Prefix> getCHSamplesEntity(string val1, string val2)
         {
             try
@@ -672,16 +676,27 @@ namespace EnviosColombiaGold
                 clsCHSamples oCh = new clsCHSamples();
 
                 if (modificate)
+                {
                     oCh.sOpcion = "3"; // Busqueda para reanalisis
-                else oCh.sOpcion = "2";
+                }
+                else
+                {
+                    oCh.sOpcion = "2";
+                }
 
                 if (cmbHoleId.SelectedValue == null)
+                {
                     oCh.sCHId = string.Empty;
-                else 
+                }
+                else
+                {
                     oCh.sCHId = cmbHoleId.SelectedValue.ToString();
+                }
 
                 if (oCh.sOpcion == "3")
+                {
                     oCh.sCHId = cmbShipment.Text;
+                }
 
                 IList<Ent_Prefix> cHSamplesEntity = getCHSamplesEntity(oCh.sOpcion, oCh.sCHId);
 
@@ -712,9 +727,13 @@ namespace EnviosColombiaGold
                 oRock.sOpcion = "1";
 
                 if (modificate)
+                {
                     dtFromToR = oRock.getGCSamplesRockPersonalizado(cmbShipment.Text);
+                }
                 else
+                {
                     dtFromToR = oRock.getGCSamplesRockAll();
+                }
 
                 cmbFrom.DisplayMember = "Sample";//"From";
                 if (cmbFrom.ValueMember == string.Empty)
@@ -740,7 +759,7 @@ namespace EnviosColombiaGold
         private void LoadCmbHoleId()
         {
             try
-                {
+            {
                 DataTable dtHoleId = new DataTable();
                 //if (CmbSamTyp.SelectedValue != null)
 
@@ -771,6 +790,7 @@ namespace EnviosColombiaGold
                         dtHoleId = new DataTable();
                         cmbHoleId.DataSource = dtHoleId;
                         cmbHoleId.Enabled = false;
+                        //dtHoleId = LoadCmbHoleDril();
                         LoadFromToRocks();
                         LoadFromToChannels();
                     }
@@ -816,7 +836,7 @@ namespace EnviosColombiaGold
             catch (Exception)
             {
                 throw;
-            }            
+            }
         }
 
         private DataTable LoadSampleofnatureAll()
@@ -980,7 +1000,7 @@ namespace EnviosColombiaGold
                             bcmbModify = false;
                             return;
                         }
-                        
+
                         if (dtCmbShipm.Rows[0]["TypeSumit"].ToString() == "RE")
                         {
                             isRean = true;
@@ -990,7 +1010,6 @@ namespace EnviosColombiaGold
                             isRean = false;
                         }
 
-                        //txtWorkOrder.Text = dtCmbShipm.Rows[0]["WorkOrder"].ToString();
                         txtDate.Text = dtCmbShipm.Rows[0]["DateShipment"].ToString();
                         cmbLab.Text = dtCmbShipm.Rows[0]["LabCode"].ToString();
                         cmbPrepLab.Text = dtCmbShipm.Rows[0]["PreparationLab"].ToString();
@@ -1007,10 +1026,8 @@ namespace EnviosColombiaGold
                         txtMetAnCod.Text = dtCmbShipm.Rows[0]["MetAnalisysCode"].ToString();
                         TxtOtAnCod.Text = dtCmbShipm.Rows[0]["OtherAnalisysCode"].ToString();
                         txtInstructions.Text = dtCmbShipm.Rows[0]["Instructions"].ToString();
-                        //txtBags.Text = dtCmbShipm.Rows[0]["NoBags"].ToString();
                         txtObserv.Text = dtCmbShipm.Rows[0]["Observations"].ToString();
                         txtElements.Text = dtCmbShipm.Rows[0]["Element"].ToString();
-                        //cmbHoleId.Text = dtCmbShipm.Rows[0]["HoleID"].ToString();
 
                         CmbNatSamp.DisplayMember = "description";
                         CmbNatSamp.ValueMember = "Id";
@@ -1066,12 +1083,15 @@ namespace EnviosColombiaGold
 
                         if (CmbSamTyp.SelectedValue.ToString() == ConfigurationSettings.AppSettings["Channels"].ToString())
                         {
-                            LoadFromTo();
-                            LoadFromToRocks();
                             LoadFromToChannels();
                         }
-
-
+                        //else
+                        //{
+                        //    LoadFromTo();
+                        //    LoadFromToRocks();
+                        //    LoadFromToChannels();
+                        //}
+                        
                         DataTable dtInterval = new DataTable();
                         dtInterval = LoadLabSubmitInterval("4", cmbShipment.Text.ToString());
                         dgInterval.DataSource = dtInterval;
@@ -1611,7 +1631,7 @@ namespace EnviosColombiaGold
                                 iSackos++;
                             }
 
-                            iCont++;                           
+                            iCont++;
                         }
                     }
                     else if (code == ConfigurationSettings.AppSettings["Channels"].ToString())
@@ -1997,7 +2017,7 @@ namespace EnviosColombiaGold
                     oLabSIn.sSample = dgDetalleInterval.Rows[i].Cells[2].Value.ToString();
                     oLabSIn.iSack = int.Parse(dgDetalleInterval.Rows[i].Cells[3].Value.ToString());
                     oLabSIn.iWeight = 0;
-                    oLabSIn.iId = (dgDetalleInterval.Rows[i].Cells[4].Value.ToString() == string.Empty 
+                    oLabSIn.iId = (dgDetalleInterval.Rows[i].Cells[4].Value.ToString() == string.Empty
                         ? 0 : int.Parse(dgDetalleInterval.Rows[i].Cells[4].Value.ToString()));
 
                     sRes = oLabSIn.LabSubmitIn_Add();

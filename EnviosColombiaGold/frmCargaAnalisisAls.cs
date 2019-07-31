@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Spire.Xls;
+using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
+using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
-using Spire.Xls;
-using System.Configuration;
-using System.Globalization;
 
 namespace EnviosColombiaGold
 {
@@ -222,7 +217,9 @@ namespace EnviosColombiaGold
         public void limpiar()
         {
             dgXls.DataSource = null;
-            dsCarga = new DataSet();
+            LoadXML();
+            dtXls = new DataTable();
+            dtElementos = new DataTable();
             txtRuta.Text = string.Empty;
             label2.Visible = false;
         }
@@ -252,13 +249,19 @@ namespace EnviosColombiaGold
                 string[] envioExtraido = dtXls.Columns[0].Caption.ToString().Split('-');
                 envio = envioExtraido[0].Trim();
 
-                string[] fechaExtraida = dsCarga.Tables[1].Rows[2][0].ToString().Split(' ');
-                DateTime fecha = Convert.ToDateTime(fechaExtraida[8]);
+                string[] fechaExtraida;
+                DateTime fecha;
 
-                string[] codEnvioExtraido = dsCarga.Tables[1].Rows[5][0].ToString().Split(' ');
+                string[] codEnvioExtraido;
+                string[] cantExtraido;
+
+                fechaExtraida = dsCarga.Tables[1].Rows[2][0].ToString().Split(' ');
+                fecha = Convert.ToDateTime(fechaExtraida[8]);
+
+                codEnvioExtraido = dsCarga.Tables[1].Rows[5][0].ToString().Split(' ');
                 codEnvio = codEnvioExtraido[3];
 
-                string[] cantExtraido = dsCarga.Tables[1].Rows[1][0].ToString().Split(' ');
+                cantExtraido = dsCarga.Tables[1].Rows[1][0].ToString().Split(' ');
                 countSamples = Convert.ToInt32(cantExtraido[4].Trim());
 
 
@@ -299,7 +302,7 @@ namespace EnviosColombiaGold
                     MessageBox.Show(sResp.ToString());
                     return;
                 }
-             
+
                 oRf.InsertTrans("LabResult", "Insert", clsRf.sUser.ToString(),
                                 "Submit = " + sEnvio +
                                 ". Jobno = " + sSample +
@@ -317,7 +320,7 @@ namespace EnviosColombiaGold
                 else { sType = ""; }
 
                 int iPosicionFin = 0;
-                iPosicionFin = dtElementos.Rows.Count-1;
+                iPosicionFin = dtElementos.Rows.Count;
 
                 int iAg = 0, iAu = 0, iS = 0;
                 string stAg = "", stAu = "", stS = "";
@@ -325,7 +328,7 @@ namespace EnviosColombiaGold
 
                 for (int iRowElem = 1; iRowElem < iPosicionFin; iRowElem++)
                 {
-                    iAg = 0; iAu = 0; iS = 0; 
+                    iAg = 0; iAu = 0; iS = 0;
                     stAg = ""; stAu = ""; stS = "";
 
                     for (int iElem = 0; iElem < dtElementos.Columns.Count; iElem++)
@@ -350,7 +353,7 @@ namespace EnviosColombiaGold
 
                                 if (iAu > 1)
                                 {
-                                    sAu = "Aufagr"; 
+                                    sAu = "Aufagr";
                                 }
 
                                 if (sVal.ToString() == ">10.0")
@@ -358,7 +361,7 @@ namespace EnviosColombiaGold
                                     sVal = "10.001";
                                 }
 
-                                if(sVal.ToString() == "<0.005")
+                                if (sVal.ToString() == "<0.005")
                                 {
                                     sVal = "0.003";
                                 }
@@ -376,7 +379,7 @@ namespace EnviosColombiaGold
                                 {
                                     sAg = "Agfagr"; //Se guarda el dato en el segundo campo en DB
                                 }
-                                
+
                                 if (sVal.ToString() == "<0.2")
                                 {
                                     sVal = "0.1";
@@ -391,7 +394,7 @@ namespace EnviosColombiaGold
                                 sCampos += ",[" + sAg + "]";
                                 sCamposVal += ",'" + sVal.ToString() + "'";
                             }
-                            
+
                             else if (words[0].ToUpper() == "WEIGHT")
                             {
                                 string sS = "Weight";
@@ -757,6 +760,9 @@ namespace EnviosColombiaGold
             oLabSub.alterdataBase(valueCommandText);
         }
 
+        private void frmCargaAnalisisAls_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }

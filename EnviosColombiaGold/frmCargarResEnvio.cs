@@ -1036,6 +1036,7 @@ namespace EnviosColombiaGold
         {
             dgXls.DataSource = null;
             txtRuta.Text = string.Empty;
+            LoadXML();
         }
 
         private void cmbJobNo_SelectedIndexChanged(object sender, EventArgs e)

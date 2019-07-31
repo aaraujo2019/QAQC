@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCargaAnalisisAls));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabJobAssay = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
@@ -204,8 +204,8 @@
             // 
             this.dgXls.AllowUserToAddRows = false;
             this.dgXls.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.dgXls.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgXls.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgXls.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgXls.Location = new System.Drawing.Point(6, 97);
             this.dgXls.Name = "dgXls";
@@ -368,6 +368,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Job Assay Results";
+            this.Load += new System.EventHandler(this.frmCargaAnalisisAls_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabJobAssay.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
