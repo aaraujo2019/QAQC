@@ -706,7 +706,6 @@ namespace EnviosColombiaGold
                 dtXls = sheet.ExportDataTable();
                 dsCarga.Tables.Add(dtXls);
                 dgXls.DataSource = dtXls;
-                dgXls.AutoResizeColumns();
             }
             catch (Exception ex)
             {
@@ -726,28 +725,6 @@ namespace EnviosColombiaGold
 
                 CargaExcelFormaSinProvider(result);
                 label2.Visible = false;
-                //if (result.ShowDialog() == DialogResult.OK)
-                //{
-                //    txtRuta.Text = result.FileName;
-                //    label2.Enabled = true;
-                //}
-
-                //if (txtRuta.Text != string.Empty)
-                //{
-                //    try
-                //    {
-                //        Cargar(dgXls, txtRuta.Text);
-                //        label2.Enabled = false;
-                //        FileInfo oFi = new FileInfo(result.FileName);
-
-                //        string sExt = oFi.Extension.ToString();
-                //        sNomArchivo = oFi.Name.Substring(0, oFi.Name.ToString().Length - sExt.ToString().Length);
-                //    }
-                //    catch (OleDbException ex)
-                //    {
-                //        MessageBox.Show(ex.Message);
-                //    }
-                //}
             }
             catch (Exception ex)
             {
@@ -831,7 +808,7 @@ namespace EnviosColombiaGold
                             }
                             else
                             {
-                                if (hoja1.Cells[numFila, 2].Text.Trim() == ">10" || hoja1.Cells[numFila, 2].Text.Trim() == ">10.0" || hoja1.Cells[numFila, 2].Text.ToString().Trim() == "˃10.00")
+                                if (hoja1.Cells[numFila, 2].Text == ">10" || hoja1.Cells[numFila, 2].Text == ">10.0" || hoja1.Cells[numFila, 2].Text == ">10.00")
                                 {
                                     tenor = "10.001";
                                     aufagr = Convert.ToString(hoja1.Cells[numFila, 3].Text);

@@ -981,10 +981,7 @@ namespace EnviosColombiaGold
                     oLabS.sSubmit = cmbShipment.Text.ToString();
                     oLabS.sOpcion = "1";
                     clsGCSamplesRock oRock = new clsGCSamplesRock();
-
-
                     DataTable dtCmbShipm = new DataTable();
-                    //Metodo que recibe una entidad, ya se encuentra modificado
 
                     dtCmbShipm = LoadLabSubmit("1", cmbShipment.Text.ToString());
 
@@ -1085,12 +1082,6 @@ namespace EnviosColombiaGold
                         {
                             LoadFromToChannels();
                         }
-                        //else
-                        //{
-                        //    LoadFromTo();
-                        //    LoadFromToRocks();
-                        //    LoadFromToChannels();
-                        //}
                         
                         DataTable dtInterval = new DataTable();
                         dtInterval = LoadLabSubmitInterval("4", cmbShipment.Text.ToString());
@@ -1174,7 +1165,6 @@ namespace EnviosColombiaGold
                         ControlsClean();
                         return;
                     }
-
                 }
             }
             catch (Exception ex)

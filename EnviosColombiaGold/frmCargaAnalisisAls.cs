@@ -75,8 +75,6 @@ namespace EnviosColombiaGold
             try
             {
                 dsCarga.ReadXml(fsReadXml);
-                //dgXML.DataSource = ds.Tables[0];
-                //dgDatos.DataMember = "Cust";
             }
             catch (Exception ex)
             {
@@ -313,6 +311,7 @@ namespace EnviosColombiaGold
                 oLabSub.sOpcion = "1";
                 oLabSub.sSubmit = sSample.ToString();
                 DataTable dtType = oLabSub.getLabSubmit();
+
                 if (dtType.Rows.Count > 0)
                 {
                     sType = dtType.Rows[0]["SampleType"].ToString();
@@ -322,14 +321,13 @@ namespace EnviosColombiaGold
                 int iPosicionFin = 0;
                 iPosicionFin = dtElementos.Rows.Count;
 
-                int iAg = 0, iAu = 0, iS = 0;
-                string stAg = "", stAu = "", stS = "";
+                int iAg = 0, iAu = 0;
+                string stAg = "";
                 string textoAgfa = string.Empty;
 
                 for (int iRowElem = 1; iRowElem < iPosicionFin; iRowElem++)
                 {
-                    iAg = 0; iAu = 0; iS = 0;
-                    stAg = ""; stAu = ""; stS = "";
+                    iAg = 0; iAu = 0; stAg = "";
 
                     for (int iElem = 0; iElem < dtElementos.Columns.Count; iElem++)
                     {
@@ -361,6 +359,11 @@ namespace EnviosColombiaGold
                                     sVal = "10.001";
                                 }
 
+                                if (sVal.ToString() == string.Empty && iAu == 1)
+                                {
+                                    sVal = "10.001";
+                                }
+
                                 if (sVal.ToString() == "<0.005")
                                 {
                                     sVal = "0.003";
@@ -375,9 +378,9 @@ namespace EnviosColombiaGold
                                 string sAg = "Agfa";
                                 iAg++;
 
-                                if (iAg > 1) //Si esta mas de una vez el elemento
+                                if (iAg > 1)
                                 {
-                                    sAg = "Agfagr"; //Se guarda el dato en el segundo campo en DB
+                                    sAg = "Agfagr";
                                 }
 
                                 if (sVal.ToString() == "<0.2")
@@ -412,10 +415,6 @@ namespace EnviosColombiaGold
                         }
                     }
 
-
-                    /*  Implementar logica para actualizar el campo qaqc solo si la muestra 
-                      no ha sido reenviada */
-
                     clsLabsumitIn oLIn = new clsLabsumitIn();
                     oLIn.sSample = dtElementos.Rows[iRowElem][0].ToString().Trim();
                     DataTable dtLIn = oLIn.getLabSubmitInBySampleReAssay();
@@ -429,7 +428,6 @@ namespace EnviosColombiaGold
 
                         if (sRespAss != "OK")
                         {
-                            //Implemento una especie de rollback para el archivo que se intento cargar
                             sSQL = "Delete from Assay Where JobNo = '" + sNomArchivo.ToString() + "'";
                             oRf.ExecSQL(sSQL);
                             sSQL = "Delete from LabResult Where Jobno = '" + sNomArchivo.ToString() + "'";
@@ -439,8 +437,6 @@ namespace EnviosColombiaGold
                             return;
                         }
 
-
-                        //Insertar el registro para el historial de transacciones por usuario
                         oRf.InsertTrans("Assay", "Insert", clsRf.sUser.ToString(),
                                         "JobNo = " + sEnvio +
                                         ". [Sample] = " + dtElementos.Rows[iRowElem][0].ToString().Trim() +
@@ -449,15 +445,14 @@ namespace EnviosColombiaGold
                                         ". Elementos = " + sCampos + ". Valores elementos:" + sCamposVal);
 
                     }
+
                     sCampos = "";
                     sCamposVal = "";
-
                 }
                 MessageBox.Show("Successful", "Shipment", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 QCReport(sEnvio);
                 pbtnUpdate.Enabled = false;
                 limpiar();
-
             }
             catch (Exception ex)
             {
