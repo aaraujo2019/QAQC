@@ -103,16 +103,6 @@ Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\bin\Debug\EPPlu
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\bin\Debug\Spire.Common.xml
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\bin\Debug\Spire.Pdf.xml
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\bin\Debug\Spire.XLS.xml
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\bin\Debug\de\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\bin\Debug\es\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\bin\Debug\fr\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\bin\Debug\it\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\bin\Debug\ja\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\bin\Debug\ko\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\bin\Debug\pt\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\bin\Debug\ru\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\bin\Debug\zh-Hans\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\bin\Debug\zh-Hant\Microsoft.SqlServer.Types.resources.dll
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\EnviosColombiaGold.csprojAssemblyReference.cache
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\EnviosColombiaGold.csproj.ResolveComReference.cache
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\EnviosColombiaGold\obj\Debug\EnviosColombiaGold.frmCargaAnalisisAls.resources

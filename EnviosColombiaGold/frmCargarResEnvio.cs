@@ -805,14 +805,20 @@ namespace EnviosColombiaGold
                     oSheet.Cells[2, 5] = dtQcReport.Rows[0]["submit"].ToString();
                     oSheet.Cells[3, 5] = dtQcReport.Rows[0]["DateShipment"].ToString();
                     oSheet.Cells[4, 5] = dtQcReport.Rows.Count.ToString();
+
                     oSheet.Cells[2, 9] = dtQcReport.Rows[0]["lab"].ToString();
                     oSheet.Cells[2, 11] = dtQcReport.Rows[0]["jobno"].ToString();
-                    oSheet.Cells[3, 11] = dtQcReport.Rows[0]["DateReport"].ToString();
+
+                    var culturaCol = CultureInfo.GetCultureInfo("es-CO");
+                    DateTime dateReporte = Convert.ToDateTime(dtQcReport.Rows[0]["DateReport"].ToString(), culturaCol);
+
+                    oSheet.Cells[3, 11] = dateReporte.ToString("dd/MM/yyyy HH:mm");
                     oSheet.Cells[4, 11] = dtQcReport.Rows[0]["DifDate"].ToString();
 
                     //int iTotalMuestras = 0;
                     int iInicial = 9;
-                    if (dtQcReport.Columns["DupDe"] != null || dtQcReport.Columns["DupOf"] != null)
+                    //if (dtQcReport.Columns["DupDe"] != null || dtQcReport.Columns["DupOf"] != null)
+                    if (!dtQcReport.Columns.Contains("DupDe"))
                     {
                         for (int i = 0; i < dtQcReport.Rows.Count; i++)
                         {
@@ -823,31 +829,32 @@ namespace EnviosColombiaGold
                             oSheet.Cells[iInicial, 4] = dtQcReport.Rows[i]["Sample"].ToString();//Sample
                             oSheet.Cells[iInicial, 5] = dtQcReport.Rows[i]["SampleType"].ToString();//Type
 
-                            if (dtQcReport.Columns["DupDe"] != null)
-                            {
-                                oSheet.Cells[iInicial, 6] = dtQcReport.Rows[i]["DupDe"].ToString();
-                            }
+                            //if (dtQcReport.Columns["DupDe"] != null)
+                            //{
+                            //    oSheet.Cells[iInicial, 6] = dtQcReport.Rows[i]["DupDe"].ToString();
+                            //}
 
-                            if (dtQcReport.Columns["DupOf"] != null)
-                            {
-                                oSheet.Cells[iInicial, 6] = dtQcReport.Rows[i]["DupOf"].ToString();
-                            }
+                            //if (dtQcReport.Columns["DupOf"] != null)
+                            //{
+                            //    oSheet.Cells[iInicial, 6] = dtQcReport.Rows[i]["DupOf"].ToString();
+                            //}
 
-                            oSheet.Cells[iInicial, 7] = dtQcReport.Rows[i]["aufaaa"].ToString();//Au ppm
-                            oSheet.Cells[iInicial, 8] = dtQcReport.Rows[i]["aufagr"].ToString();//AuGr ppm
-                            oSheet.Cells[iInicial, 9] = dtQcReport.Rows[i]["agfa"].ToString();//Ag ppm
-                            oSheet.Cells[iInicial, 10] = dtQcReport.Rows[i]["agfagr"].ToString();//AgGr ppm
-                            oSheet.Cells[iInicial, 11] = dtQcReport.Rows[i]["CertifiedValue_ppm"].ToString();//Qc ppm
+                            oSheet.Cells[iInicial, 6] = dtQcReport.Rows[i]["aufaaa"].ToString();//Au ppm
+                            oSheet.Cells[iInicial, 7] = dtQcReport.Rows[i]["aufagr"].ToString();//AuGr ppm
+                            oSheet.Cells[iInicial, 8] = dtQcReport.Rows[i]["agfa"].ToString();//Ag ppm
+                            oSheet.Cells[iInicial, 9] = dtQcReport.Rows[i]["agfagr"].ToString();//AgGr ppm
+                            oSheet.Cells[iInicial, 10] = dtQcReport.Rows[i]["CertifiedValue_ppm"].ToString();//Qc ppm
 
                             if (dtQcReport.Rows[i]["+3st"].ToString() != "")
                             {
-                                oSheet.Cells[iInicial, 12] = dtQcReport.Rows[i]["QCAu"].ToString();
+                                oSheet.Cells[iInicial, 11] = dtQcReport.Rows[i]["QCAu"].ToString();
 
-                                oSheet.Cells[iInicial, 13] = dtQcReport.Rows[i]["AgCertifiedValue_ppm"].ToString();
-                                oSheet.Cells[iInicial, 14] = dtQcReport.Rows[i]["QCAg"].ToString();
+                                oSheet.Cells[iInicial, 12] = dtQcReport.Rows[i]["AgCertifiedValue_ppm"].ToString();
+                                oSheet.Cells[iInicial, 13] = dtQcReport.Rows[i]["QCAg"].ToString();
+
                             }
 
-                            oSheet.Cells[iInicial, 15] = dtQcReport.Rows[i]["Comments"].ToString();
+                            oSheet.Cells[iInicial, 14] = dtQcReport.Rows[i]["Comments"].ToString();
                             iInicial += 1;
 
                         }
@@ -863,22 +870,25 @@ namespace EnviosColombiaGold
                             oSheet.Cells[iInicial, 4] = dtQcReport.Rows[i]["Sample"].ToString();//Sample
                             oSheet.Cells[iInicial, 5] = dtQcReport.Rows[i]["SampleType"].ToString();//Type
 
+                            if (dtQcReport.Columns.Contains("DupDe"))
+                            {
+                                oSheet.Cells[iInicial, 6] = dtQcReport.Rows[0]["DupDe"].ToString();
+                            }
 
-                            oSheet.Cells[iInicial, 6] = dtQcReport.Rows[i]["aufaaa"].ToString();//Au ppm
-                            oSheet.Cells[iInicial, 7] = dtQcReport.Rows[i]["aufagr"].ToString();//AuGr ppm
-                            oSheet.Cells[iInicial, 8] = dtQcReport.Rows[i]["agfa"].ToString();//Ag ppm
-                            oSheet.Cells[iInicial, 9] = dtQcReport.Rows[i]["agfagr"].ToString();//AgGr ppm
-                            oSheet.Cells[iInicial, 10] = dtQcReport.Rows[i]["CertifiedValue_ppm"].ToString();//Qc ppm
+                            oSheet.Cells[iInicial, 7] = dtQcReport.Rows[i]["aufaaa"].ToString();//Au ppm
+                            oSheet.Cells[iInicial, 8] = dtQcReport.Rows[i]["aufagr"].ToString();//AuGr ppm
+                            oSheet.Cells[iInicial, 9] = dtQcReport.Rows[i]["agfa"].ToString();//Ag ppm
+                            oSheet.Cells[iInicial, 10] = dtQcReport.Rows[i]["agfagr"].ToString();//AgGr ppm
+                            oSheet.Cells[iInicial, 11] = dtQcReport.Rows[i]["CertifiedValue_ppm"].ToString();//Qc ppm
 
                             if (dtQcReport.Rows[i]["+3st"].ToString() != "")
                             {
-                                oSheet.Cells[iInicial, 11] = dtQcReport.Rows[i]["QCAu"].ToString();
-
-                                oSheet.Cells[iInicial, 12] = dtQcReport.Rows[i]["AgCertifiedValue_ppm"].ToString();
-                                oSheet.Cells[iInicial, 13] = dtQcReport.Rows[i]["QCAg"].ToString();
+                                oSheet.Cells[iInicial, 12] = dtQcReport.Rows[i]["QCAu"].ToString();
+                                oSheet.Cells[iInicial, 13] = dtQcReport.Rows[i]["AgCertifiedValue_ppm"].ToString();
+                                oSheet.Cells[iInicial, 14] = dtQcReport.Rows[i]["QCAg"].ToString();
                             }
 
-                            oSheet.Cells[iInicial, 14] = dtQcReport.Rows[i]["Comments"].ToString();
+                            oSheet.Cells[iInicial, 15] = dtQcReport.Rows[i]["Comments"].ToString();
                             iInicial += 1;
                         }
                     }

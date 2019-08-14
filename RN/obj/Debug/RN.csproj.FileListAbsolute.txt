@@ -23,16 +23,6 @@ Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\RN\bin\Debug\RN.pdb
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\RN\bin\Debug\Entities.dll
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\RN\bin\Debug\Microsoft.SqlServer.Types.dll
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\RN\bin\Debug\Entities.pdb
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\RN\bin\Debug\de\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\RN\bin\Debug\es\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\RN\bin\Debug\fr\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\RN\bin\Debug\it\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\RN\bin\Debug\ja\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\RN\bin\Debug\ko\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\RN\bin\Debug\pt\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\RN\bin\Debug\ru\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\RN\bin\Debug\zh-Hans\Microsoft.SqlServer.Types.resources.dll
-Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\RN\bin\Debug\zh-Hant\Microsoft.SqlServer.Types.resources.dll
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\RN\obj\Debug\RN.csprojAssemblyReference.cache
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\RN\obj\Debug\RN.csproj.CoreCompileInputs.cache
 Y:\DESARROLLO\PROYECTOS\GranColombiaGold\QAQC\RN\obj\Debug\RN.csproj.CopyComplete
