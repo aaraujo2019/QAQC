@@ -92,7 +92,7 @@ public class clsDHSamples
             arr[1].ParameterName = "@SampleFin";
             arr[1].Value = _sFin;
             arr[2].ParameterName = "@Id";
-            arr[2].Value = int.Parse(_Id);
+            arr[2].Value = Convert.ToInt32(_Id);
             dtDHSamples = oData.ExecuteDataset("usp_DH_Samples_ListRange", arr, CommandType.StoredProcedure);
             return dtDHSamples.Tables[0];
 

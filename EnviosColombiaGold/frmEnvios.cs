@@ -824,9 +824,9 @@ namespace EnviosColombiaGold
                     DataTable dHSamplesDistinct = clsDHSamples.getDHSamplesDistinct();
                     for (int i = 0; i < 2; i++)
                     {
-                        cmbHoleId.ValueMember = "HoleID";
-                        cmbHoleId.DisplayMember = "Comb";
                         cmbHoleId.DataSource = dHSamplesDistinct;
+                        cmbHoleId.ValueMember = "HoleID";
+                        cmbHoleId.DisplayMember = "Comb";   
                         cmbHoleId.Enabled = true;
                         cmbHoleId.SelectedItem = string.Empty;
                     }
@@ -1393,15 +1393,16 @@ namespace EnviosColombiaGold
                     string code = LoadSampShipmentAllEnt()[CmbSamTyp.SelectedIndex].Code.ToString().Trim();
                     if (code == ConfigurationSettings.AppSettings["Drill"].ToString())
                     {
+                        DataTable dtDrill = oDHSamp.getDHSamplesBySamp(cmbFrom.SelectedValue.ToString(), CmbToSamp.SelectedValue.ToString());
                         if (oDHSamp.getDHSamples_getRangeValid(dgInterval.Rows[i].Cells["SampleFrom"].Value.ToString(),
-                            dgInterval.Rows[i].Cells["SampleTo"].Value.ToString(), cmbFrom.SelectedValue.ToString()).Rows.Count > 0)
+                            dgInterval.Rows[i].Cells["SampleTo"].Value.ToString(), dtDrill.Rows[0]["SKDHSamples"].ToString()).Rows.Count > 0)
                         {
                             sMens = "NOK";
                             break;
                         }
 
                         if (oDHSamp.getDHSamples_getRangeValid(dgInterval.Rows[i].Cells["SampleFrom"].Value.ToString(),
-                            dgInterval.Rows[i].Cells["SampleTo"].Value.ToString(), CmbToSamp.SelectedValue.ToString()).Rows.Count > 0)
+                            dgInterval.Rows[i].Cells["SampleTo"].Value.ToString(), dtDrill.Rows[0]["SKDHSamples"].ToString()).Rows.Count > 0)
                         {
                             sMens = "NOK";
                             break;
