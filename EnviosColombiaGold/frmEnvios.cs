@@ -284,7 +284,7 @@ namespace EnviosColombiaGold
 
                 query = LoadSampShipmentAllEnt().Select(c => c.Description).ToList();
                 CmbSamTyp.Items.AddRange(query.ToArray());
-                CmbSamTyp.SelectedText = "-1";
+                CmbSamTyp.SelectedIndex = 0;
                 CmbSamTyp.SelectedIndex = query.ToList().Count - 1;
 
                 CmbTypSub.DisplayMember = "Description";
@@ -1025,20 +1025,22 @@ namespace EnviosColombiaGold
                         txtInstructions.Text = dtCmbShipm.Rows[0]["Instructions"].ToString();
                         txtObserv.Text = dtCmbShipm.Rows[0]["Observations"].ToString();
                         txtElements.Text = dtCmbShipm.Rows[0]["Element"].ToString();
-
+                                                
+                        CmbNatSamp.DataSource = LoadSampleofnatureAll();
                         CmbNatSamp.DisplayMember = "description";
                         CmbNatSamp.ValueMember = "Id";
-                        CmbNatSamp.DataSource = LoadSampleofnatureAll();
+
                         if (dtCmbShipm.Rows[0]["SampleNature"].ToString() != string.Empty)
                         {
                             CmbNatSamp.SelectedValue = dtCmbShipm.Rows[0]["SampleNature"].ToString();
                         }
 
-                        CmbSamTyp.DisplayMember = "Description";
-                        CmbSamTyp.ValueMember = "Code";
                         if (CmbSamTyp.DataSource == null)
                         {
+                            CmbSamTyp.DataSource = LoadSampShipmentAllEnt();
                             CmbSamTyp.DataSource = LoadSampShipmentAll();
+                            CmbSamTyp.DisplayMember = "Description";
+                            CmbSamTyp.ValueMember = "Code";
                         }
 
                         if (dtCmbShipm.Rows[0]["SampleType"].ToString() != string.Empty)
@@ -1046,11 +1048,11 @@ namespace EnviosColombiaGold
                             CmbSamTyp.SelectedValue = dtCmbShipm.Rows[0]["SampleType"].ToString();
                         }
 
-                        CmbTypSub.DisplayMember = "Description";
-                        CmbTypSub.ValueMember = "Code";
                         var query1 = LoadShipmentAllTypSubEntity();
                         CmbTypSub.DataSource = query1.Select(c => c.Description).ToList();
                         CmbTypSub.SelectedIndex = query1.ToList().Count - 1;
+                        CmbTypSub.DisplayMember = "Description";
+                        CmbTypSub.ValueMember = "Code";
 
                         if (dtCmbShipm.Rows[0]["TypeSumit"].ToString() != string.Empty)
                         {
